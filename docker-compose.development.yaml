@@ -1,0 +1,10 @@
+version: '3.9'
+
+# just some overwrites to be applied ontop of base docker-compose for hot reloading and volumes. just for better dev experience
+services:
+  strapi:
+    image: strapi/strapi
+    volumes:
+      - ./strapi:/srv/app
+    build:
+      context: .

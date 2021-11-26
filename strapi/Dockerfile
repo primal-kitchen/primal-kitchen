@@ -7,11 +7,11 @@ COPY ./yarn.lock .
 
 RUN ["yarn", "install", "--immutable"]
 
-COPY config config
-COPY api api
-COPY extensions extensions
-COPY public public
 COPY favicon.ico favicon.ico
+COPY config config
+COPY public public
+COPY extensions extensions
+COPY api api
 
 RUN ["yarn", "build"]
 

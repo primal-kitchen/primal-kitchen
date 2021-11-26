@@ -1,0 +1,71 @@
+version: '3.9'
+
+# TODO: use .env file volume stuff
+# TODO: use .env file config for environment sections
+# TODO: define exact commit hashes
+# TODO: do we need secrets/should we be using swarm mode?
+# TODO: add a postgres backup container probably?
+# TODO: need to add more volumes for postgres (logs etc)?
+
+services:
+#  redis:
+#    container_name: redis
+#    image: redis
+
+  postgres:
+    container_name: primal-kitchen-postgres
+    image: postgres
+    volumes:
+      - ./data/postgres-volume:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+
+  strapi:
+    container_name: primal-kitchen-strapi
+    image: primal-kitchen-strapi
+    build:
+      context: strapi
+      dockerfile: Dockerfile
+    ports:
+      - ${STRAPI_PORT}:${STRAPI_PORT}
+    env_file:
+       - .env
+      # - strapi/.env
+    environment:
+      DATABASE_CLIENT: postgres
+      # must match name of service i think.. how does this work?
+      DATABASE_HOST: postgres
+      DATABASE_PORT: ${POSTGRES_PORT}
+      DATABASE_NAME: ${POSTGRES_DATABASE}
+      DATABASE_USERNAME: ${POSTGRES_USERNAME}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_SSL: ${POSTGRES_USING_SSL}
+      PORT: ${STRAPI_PORT}
+      HOST: ${STRAPI_HOST_URL}
+      ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
+    depends_on:
+      - postgres
+
+#  medusa:
+#    build:
+#      dockerfile: medusa/Dockerfile
+#    depends_on:
+#      - redis
+#      - postgres
+#      - strapi
+
+#  frontend:
+#    build:
+#      dockerfile: frontend/Dockerfile
+#    container_name: frontend
+#    depends_on:
+#      - medusa
+#      - strapi
+
+#networks:
+#  backend:
+#    driver: bridge
