@@ -58,13 +58,16 @@ services:
 #      - postgres
 #      - strapi
 
-#  frontend:
-#    build:
-#      dockerfile: frontend/Dockerfile
-#    container_name: frontend
-#    depends_on:
+  frontend:
+    container_name: primal-kitchen-frontend
+    image: primal-kitchen-frontend
+    build:
+      context: frontend
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    depends_on:
 #      - medusa
-#      - strapi
+      - strapi
 
 #networks:
 #  backend:

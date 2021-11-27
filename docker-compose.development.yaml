@@ -8,3 +8,9 @@ services:
       - ./strapi:/srv/app
     build:
       context: .
+
+  frontend:
+    volumes:
+      # TODO: where is serve??
+      - ./frontend:/srv/app
+    command: ['npm', 'run', 'dev']
