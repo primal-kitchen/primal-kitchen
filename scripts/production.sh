@@ -1,7 +1,7 @@
 #!/bin/sh
 
 docker compose down
-docker image remove primal-kitchen-frontend primal-kitchen-strapi
+docker image remove primal-kitchen-frontend primal-kitchen-strapi primal-kitchen-medusa
 
 docker compose up --detach
 

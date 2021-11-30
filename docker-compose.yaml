@@ -8,10 +8,6 @@ version: '3.9'
 # TODO: need to add more volumes for postgres (logs etc)?
 
 services:
-#  redis:
-#    container_name: redis
-#    image: redis
-
   postgres:
     container_name: primal-kitchen-postgres
     image: postgres
@@ -50,13 +46,44 @@ services:
     depends_on:
       - postgres
 
-#  medusa:
-#    build:
-#      dockerfile: medusa/Dockerfile
-#    depends_on:
-#      - redis
-#      - postgres
-#      - strapi
+  redis:
+    container_name: primal-kitchen-redis
+    image: redis
+    environment:
+      # TODO: ... we need a password ...
+      ALLOW_EMPTY_PASSWORD: yes
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+
+  medusa:
+    container_name: primal-kitchen-medusa
+    image: primal-kitchen-medusa
+    build:
+      context: medusa
+    environment:
+      ADMIN_CORS: ''
+      STORE_CORS: ''
+      DATABASE_URL: postgres://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
+      REDIS_URL: redis://localhost:${REDIS_PORT}
+      STRIPE_API_KEY: ''
+      STRIPE_WEBHOOK_SECRET: ''
+    ports:
+      - ${MEDUSA_STOREFRONT_API_PORT}:${MEDUSA_STOREFRONT_API_PORT}
+    depends_on:
+      - postgres
+      - strapi
+      - redis
+
+  medusa-admin:
+    container_name: primal-kitchen-medusa-admin
+    image: primal-kitchen-medusa-admin
+    build:
+      context: medusa-admin
+      dockerfile: ../medusa-admin.dockerfile
+    ports:
+      - ${MEDUSA_ADMIN_PANEL_PORT}:${MEDUSA_ADMIN_PANEL_PORT}
+    depends_on:
+      - medusa
 
   frontend:
     container_name: primal-kitchen-frontend
@@ -66,8 +93,8 @@ services:
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
     depends_on:
-#      - medusa
       - strapi
+#      - medusa
 
 #networks:
 #  backend:
