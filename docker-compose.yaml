@@ -97,7 +97,8 @@ services:
       - medusa
 
   reverse-proxy:
-    image: nginx
+    build:
+      context: reverse-proxy
     depends_on:
       - strapi
       - medusa

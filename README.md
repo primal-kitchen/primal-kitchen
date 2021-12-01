@@ -15,7 +15,7 @@ github actions etc etc
 - `ssh -i ~/.ssh/<keyname> primal-kitchen@<machine-ip>`
 
 # TODOS FOR SETUP - move this somewhere else...
-- git submodules or subtree for medusa-admin
+- !!! **git submodules or subtree for medusa-admin** !!!
 - is medusa admin working?
 - can i get data from strapi to frontend?
 - can i get data from medusa to frontend?
