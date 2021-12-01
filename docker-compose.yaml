@@ -9,7 +9,7 @@ version: '3.9'
 
 services:
   postgres:
-    container_name: primal-kitchen-postgres
+    container_name: primal-kitchen/postgres
     image: postgres
     volumes:
       - ./data/postgres-volume:/var/lib/postgresql/data
@@ -21,8 +21,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DATABASE}
 
   strapi:
-    container_name: primal-kitchen-strapi
-    image: primal-kitchen-strapi
+    container_name: primal-kitchen/strapi
+    image: primal-kitchen/strapi
     build:
       context: strapi
       dockerfile: Dockerfile
@@ -47,17 +47,17 @@ services:
       - postgres
 
   redis:
-    container_name: primal-kitchen-redis
+    container_name: primal-kitchen/redis
     image: redis
     environment:
       # TODO: ... we need a password ...
-      ALLOW_EMPTY_PASSWORD: yes
+      ALLOW_EMPTY_PASSWORD: 'yes'
     ports:
       - ${REDIS_PORT}:${REDIS_PORT}
 
   medusa:
-    container_name: primal-kitchen-medusa
-    image: primal-kitchen-medusa
+    container_name: primal-kitchen/medusa
+    image: primal-kitchen/medusa
     build:
       context: medusa
     environment:
@@ -75,8 +75,8 @@ services:
       - redis
 
   medusa-admin:
-    container_name: primal-kitchen-medusa-admin
-    image: primal-kitchen-medusa-admin
+    container_name: primal-kitchen/medusa-admin
+    image: primal-kitchen/medusa-admin
     build:
       context: medusa-admin
       dockerfile: ../medusa-admin.dockerfile
@@ -86,15 +86,23 @@ services:
       - medusa
 
   frontend:
-    container_name: primal-kitchen-frontend
-    image: primal-kitchen-frontend
+    container_name: primal-kitchen/frontend
+    image: primal-kitchen/frontend
     build:
       context: frontend
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
     depends_on:
       - strapi
-#      - medusa
+      - medusa
+
+  reverse-proxy:
+    image: nginx
+    depends_on:
+      - strapi
+      - medusa
+      - medusa-admin
+      - frontend
 
 #networks:
 #  backend:
