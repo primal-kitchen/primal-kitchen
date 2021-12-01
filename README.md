@@ -14,5 +14,8 @@ github actions etc etc
 - `doctl auth init`
 - `ssh -i ~/.ssh/<keyname> root@<machine-ip>`
 
-# TODOS - move this somewhere else...
-- git submodules for medusa-admin
+# TODOS FOR SETUP - move this somewhere else...
+- git submodules or subtree for medusa-admin
+- is medusa admin working?
+- can i get data from strapi to frontend?
+- can i get data from medusa to frontend?
