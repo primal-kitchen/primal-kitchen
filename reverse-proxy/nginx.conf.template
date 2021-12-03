@@ -1,0 +1,37 @@
+# TODO: actually learn nginx properly
+
+events {}
+http {
+	# upstream frontend {}
+	# upstream strapi-admin {}
+	# upstream medusa-admin {}
+
+	server {
+		listen	80;
+		server_name	${APP_DOMAIN};
+
+		location / {
+			proxy_pass	http://${FRONTEND_CONTAINER_NAME}:${FRONTEND_PORT};
+		}
+	}
+
+	server {
+		listen 80;
+		server_name	strapi-admin.${APP_DOMAIN};
+
+		location / {
+			# TODO: update to strapi admin
+			proxy_pass	http://${STRAPI_CONTAINER_NAME}:${STRAPI_PORT};
+		}
+	}
+
+	server {
+		listen 80;
+		server_name	medusa-admin.${APP_DOMAIN};
+
+		location / {
+			# TODO: update to medusa admin
+			proxy_pass	http://${MEDUSA_ADMIN_PANEL_CONTAINER_NAME}:80;
+		}
+	}
+}

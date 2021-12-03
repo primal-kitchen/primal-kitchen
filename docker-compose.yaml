@@ -9,25 +9,23 @@ version: '3.9'
 
 services:
   postgres:
-    container_name: primal-kitchen/postgres
+    container_name: primal-kitchen-postgres
     image: postgres
     volumes:
       - ./data/postgres-volume:/var/lib/postgresql/data
-    ports:
-      - ${POSTGRES_PORT}:${POSTGRES_PORT}
     env_file: .env
+    networks:
+      - primal-kitchen-backend-network
     environment:
       POSTGRES_USER: ${POSTGRES_USERNAME}
       POSTGRES_DB: ${POSTGRES_DATABASE}
 
   strapi:
-    container_name: primal-kitchen/strapi
+    container_name: primal-kitchen-strapi
     image: primal-kitchen/strapi
     build:
       context: strapi
       dockerfile: Dockerfile
-    ports:
-      - ${STRAPI_PORT}:${STRAPI_PORT}
     env_file:
        - .env
       # - strapi/.env
@@ -43,20 +41,22 @@ services:
       PORT: ${STRAPI_PORT}
       HOST: ${STRAPI_HOST_URL}
       ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
+    networks:
+      - primal-kitchen-backend-network
     depends_on:
       - postgres
 
   redis:
-    container_name: primal-kitchen/redis
+    container_name: primal-kitchen-redis
     image: redis
     environment:
       # TODO: ... we need a password ...
       ALLOW_EMPTY_PASSWORD: 'yes'
-    ports:
-      - ${REDIS_PORT}:${REDIS_PORT}
+    networks:
+      - primal-kitchen-backend-network
 
   medusa:
-    container_name: primal-kitchen/medusa
+    container_name: primal-kitchen-medusa
     image: primal-kitchen/medusa
     build:
       context: medusa
@@ -67,44 +67,52 @@ services:
       REDIS_URL: redis://localhost:${REDIS_PORT}
       STRIPE_API_KEY: ''
       STRIPE_WEBHOOK_SECRET: ''
-    ports:
-      - ${MEDUSA_STOREFRONT_API_PORT}:${MEDUSA_STOREFRONT_API_PORT}
+    networks:
+      - primal-kitchen-backend-network
     depends_on:
       - postgres
       - strapi
       - redis
 
   medusa-admin:
-    container_name: primal-kitchen/medusa-admin
+    container_name: ${MEDUSA_ADMIN_PANEL_CONTAINER_NAME}
     image: primal-kitchen/medusa-admin
     build:
       context: medusa-admin
       dockerfile: ../medusa-admin.dockerfile
-    ports:
-      - ${MEDUSA_ADMIN_PANEL_PORT}:80
+    networks:
+      - primal-kitchen-backend-network
     depends_on:
       - medusa
 
   frontend:
-    container_name: primal-kitchen/frontend
+    container_name: ${FRONTEND_CONTAINER_NAME}
     image: primal-kitchen/frontend
     build:
       context: frontend
-    ports:
-      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    networks:
+      - primal-kitchen-backend-network
     depends_on:
       - strapi
       - medusa
 
+  # TODO: look into if we need to "warm up" nginx as first load can be really slow...
   reverse-proxy:
+    container_name: primal-kitchen-reverse-proxy
+    image: primal-kitchen/reverse-proxy
+    env_file: .env
     build:
       context: reverse-proxy
+    ports:
+      - "80:80"
+    networks:
+      - primal-kitchen-backend-network
     depends_on:
       - strapi
       - medusa
       - medusa-admin
       - frontend
 
-#networks:
-#  backend:
-#    driver: bridge
+networks:
+  primal-kitchen-backend-network:
+    driver: bridge

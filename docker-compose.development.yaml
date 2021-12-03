@@ -2,15 +2,30 @@ version: '3.9'
 
 # just some overwrites to be applied ontop of base docker-compose for hot reloading and volumes. just for better dev experience
 services:
+  postgres:
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+
+  # TODO: i think there may be an issue when requesting strapi data using this development config... need to check this
   strapi:
     image: strapi/strapi
     volumes:
       - ./strapi:/srv/app
+    ports:
+      - ${STRAPI_PORT}:${STRAPI_PORT}
     build:
       context: .
+
+  redis:
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+
+  medusa-admin:
+    ports:
+      - ${MEDUSA_ADMIN_PANEL_PORT}:80
 
   frontend:
     volumes:
       # TODO: where is serve??
       - ./frontend:/srv/app
-    command: ['npm', 'run', 'dev']
+    command: [ 'npm', 'run', 'dev' ]

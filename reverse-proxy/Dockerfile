@@ -3,17 +3,19 @@
 
 FROM nginx
 
-# TODO: make it so don't need to manually type out each file name
-WORKDIR /etc/nginx/sites-available
-COPY ./sites-available/new.primalkitchen.nz.conf .
-COPY ./sites-available/strapi-admin.new.primalkitchen.nz.conf .
+COPY nginx.conf.template /etc/nginx/templates/
 
-# TODO: make it so don't need to manually type out each file name
-WORKDIR /etc/nginx/sites-enabled
-RUN ln -s /etc/nginx/sites-available/new.primalkitchen.nz.conf .
-RUN ln -s /etc/nginx/sites-available/strapi-admin.new.primalkitchen.nz.conf .
+# this is very important. it will try to put in /etc/nginx/conf.d otherwise. might need to use a multistage build if doing other nginx
+# 	templates (such as /etc/nginx/sites-available or whatever instead of putting all config in nginx.conf).
+# 	read dockerhub nginx docs to learn more.
+ENV NGINX_ENVSUBST_OUTPUT_DIR="/etc/nginx"
 
-# check actually works
-RUN nginx -t
+# ENV FRONTEND_CONTAINER_NAME="primal-kitchen-frontend"
+#ENV FRONTEND_PORT=3000
+#ENV APP_DOMAIN="new.primalkitchen.nz.local"
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# check it actually works (unsure if can use this before env variable substitution is run...
+# 	maybe could be put in docker-entrypoint.sh? needa read the docs...
+# RUN nginx -t
+
+# note that using an ENTRYPOINT breaks this. probably CMD does as well but haven't checked
