@@ -20,6 +20,8 @@
 # SETUP
 - git clone
 - ensure docker is running (macos `open -a Docker`) 
+- `cp .env.template .env`
+- `sudo vim /etc/hosts`
 
 # HOW TO TEST
 `npm run test`
@@ -30,6 +32,7 @@
 # DOCKER HUB
 hub url: registry.digitalocean.com/primal-kitchen
 - `doctl registry login`
+- `docker pull registry.digitalocean.com/primal-kitchen/<image-name>`
 - `docker tag <image-name> registry.digitalocean.com/primal-kitchen/<image-name>`
 - `docker push registry.digitalocean.com/primal-kitchen/<image-name>`
 

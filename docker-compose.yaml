@@ -22,7 +22,7 @@ services:
 
   strapi:
     container_name: primal-kitchen-strapi
-    image: primal-kitchen/strapi
+    image: ${CONTAINER_REGISTRY}/strapi
     build:
       context: strapi
       dockerfile: Dockerfile
@@ -57,7 +57,7 @@ services:
 
   medusa:
     container_name: primal-kitchen-medusa
-    image: primal-kitchen/medusa
+    image: ${CONTAINER_REGISTRY}/medusa
     build:
       context: medusa
     environment:
@@ -76,7 +76,7 @@ services:
 
   medusa-admin:
     container_name: ${MEDUSA_ADMIN_PANEL_CONTAINER_NAME}
-    image: primal-kitchen/medusa-admin
+    image: ${CONTAINER_REGISTRY}/medusa-admin
     build:
       context: medusa-admin
       dockerfile: ../medusa-admin.dockerfile
@@ -87,7 +87,7 @@ services:
 
   frontend:
     container_name: ${FRONTEND_CONTAINER_NAME}
-    image: primal-kitchen/frontend
+    image: ${CONTAINER_REGISTRY}/frontend
     build:
       context: frontend
     networks:
@@ -99,7 +99,7 @@ services:
   # TODO: look into if we need to "warm up" nginx as first load can be really slow...
   reverse-proxy:
     container_name: primal-kitchen-reverse-proxy
-    image: primal-kitchen/reverse-proxy
+    image: ${CONTAINER_REGISTRY}/reverse-proxy
     env_file: .env
     build:
       context: reverse-proxy
@@ -112,6 +112,12 @@ services:
       - medusa
       - medusa-admin
       - frontend
+
+  certbot:
+    container_name: primal-kitchen-certbot
+    image: certbot/certbot
+    env_file: .env
+
 
 networks:
   primal-kitchen-backend-network:
