@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# TODO: read in env files...
+# TODO: this needs other stuff for sure...
+
+certbot renew

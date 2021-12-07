@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 docker compose down
 docker image remove primal-kitchen-frontend primal-kitchen-strapi primal-kitchen-medusa
