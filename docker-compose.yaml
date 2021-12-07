@@ -6,6 +6,7 @@ version: '3.9'
 # TODO: do we need secrets/should we be using swarm mode?
 # TODO: add a postgres backup container probably?
 # TODO: need to add more volumes for postgres (logs etc)?
+# TODO: perfect forward secrecy?
 
 services:
   postgres:
@@ -104,7 +105,7 @@ services:
     build:
       context: reverse-proxy
     volumes:
-      - ./data/certbot/www/:/var/www/certbot/:ro
+      - ./data/certbot/www/:${NGINX_WEBROOT}:ro
       - ./data/certbot/conf/:/etc/nginx/ssl/:ro
     ports:
       - "80:80"
@@ -122,9 +123,12 @@ services:
     image: certbot/certbot
     env_file: .env
     volumes:
-      - ./data/certbot/www/:/var/www/certbot/:rw
+      - ./data/certbot/www/:${NGINX_WEBROOT}:rw
       - ./data/certbot/conf/:/etc/letsencrypt/:rw
-    # command: certonly --webroot --webroot-path /var/www/certbot/
+      - ./data/log/letsencrypt/:/var/log/letsencrypt/
+    depends_on:
+      - reverse-proxy
+    command: certonly --webroot --webroot-path ${NGINX_WEBROOT} --dry-run --email ${DEVELOPER_EMAIL} --agree-tos --no-eff-email --staging -d ${APP_DOMAIN}
 
 networks:
   primal-kitchen-backend-network:

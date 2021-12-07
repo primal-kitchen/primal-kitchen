@@ -9,15 +9,26 @@ http {
 	server {
 		listen	80;
 		server_name	${APP_DOMAIN};
+		server_tokens off; # what does this do? is it needed?
 
+		# needed for ssl acme challenge
+		location /.well-known/acme-challenge/ {
+			root ${NGINX_WEBROOT};
+			default_type text/plain; # what does this do? is it needed?
+		}
+
+		# otherwise, force https
 		location / {
-			proxy_pass	http://${FRONTEND_CONTAINER_NAME}:${FRONTEND_PORT};
+			return 301 https://${APP_DOMAIN}$request_uri;
 		}
 	}
 
 	server {
-		listen 80;
+		listen 443 ssl http2;
 		server_name	strapi-admin.${APP_DOMAIN};
+
+		ssl_certificate /etc/nginx/ssl/live/example.org/fullchain.pem;
+		ssl_certificate_key /etc/nginx/ssl/live/example.org/privkey.pem;
 
 		location / {
 			# TODO: update to strapi admin
