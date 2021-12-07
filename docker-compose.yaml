@@ -128,7 +128,7 @@ services:
       - ./data/log/letsencrypt/:/var/log/letsencrypt/
     depends_on:
       - reverse-proxy
-    command: certonly --webroot --webroot-path ${NGINX_WEBROOT} --dry-run --email ${DEVELOPER_EMAIL} --agree-tos --no-eff-email --staging -d ${APP_DOMAIN}
+    command: certonly --webroot --webroot-path ${NGINX_WEBROOT} --email ${DEVELOPER_EMAIL} --agree-tos --no-eff-email --staging -d ${APP_DOMAIN}
 
 networks:
   primal-kitchen-backend-network:
