@@ -103,8 +103,12 @@ services:
     env_file: .env
     build:
       context: reverse-proxy
+    volumes:
+      - ./data/certbot/www/:/var/www/certbot/:ro
+      - ./data/certbot/conf/:/etc/nginx/ssl/:ro
     ports:
       - "80:80"
+      - "443:443"
     networks:
       - primal-kitchen-backend-network
     depends_on:
@@ -117,7 +121,10 @@ services:
     container_name: primal-kitchen-certbot
     image: certbot/certbot
     env_file: .env
-
+    volumes:
+      - ./data/certbot/www/:/var/www/certbot/:rw
+      - ./data/certbot/conf/:/etc/letsencrypt/:rw
+    # command: certonly --webroot --webroot-path /var/www/certbot/
 
 networks:
   primal-kitchen-backend-network:
