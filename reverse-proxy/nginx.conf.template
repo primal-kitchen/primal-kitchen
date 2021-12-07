@@ -3,6 +3,7 @@
 # TODO: ipv6 stuff
 # TODO: find a way to repeat server block stuff less
 # TODO: solve chicken or egg problem when certificates haven't yet been generated (the first time run on fresh server will crash nginx)
+# TODO: should i be doing www redirects?
 
 events {}
 http {
@@ -12,7 +13,7 @@ http {
 
 	server {
 		listen	80;
-		server_name	${APP_DOMAIN};
+		server_name	*.${APP_DOMAIN}; # * very important for redirecting to subdomains on https
 		server_tokens off; # what does this do? is it needed?
 
 		# needed for ssl acme challenge
@@ -24,7 +25,7 @@ http {
 
 		# otherwise, redirect to https url to force secure
 		location / {
-			return 301 https://${APP_DOMAIN}$request_uri;
+			return 301 https://$host$request_uri;
 		}
 	}
 
