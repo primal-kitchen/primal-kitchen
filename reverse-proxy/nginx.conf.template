@@ -1,4 +1,7 @@
 # TODO: actually learn nginx properly
+# TODO: perfect forward secrecy?
+# TODO: ipv6 stuff
+# TODO: find a way to repeat server block stuff less
 
 events {}
 http {
@@ -17,7 +20,7 @@ http {
 			default_type text/plain; # what does this do? is it needed?
 		}
 
-		# otherwise, force https
+		# otherwise, redirect to https url to force secure
 		location / {
 			return 301 https://${APP_DOMAIN}$request_uri;
 		}
