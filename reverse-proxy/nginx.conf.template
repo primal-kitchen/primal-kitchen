@@ -2,6 +2,7 @@
 # TODO: perfect forward secrecy?
 # TODO: ipv6 stuff
 # TODO: find a way to repeat server block stuff less
+# TODO: solve chicken or egg problem when certificates haven't yet been generated (the first time run on fresh server will crash nginx)
 
 events {}
 http {
@@ -29,25 +30,23 @@ http {
 	}
 
 	server {
-		# listen 443 ssl http2;
-		listen 80;
-		server_name ${APP_DOMAIN};
+		listen 443 ssl http2;
+		server_name	${APP_DOMAIN};
 
-		# ssl_certificate /etc/nginx/ssl/live/example.org/fullchain.pem;
-		# ssl_certificate_key /etc/nginx/ssl/live/example.org/privkey.pem;
+		ssl_certificate /etc/nginx/ssl/live/${APP_DOMAIN}/fullchain.pem;
+		ssl_certificate_key /etc/nginx/ssl/live/${APP_DOMAIN}/privkey.pem;
 
 		location / {
-			proxy_pass http://${FRONTEND_CONTAINER_NAME}:${FRONTEND_PORT};
+			proxy_pass	http://${FRONTEND_CONTAINER_NAME}:${FRONTEND_PORT};
 		}
 	}
 
 	server {
-		# listen 443 ssl http2;
-		listen 80;
+		listen 443 ssl http2;
 		server_name	strapi-admin.${APP_DOMAIN};
 
-		# ssl_certificate /etc/nginx/ssl/live/example.org/fullchain.pem;
-		# ssl_certificate_key /etc/nginx/ssl/live/example.org/privkey.pem;
+		ssl_certificate /etc/nginx/ssl/live/${APP_DOMAIN}/fullchain.pem;
+		ssl_certificate_key /etc/nginx/ssl/live/${APP_DOMAIN}/privkey.pem;
 
 		location / {
 			# TODO: update to strapi admin
