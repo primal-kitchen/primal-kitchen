@@ -24,8 +24,7 @@ http {
 
 		# otherwise, redirect to https url to force secure
 		location / {
-			# return 301 https://${APP_DOMAIN}$request_uri;
-			return 301 http://${APP_DOMAIN}$request_uri;
+			return 301 https://${APP_DOMAIN}$request_uri;
 		}
 	}
 
