@@ -33,8 +33,8 @@ http {
 		listen 443 ssl http2;
 		server_name	${APP_DOMAIN};
 
-		ssl_certificate /etc/nginx/ssl/live/${APP_DOMAIN}/fullchain.pem;
-		ssl_certificate_key /etc/nginx/ssl/live/${APP_DOMAIN}/privkey.pem;
+		ssl_certificate /etc/nginx/ssl/live/${APP_DOMAIN}/${SSL_CERTIFICATE_FILE};
+		ssl_certificate_key /etc/nginx/ssl/live/${APP_DOMAIN}/${SSL_CERTIFICATE_PRIVATE_KEY_FILE};
 
 		location / {
 			proxy_pass	http://${FRONTEND_CONTAINER_NAME}:${FRONTEND_PORT};
@@ -45,8 +45,8 @@ http {
 		listen 443 ssl http2;
 		server_name	${STRAPI_SUBDOMAIN}.${APP_DOMAIN};
 
-		ssl_certificate /etc/nginx/ssl/live/${APP_DOMAIN}/fullchain.pem;
-		ssl_certificate_key /etc/nginx/ssl/live/${APP_DOMAIN}/privkey.pem;
+		ssl_certificate /etc/nginx/ssl/live/${APP_DOMAIN}/${SSL_CERTIFICATE_FILE};
+		ssl_certificate_key /etc/nginx/ssl/live/${APP_DOMAIN}/${SSL_CERTIFICATE_PRIVATE_KEY_FILE};
 
 		location / {
 			# TODO: update to strapi admin
@@ -58,8 +58,8 @@ http {
 		listen 443 ssl http2;
 		server_name	${MEDUSA_ADMIN_PANEL_SUBDOMAIN}.${APP_DOMAIN};
 
-		ssl_certificate /etc/nginx/ssl/live/${APP_DOMAIN}/fullchain.pem;
-		ssl_certificate_key /etc/nginx/ssl/live/${APP_DOMAIN}/privkey.pem;
+		ssl_certificate /etc/nginx/ssl/live/${APP_DOMAIN}/${SSL_CERTIFICATE_FILE};
+		ssl_certificate_key /etc/nginx/ssl/live/${APP_DOMAIN}/${SSL_CERTIFICATE_PRIVATE_KEY_FILE};
 
 		location / {
 			# TODO: update to medusa admin

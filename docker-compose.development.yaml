@@ -1,5 +1,7 @@
 version: '3.9'
 
+# TODO: consider using pebble local acme server instead of m
+
 # just some overwrites to be applied ontop of base docker-compose for hot reloading and volumes. just for better dev experience
 services:
   postgres:
@@ -7,14 +9,13 @@ services:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
 
   # TODO: i think there may be an issue when requesting strapi data using this development config... need to check this
+  # dodgy trying to set this up as have to run install
   strapi:
     image: strapi/strapi
     volumes:
       - ./strapi:/srv/app
     ports:
       - ${STRAPI_PORT}:${STRAPI_PORT}
-    build:
-      context: .
 
   redis:
     ports:

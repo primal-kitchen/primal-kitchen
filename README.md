@@ -22,6 +22,11 @@
 - ensure docker is running (macos `open -a Docker`) 
 - `cp .env.template .env`
 - `sudo vim /etc/hosts`
+- `brew install mkcert` local ca stuff
+- `brew install nss` so mkcert will work for firefox
+- `mkcert --install` setup mkcert for local machine
+- `./scripts/generate-local-ssl-certificates.sh`
+... consider using pebble local acme server instead of m
 
 # HOW TO TEST
 `npm run test`
