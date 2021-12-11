@@ -1,0 +1,29 @@
+name: 'build'
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/build-and-push-frontend.yaml'
+      - 'frontend/**'
+  workflow_dispatch: # allow manual triggering
+
+env:
+  REGISTRY_HOST: registry.digitalocean.com
+  REGISTRY_NAME: primal-kitchen
+  IMAGE_NAME: frontend
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: build image
+        run: docker image build --tag $REGISTRY_NAME/$IMAGE_NAME
+
+      - name: tag image to registry. unsure really what this is for
+        run: docker tag $REGISTRY_NAME/$IMAGE_NAME $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE_NAME
+
+      - name: push image
+        run: docker push $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE_NAME
+
+
