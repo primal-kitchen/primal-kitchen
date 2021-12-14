@@ -11,3 +11,7 @@ COPY medusa-config.js .
 COPY src .
 
 CMD ["npm", "start"]
+
+# TODO: get this to run...
+# ENTRYPOINT ["npm", "start"]
+# CMD ["npx", "medusa", "user", "-e", "${MEDUSA_ADMIN_EMAIL}", "-p", "${MEDUSA_ADMIN_PASSWORD}"]
