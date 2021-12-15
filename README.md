@@ -21,7 +21,7 @@
 - git clone
 - ensure docker is running (macos `open -a Docker`) 
 - `cp .env.template .env`
-- `sudo vim /etc/hosts`
+- `sudo vim /etc/hosts` (add base url, medusa, medusa admin, strapi admin entries)
 - `brew install mkcert` local ca stuff
 - `brew install nss` so mkcert will work for firefox
 - `mkcert --install` setup mkcert for local machine
@@ -33,6 +33,10 @@
 
 # HOW TO RUN
 `docker compose up`
+
+# MAINTIANENCE
+`npm outdated` in various services is helpful when updating
+TODO: learn how to replace running docker compose container in place??
 
 # DOCKER HUB
 hub url: registry.digitalocean.com/primal-kitchen
@@ -48,6 +52,9 @@ github actions etc etc
 - `doctl project`
 - `doctl auth init`
 - `ssh -i ~/.ssh/<keyname> primal-kitchen@<machine-ip>`
+
+# TECH DEBT
+- primal-kitchen-postgres | 2021-12-15 00:29:24.400 UTC [32] WARNING:  could not open statistics file "pg_stat_tmp/global.stat": Operation not permitted
 
 # TODOS FOR SETUP - move this somewhere else...
 - !!! **git submodules or subtree for medusa-admin** !!!

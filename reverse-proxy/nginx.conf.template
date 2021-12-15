@@ -4,6 +4,8 @@
 # TODO: find a way to repeat server block stuff less
 # TODO: solve chicken or egg problem when certificates haven't yet been generated (the first time run on fresh server will crash nginx)
 # TODO: should i be doing www redirects?
+# TODO: 400 error pages
+# TODO: 500 error pages
 
 events {}
 http {
@@ -51,6 +53,19 @@ http {
 		location / {
 			# TODO: update to strapi admin
 			proxy_pass	http://${STRAPI_CONTAINER_NAME}:${STRAPI_PORT};
+		}
+	}
+
+	server {
+		listen 443 ssl http2;
+		server_name	${MEDUSA_STOREFRONT_SUBDOMAIN}.${APP_DOMAIN};
+
+		ssl_certificate /etc/nginx/ssl/live/${APP_DOMAIN}/${SSL_CERTIFICATE_FILE};
+		ssl_certificate_key /etc/nginx/ssl/live/${APP_DOMAIN}/${SSL_CERTIFICATE_PRIVATE_KEY_FILE};
+
+		location / {
+			# TODO: update to medusa admin
+			proxy_pass	http://${MEDUSA_STOREFRONT_CONTAINER_NAME}:${MEDUSA_STOREFRONT_API_PORT};
 		}
 	}
 

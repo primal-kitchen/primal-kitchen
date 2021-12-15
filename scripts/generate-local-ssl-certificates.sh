@@ -7,6 +7,7 @@
 # TODO: load in APP_DOMAIN and other environment variables
 APP_DOMAIN=new.primalkitchen.nz.local
 STRAPI_SUBDOMAIN=strapi-admin
+MEDUSA_STOREFRONT_SUBDOMAIN=medusa
 MEDUSA_ADMIN_PANEL_SUBDOMAIN=medusa-admin
 SSL_CERTIFICATE_FILE=ssl-certificate.pem
 SSL_CERTIFICATE_PRIVATE_KEY_FILE=ssl-certificate-private-key.pem
@@ -17,4 +18,7 @@ mkdir -p $certificate_destination
 
 mkcert -cert-file $certificate_destination/$SSL_CERTIFICATE_FILE \
 	-key-file $certificate_destination/$SSL_CERTIFICATE_PRIVATE_KEY_FILE \
-	$APP_DOMAIN $MEDUSA_ADMIN_PANEL_SUBDOMAIN $STRAPI_SUBDOMAIN.$APP_DOMAIN
+	$APP_DOMAIN \
+	$MEDUSA_STOREFRONT_SUBDOMAIN.$APP_DOMAIN \
+	$MEDUSA_ADMIN_PANEL_SUBDOMAIN.$APP_DOMAIN \
+	$STRAPI_SUBDOMAIN.$APP_DOMAIN
