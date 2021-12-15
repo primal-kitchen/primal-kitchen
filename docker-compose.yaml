@@ -57,17 +57,19 @@ services:
       - primal-kitchen-backend-network
 
   medusa:
-    container_name: primal-kitchen-medusa
+    container_name: ${MEDUSA_STOREFRONT_CONTAINER_NAME}
     image: ${CONTAINER_REGISTRY}/medusa
     build:
       context: medusa
     environment:
-      ADMIN_CORS: 'http://localhost:7000'
-      STORE_CORS: ''
+      ADMIN_CORS: https://${MEDUSA_ADMIN_PANEL_SUBDOMAIN}.${APP_DOMAIN} # think this needs to be only http...
+      STORE_CORS: https://${APP_DOMAIN}
       DATABASE_URL: postgres://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
       REDIS_URL: redis://localhost:${REDIS_PORT}
       STRIPE_API_KEY: ''
       STRIPE_WEBHOOK_SECRET: ''
+      COOKIE_SECRET: ${MEDUSA_STOREFRONT_COOKIE_SECRET}
+      JWT_SECRET: ${MEDUSA_STOREFRONT_JWT_SECRET}
     networks:
       - primal-kitchen-backend-network
     depends_on:
@@ -80,7 +82,8 @@ services:
     image: ${CONTAINER_REGISTRY}/medusa-admin
     build:
       context: medusa-admin
-      dockerfile: ../medusa-admin.dockerfile
+    environment:
+      GATSBY_MEDUSA_BACKEND_URL: https://${MEDUSA_STOREFRONT_SUBDOMAIN}.${APP_DOMAIN}
     networks:
       - primal-kitchen-backend-network
     depends_on:

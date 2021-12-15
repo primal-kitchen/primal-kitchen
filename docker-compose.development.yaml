@@ -21,6 +21,10 @@ services:
     ports:
       - ${REDIS_PORT}:${REDIS_PORT}
 
+  medusa:
+    ports:
+      - ${MEDUSA_STOREFRONT_API_PORT}:80
+
   medusa-admin:
     ports:
       - ${MEDUSA_ADMIN_PANEL_PORT}:80
