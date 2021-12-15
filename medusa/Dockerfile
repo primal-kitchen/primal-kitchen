@@ -8,7 +8,7 @@ RUN ["npm", "clean-install"]
 
 COPY .env .
 COPY medusa-config.js .
-COPY src .
+COPY src src
 
 CMD ["npm", "start"]
 
