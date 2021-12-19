@@ -79,6 +79,8 @@ http {
 		location / {
 			# TODO: update to medusa admin
 			proxy_pass	http://${MEDUSA_ADMIN_PANEL_CONTAINER_NAME}:80;
+
+			# proxy_set_header Host $host;
 		}
 	}
 }

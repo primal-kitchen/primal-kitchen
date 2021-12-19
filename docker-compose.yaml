@@ -82,8 +82,9 @@ services:
     image: ${CONTAINER_REGISTRY}/medusa-admin
     build:
       context: medusa-admin
-    environment:
-      GATSBY_MEDUSA_BACKEND_URL: https://${MEDUSA_STOREFRONT_SUBDOMAIN}.${APP_DOMAIN}
+      args:
+        # TODO: this is bad we want env not arg
+        GATSBY_MEDUSA_BACKEND_URL: https://${MEDUSA_STOREFRONT_SUBDOMAIN}.${APP_DOMAIN}
     networks:
       - primal-kitchen-backend-network
     depends_on:

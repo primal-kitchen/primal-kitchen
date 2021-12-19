@@ -7,11 +7,13 @@ WORKDIR /srv/app
 COPY medusa-admin/package.json .
 COPY medusa-admin/yarn.lock .
 RUN ["yarn", "install", "--immutable"]
-# build the site
+# copy the assets
 COPY medusa-admin .
+# TODO: this is fucky. need to rebuild with production url every docker push... how tf to fix this?
+ARG GATSBY_MEDUSA_BACKEND_URL
+RUN ["echo", "GATSBY_MEDUSA_BACKEND_URL=${GATSBY_MEDUSA_BACKEND_URL}", ">>", ".env.production"]
+# build this site
 RUN ["yarn", "build"]
-RUN echo thing
-RUN echo $GATSBY_MEDUSA_BACKEND_URL
 
 # TODO: specificy nginx version
 # TODO: see if need custom nginx default.conf
@@ -22,7 +24,5 @@ WORKDIR /usr/share/nginx/html
 RUN ["rm", "-rf", "./*"]
 # copy static assets from builder stage. note that the path needs to match where we built it!
 COPY --from=build-stage /srv/app/public .
-RUN echo actuallll
-RUN echo $GATSBY_MEDUSA_BACKEND_URL
 # containers run nginx with global directives and daemon off
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
