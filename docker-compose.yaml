@@ -20,6 +20,8 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USERNAME}
       POSTGRES_DB: ${POSTGRES_DATABASE}
+    # fix a volume permissions issue
+    command: postgres -c stats_temp_directory=/tmp
 
   strapi:
     container_name: primal-kitchen-strapi
