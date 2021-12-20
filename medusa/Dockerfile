@@ -10,3 +10,4 @@ COPY medusa-config.js .
 COPY src src
 
 ENTRYPOINT ["npm", "start"]
+# ENTRYPOINT echo ${DATABASE_URL}
