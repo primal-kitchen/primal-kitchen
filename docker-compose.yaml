@@ -72,6 +72,9 @@ services:
       STRIPE_WEBHOOK_SECRET: ''
       COOKIE_SECRET: ${MEDUSA_STOREFRONT_COOKIE_SECRET}
       JWT_SECRET: ${MEDUSA_STOREFRONT_JWT_SECRET}
+      STRAPI_URL: ${STRAPI_SUBDOMAIN}.${APP_DOMAIN}
+      STRAPI_USERNAME: ${STRAPI_USERNAME}
+      STRAPI_PASSWORD: ${STRAPI_USERNAME}
     networks:
       - primal-kitchen-backend-network
     depends_on:

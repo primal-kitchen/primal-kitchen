@@ -17,6 +17,7 @@
     "medusa-interfaces": "^1.1.27",
     "medusa-payment-manual": "^1.0.8",
     "medusa-payment-stripe": "^1.1.30",
+    "medusa-plugin-strapi": "^0.0.2-beta",
     "mongoose": "^5.13.3",
     "typeorm": "^0.2.36"
   },
