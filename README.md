@@ -42,8 +42,13 @@
 `docker compose up`
 
 # MAINTIANENCE
+### npm packages
 `npm outdated` in various services is helpful when updating
 TODO: learn how to replace running docker compose container in place??
+### inplace docker contianer upgrade
+i'm sure that there's a 0 downtime way to do this
+- this is building, but could do pull instead i think `docker compose build <service-name>` — remember to pass `--file` overrides if need be
+- replace inplace (small amount of downtime) `docker compose up --detach --no-deps <service-name>`
 
 # DOCKER HUB
 hub url: registry.digitalocean.com/primal-kitchen

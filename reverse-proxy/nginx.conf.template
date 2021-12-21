@@ -40,6 +40,9 @@ http {
 
 		location / {
 			proxy_pass	http://${FRONTEND_CONTAINER_NAME}:${FRONTEND_PORT};
+			# needed for HMR in next js... or just web sockets in general i think
+			proxy_set_header Upgrade $http_upgrade;
+			proxy_set_header Connection "upgrade";
 		}
 	}
 
