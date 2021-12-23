@@ -6,30 +6,41 @@ const Signup: NextPage = ({}) => {
 
 	const signup = async (event: React.FormEvent<EventTarget>) => {
 		event.preventDefault();
-		// check user hasn't already been created
-		// await fetch('')
-		// create the user
-		fetch('https://medusa.new.primalkitchen.nz.local/store/customers', {
-			method: 'POST',
-			// credentials: 'same-origin',
-			headers: {
-				'content-type': 'application/json',
-			},
-			body: JSON.stringify({
-				email: event.target.email.value,
-				password: event.target.password.value,
-				first_name: event.target['first-name'].value,
-				last_name: event.target['last-name'].value,
-				// phoneNumber: number
+		const createUser = () => {
+			// create the user
+			fetch('https://medusa.new.primalkitchen.nz.local/store/customers', {
+				method: 'POST',
+				// credentials: 'same-origin',
+				headers: {
+					'content-type': 'application/json',
+				},
+				body: JSON.stringify({
+					email: event.target.email.value,
+					password: event.target.password.value,
+					first_name: event.target['first-name'].value,
+					last_name: event.target['last-name'].value,
+					// phoneNumber: number
+				}),
 			})
-		})
-			.then(res => res.json())
-			.then(console.info)
-			.then(res => {
-				setResult(`created :D ${res.customer.email}`)
-			})
+				.then(res => res.json())
+				.then(console.info)
+				.then(res => {
+					setResult(`created :D ${res.customer.email}`);
+				});
 			// .catch(res => setResult(`failed! ${res.code} ${res.type} ${res.message}`))
 			// .then(setResult)
+		}
+		// check user hasn't already been created
+		await fetch(`https://medusa.new.primalkitchen.nz.local/store/auth/${event.target.email.value}`)
+			.then(result => result.json())
+			// TODO: flatten this when there's connection
+			.then(result => {
+				// TODO: medusa is bugged. update to latest...
+				if (!result.exists) createUser();
+				else setResult(`user already exists! redirect to login`);
+			})
+			.catch(error => setResult(`exploded when checking if user exists...`))
+
 	};
 
 	return (
