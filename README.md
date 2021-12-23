@@ -27,6 +27,9 @@
 - `mkcert --install` setup mkcert for local machine
 - `./scripts/generate-local-ssl-certificates.sh`
 ... consider using pebble local acme server instead of m
+ 
+### code completion
+- may need to `npm clean-install` for code completion in frontend
 
 ### INSOMNIA REST CLIENT
 - beforehand run mkcert etc
