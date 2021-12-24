@@ -2,17 +2,18 @@ import { NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
 
 const Account: NextPage = () => {
-	const [user, setUser] = useState('nuk');
+	const [user, setUser] = useState({id: 'nuk'});
 	useEffect(() => {
 		fetch('https://medusa.new.primalkitchen.nz.local/store/customers/me', {
 			credentials: 'include',
 		})
 			.then(res => res.json())
 			.then(res => setUser(res.customer))
-			.catch(er => setUser(`errr...`));
+			.catch(er => setUser({id: `errr...`}));
 	}, []);
 
 	// TODO: medusa breaking unknown need wifi
+
 	const addAddress = (event: React.FormEvent<EventTarget>) => {
 		event.preventDefault();
 		fetch(`https://medusa.new.primalkitchen.nz.local/store/customers/${user?.id}/addresses`, {
