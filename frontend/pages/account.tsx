@@ -1,3 +1,5 @@
+// @ts-nocheck TODO: remove this
+
 import { NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
 
@@ -59,7 +61,7 @@ const Account: NextPage = () => {
 			</form>
 			<br/>
 
-			<h1>add address</h1>
+			<h1 className='text-red-900 text-3xl font-bold underline'>add address</h1>
 			<form onSubmit={addAddress}>
 				<label htmlFor='company'>company</label>
 				<input id='company' type='text' autoComplete=''/>

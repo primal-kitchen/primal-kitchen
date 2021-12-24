@@ -1,3 +1,5 @@
+// @ts-nocheck TODO: remove this
+
 import { NextPage } from 'next';
 import React, { useState } from 'react';
 
