@@ -36,7 +36,7 @@
 - replace the path to the insomnia ca-certs file as appropriate
 - ensure url etc is right for the local cert below
 - got solution from https://github.com/FiloSottile/mkcert/issues/249
-- `cat data/certbot/conf/live/new.primalkitchen.nz.local/ssl-certificate.pem >> /var/folders/f3/2dnly051155519wzm4cyrtyr0000gn/T/insomnia_2021.7.2/ca-certs.pem`
+- `sudo cat data/certbot/conf/live/new.primalkitchen.nz.local/ssl-certificate.pem >> /var/folders/f3/2dnly051155519wzm4cyrtyr0000gn/T/insomnia_2021.7.2/ca-certs.pem`
 
 # HOW TO TEST
 `npm run test`
