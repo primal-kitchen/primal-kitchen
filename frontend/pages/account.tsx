@@ -52,6 +52,9 @@ const Account: NextPage = () => {
 			method: 'POST',
 			credentials: 'include',
 			body: JSON.stringify(fixedInput),
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		})
 			.then(res => res.json())
 			.then(console.log)
