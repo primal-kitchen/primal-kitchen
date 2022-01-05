@@ -4,36 +4,32 @@ import { NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import { UpdateUserInput } from '@medusajs/medusa/dist/types/user';
+import { useMeCustomer } from 'medusa-react';
 
 const Account: NextPage = () => {
-	const [user, setUser] = useState({id: 'nuk'});
-	useEffect(() => {
-		fetch('https://medusa.new.primalkitchen.nz.local/store/customers/me', {
-			credentials: 'include',
-		})
-			.then(res => res.json())
-			.then(res => setUser(res.customer))
-			.catch(er => setUser({id: `errr...`}));
-	}, []);
+	const user = useMeCustomer();
 
 	// TODO: medusa breaking unknown need wifi
 
 	const addAddress = (event: React.FormEvent<EventTarget>) => {
 		event.preventDefault();
-		fetch(`https://medusa.new.primalkitchen.nz.local/store/customers/${user?.id}/addresses`, {
+		fetch(`https://medusa.new.primalkitchen.nz.local/store/customers/me/addresses`, {
 			method: 'POST',
 			credentials: 'include',
 			headers: {
 				'content-type': 'application/json',
 			},
 			body: JSON.stringify({
-				company: event.target.company.value,
-				first_name: event.target['first-name'].value,
-				last_name: event.target['last-name'].value,
-				address_1: event.target['address-1'].value,
-				address_2: event.target['address-2'].value,
-				city: event.target.city.value,
-				country: event.target.country.value,
+				address: {
+					company: event.target.company.value,
+					first_name: event.target['first-name'].value,
+					last_name: event.target['last-name'].value,
+					address_1: event.target['address-1'].value,
+					address_2: event.target['address-2'].value,
+					postal_code: event.target['postal-code'].value,
+					city: event.target.city.value,
+					country_code: event.target.country.value,
+				}
 			}),
 		});
 	};
@@ -65,17 +61,17 @@ const Account: NextPage = () => {
 	return (
 		<div>
 			<form onSubmit={handleUpdateSubmission(validSubmissionHandler, invalidSubmissionHandler)}>
-				<label htmlFor='first-name'>first name {user?.first_name}</label>
-				<input id='first-name' autoComplete='given-name' defaultValue={user?.first_name} {...registerUpdateInput('first_name')}/>
+				<label htmlFor='first-name'>first name {user.customer?.first_name}</label>
+				<input id='first-name' autoComplete='given-name' defaultValue={user.customer?.first_name} {...registerUpdateInput('first_name')}/>
 				<br/>
 
-				<label htmlFor='last-name'>last name {user?.last_name}</label>
+				<label htmlFor='last-name'>last name {user.customer?.last_name}</label>
 				<input id='last-name' type='last' autoComplete='famiy-name'
-					   defaultValue={user?.last_name} {...registerUpdateInput('last_name')}/>
+					   defaultValue={user.customer?.last_name} {...registerUpdateInput('last_name')}/>
 				<br/>
 
-				<label htmlFor='email'>email address {user?.email}</label>
-				<input id='email' type='email' autoComplete='email' defaultValue={user?.email} {...registerUpdateInput('email')}/>
+				<label htmlFor='email'>email address {user.customer?.email}</label>
+				<input id='email' type='email' autoComplete='email' defaultValue={user.customer?.email} {...registerUpdateInput('email')}/>
 				<br/>
 
 				{/* TODO: phone mayb not in this update? */}
@@ -109,6 +105,10 @@ const Account: NextPage = () => {
 				<input id='address-2' type='text' autoComplete=''/>
 				<br/>
 
+				<label htmlFor='postal-code'>postal code</label>
+				<input id='postal-code' type='text' autoComplete=''/>
+				<br/>
+
 				<label htmlFor='city'>city</label>
 				<input id='city' type='text' autoComplete=''/>
 				<br/>
@@ -123,11 +123,11 @@ const Account: NextPage = () => {
 
 			<h1>addresses...</h1>
 			<div>
-				{/*{addresses.forEach(address => (*/}
-				{/*	<div>*/}
-				{/*		${address}*/}
-				{/*	</div>*/}
-				{/*))}*/}
+				{user.customer?.shipping_addresses.map(address => (
+					<div key={address.address_1}>
+						{address.address_1}
+					</div>
+				))}
 			</div>
 		</div>
 	);

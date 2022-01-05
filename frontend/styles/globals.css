@@ -13,3 +13,7 @@ body {
   box-sizing: inherit;
   user-select: none; /* prevent dragging to select text unless specifically allowed */
 }
+
+input {
+  user-select: revert;
+}
