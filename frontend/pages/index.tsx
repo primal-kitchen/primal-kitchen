@@ -2,8 +2,11 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useProducts } from 'medusa-react';
 
 const Home: NextPage = () => {
+	const products = useProducts();
+
 	const [asdfs, setAsdfs] = useState('nothing');
 	useEffect(() => {
 		fetch('https://strapi-admin.new.primalkitchen.nz.local/asdfs', {
@@ -34,6 +37,15 @@ const Home: NextPage = () => {
 			<div>
 				<h1>from medusa</h1>
 				<p>{medusaBS}</p>
+				<div>
+					<h3>prods</h3>
+					{products.products?.map(prod => (
+						<>
+							<p>{prod.title}</p>
+							<p>{prod.description}</p>
+						</>
+					))}
+				</div>
 			</div>
 		</main>
 	);

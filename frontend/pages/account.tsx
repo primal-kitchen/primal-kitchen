@@ -74,7 +74,7 @@ const Account: NextPage = () => {
 				<input id='email' type='email' autoComplete='email' defaultValue={user.customer?.email} {...registerUpdateInput('email')}/>
 				<br/>
 
-				{/* TODO: phone mayb not in this update? */}
+				{/* TODO: phone maybe not in this update? */}
 				{/*<label htmlFor='phone-number'>phone {user?.phone} {...registerUpdateInput('')}</label>*/}
 				{/*<input id='phone-number'/>*/}
 				{/*<br/>*/}
