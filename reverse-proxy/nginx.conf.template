@@ -86,4 +86,18 @@ http {
 			# proxy_set_header Host $host;
 		}
 	}
+
+	server {
+		listen 443 ssl http2;
+		server_name	${MINIO_SUBDOMAIN}.${APP_DOMAIN};
+
+		ssl_certificate /etc/nginx/ssl/live/${APP_DOMAIN}/${SSL_CERTIFICATE_FILE};
+		ssl_certificate_key /etc/nginx/ssl/live/${APP_DOMAIN}/${SSL_CERTIFICATE_PRIVATE_KEY_FILE};
+
+		location / {
+			proxy_pass	http://${MINIO_CONTAINER_NAME}:${MINIO_PORT};
+
+			# proxy_set_header Host $host;
+		}
+	}
 }

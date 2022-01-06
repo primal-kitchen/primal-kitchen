@@ -58,6 +58,17 @@ services:
     networks:
       - primal-kitchen-backend-network
 
+  minio:
+    container_name: primal-kitchen-minio
+    image: minio/minio:RELEASE.2022-01-04T07-41-07Z.fips
+    networks:
+      - primal-kitchen-backend-network
+    volumes:
+      - ./data/minio-volume:/data
+    command: server /data --address ":${MINIO_PORT}"
+    hostname: ${MINIO_HOSTNAME}
+    env_file: .env
+
   medusa:
     container_name: ${MEDUSA_STOREFRONT_CONTAINER_NAME}
     image: ${CONTAINER_REGISTRY}/medusa
@@ -78,9 +89,15 @@ services:
       STRAPI_PORT: ${STRAPI_PORT}
       STRAPI_USERNAME: ${STRAPI_USERNAME}
       STRAPI_PASSWORD: ${STRAPI_USERNAME}
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_SUBDOMNAIN: ${MINIO_SUBDOMAIN}
+      MINIO_BUCKET: ${MINIO_BUCKET}
+      MINIO_ENDPOINT: ${MINIO_SUBDOMAIN}.${APP_DOMAIN}
     networks:
       - primal-kitchen-backend-network
     depends_on:
+      - minio
       - postgres
       - strapi
       - redis

@@ -13,6 +13,7 @@
   "dependencies": {
     "@medusajs/medusa": "^1.1.49",
     "@medusajs/medusa-cli": "^1.1.22",
+    "medusa-file-minio": "^1.0.3",
     "medusa-fulfillment-manual": "^1.1.26",
     "medusa-interfaces": "^1.1.27",
     "medusa-payment-manual": "^1.0.8",

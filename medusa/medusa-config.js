@@ -19,7 +19,6 @@ const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET;
 const plugins = [
 	`medusa-fulfillment-manual`,
 	`medusa-payment-manual`,
-	// TODO: add strapi plugin ma boi
 	{
 		"resolve": `medusa-plugin-strapi`,
 		"options": {
@@ -29,6 +28,15 @@ const plugins = [
 			"strapi_port": process.env.STRAPI_PORT,
 		},
 	},
+	{
+		resolve: `medusa-file-minio`,
+		options: {
+			endpoint: process.env.MINIO_ENDPOINT,
+			bucket: process.env.MINIO_BUCKET,
+			access_key_id: process.env.MINIO_ROOT_USER,
+			secret_access_key: process.env.MINIO_ROOT_PASSWORD,
+		},
+	}
 	// Uncomment to add Stripe support.
 	// You can create a Stripe account via: https://stripe.com
 	// {
