@@ -28,7 +28,6 @@ services:
     image: ${CONTAINER_REGISTRY}/strapi
     build:
       context: strapi
-      dockerfile: Dockerfile
     env_file:
        - .env
       # - strapi/.env
@@ -79,7 +78,7 @@ services:
       STORE_CORS: https://${APP_DOMAIN}
       DATABASE_URL: postgres://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
       DATABASE_TYPE: ${POSTGRES_HOST}
-      REDIS_URL: redis://localhost:${REDIS_PORT}
+      REDIS_URL: redis://redis:${REDIS_PORT}
       STRIPE_API_KEY: ''
       STRIPE_WEBHOOK_SECRET: ''
       COOKIE_SECRET: ${MEDUSA_STOREFRONT_COOKIE_SECRET}

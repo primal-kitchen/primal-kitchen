@@ -51,7 +51,7 @@ const plugins = [
 module.exports = {
 	projectConfig: {
 		// TODO: activate redis ma boi
-		// redis_url: REDIS_URL,
+		redis_url: REDIS_URL,
 		// For more production-like environment install PostgresQL
 		database_url: DATABASE_URL,
 		// TODO: change to POSTGRES_HOST env variable
