@@ -14,8 +14,6 @@ services:
     image: strapi/strapi
     volumes:
       - ./strapi:/srv/app
-    ports:
-      - ${STRAPI_PORT}:${STRAPI_PORT}
 
   redis:
     ports:

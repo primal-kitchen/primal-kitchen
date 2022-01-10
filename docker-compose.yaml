@@ -31,6 +31,8 @@ services:
     env_file:
        - .env
       # - strapi/.env
+    expose:
+      - ${STRAPI_PORT}
     environment:
       DATABASE_CLIENT: postgres
       # must match name of service i think.. how does this work?
@@ -42,7 +44,9 @@ services:
       DATABASE_SSL: ${POSTGRES_USING_SSL}
       PORT: ${STRAPI_PORT}
       HOST: ${STRAPI_HOST_URL}
+      URL: https://${STRAPI_SUBDOMAIN}.${APP_DOMAIN}
       ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
+      STRAPI_LOG_LEVEL: trace
     networks:
       - primal-kitchen-backend-network
     depends_on:
@@ -84,10 +88,10 @@ services:
       COOKIE_SECRET: ${MEDUSA_STOREFRONT_COOKIE_SECRET}
       JWT_SECRET: ${MEDUSA_STOREFRONT_JWT_SECRET}
       # TODO: check actually need to declare all
-      STRAPI_URL: ${STRAPI_SUBDOMAIN}.${APP_DOMAIN}
+      STRAPI_URL: https://${STRAPI_SUBDOMAIN}.${APP_DOMAIN}
       STRAPI_PORT: ${STRAPI_PORT}
       STRAPI_USERNAME: ${STRAPI_USERNAME}
-      STRAPI_PASSWORD: ${STRAPI_USERNAME}
+      STRAPI_PASSWORD: ${STRAPI_PASSWORD}
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
       MINIO_SUBDOMNAIN: ${MINIO_SUBDOMAIN}
