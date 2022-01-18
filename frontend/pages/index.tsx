@@ -31,7 +31,7 @@ const Home: NextPage = () => {
 	return (
 		<main>
 			<div>
-				<h1 className='text-red-900 text-3xl font-bold underline'>from strapi</h1>
+				<h1 className='text-another text-3xl font-bold underline'>from strapi</h1>
 				<p>{asdfs}</p>
 			</div>
 			<div>

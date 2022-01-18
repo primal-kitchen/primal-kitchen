@@ -41,6 +41,7 @@ services:
       # TODO: where is serve??
       # TODO: gotta be a better way to do this... done to avoid crap getting put on local disk
       - ./frontend/pages:/srv/app/pages
+      - ./frontend/components:/srv/app/components
       - ./frontend/public:/srv/app/public
       - ./frontend/styles:/srv/app/styles
       - ./frontend/next.config.js:/srv/app/next.config.js
