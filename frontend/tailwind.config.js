@@ -17,10 +17,12 @@ module.exports = {
       inherit: colors.inherit,
       current: colors.current,
       transparent: colors.transparent,
-
-      'dark-gray': '#2E2E2E',
+      // site specific colours
+      'dark-grey': '#2E2E2E',
+      'light-grey': '#1A000000',
       red: '#C22227',
-
+      white: '#FFFFFF',
+      black: '#000000',
     }),
     columns: {
       auto: 'auto',
@@ -326,33 +328,9 @@ module.exports = {
       DEFAULT: '1',
     },
     fontFamily: {
-      sans: [
-        'ui-sans-serif',
-        'system-ui',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        '"Noto Sans"',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
-      ],
-      serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-      mono: [
-        'ui-monospace',
-        'SFMono-Regular',
-        'Menlo',
-        'Monaco',
-        'Consolas',
-        '"Liberation Mono"',
-        '"Courier New"',
-        'monospace',
-      ],
+      'roboto': ['Roboto', 'sans-serif'],
+      'libre-franklin': ['Libre Franklin', 'sans-serif'],
+      'caveat': ['Caveat', 'cursive'],
     },
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],
