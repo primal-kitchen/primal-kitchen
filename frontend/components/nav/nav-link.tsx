@@ -2,7 +2,7 @@
 
 const NavLink = ({to, children}) => {
 	return (
-		<a href={to}>
+		<a href={to} className='whitespace-nowrap'>
 			{children}
 		</a>
 	)
