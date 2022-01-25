@@ -18,7 +18,7 @@ const SplashScreen = () => {
 					<div className='w-max h-full flex flex-col justify-center items-center mt-8'>
 						<h1 className='font-libre-franklin font-bold text-5xl self-start'>Paleo Meals</h1>
 						<h2 className='font-libre-franklin font-bold text-3xl mt-5 mb-[25%] self-start'>... delivered fresh</h2>
-						<div className='flex flex-col md:flex-row gap-4 md:gap-20 font-caveat text-3xl'>
+						<div className='flex flex-col md:flex-row gap-3 md:gap-[5vw] font-caveat text-3xl'>
 							<SplashScreenListItem>All natural</SplashScreenListItem>
 							<SplashScreenListItem>Gluten free</SplashScreenListItem>
 							<SplashScreenListItem>No refined sugar</SplashScreenListItem>
