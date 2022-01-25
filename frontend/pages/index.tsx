@@ -34,23 +34,23 @@ const Home: NextPage = () => {
 			<div className='h-[90vh]'>
 				<SplashScreen />
 			</div>
-			<div>
-				<h1 className='text-another text-3xl font-bold underline'>from strapi</h1>
-				<p>{asdfs}</p>
-			</div>
-			<div>
-				<h1>from medusa</h1>
-				<p>{medusaBS}</p>
-				<div>
-					<h3>prods</h3>
-					{products.products?.map(prod => (
-						<>
-							<p>{prod.title}</p>
-							<p>{prod.description}</p>
-						</>
-					))}
-				</div>
-			</div>
+			{/*<div>*/}
+			{/*	<h1 className='text-another text-3xl font-bold underline'>from strapi</h1>*/}
+			{/*	<p>{asdfs}</p>*/}
+			{/*</div>*/}
+			{/*<div>*/}
+			{/*	<h1>from medusa</h1>*/}
+			{/*	<p>{medusaBS}</p>*/}
+			{/*	<div>*/}
+			{/*		<h3>prods</h3>*/}
+			{/*		{products.products?.map(prod => (*/}
+			{/*			<>*/}
+			{/*				<p>{prod.title}</p>*/}
+			{/*				<p>{prod.description}</p>*/}
+			{/*			</>*/}
+			{/*		))}*/}
+			{/*	</div>*/}
+			{/*</div>*/}
 		</main>
 	);
 };
