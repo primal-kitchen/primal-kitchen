@@ -1,4 +1,6 @@
 import '../styles/globals.css';
+import '../styles/splash-screen.css';
+
 import type { AppProps } from 'next/app';
 import { MedusaProvider } from 'medusa-react';
 import { QueryClient } from 'react-query';

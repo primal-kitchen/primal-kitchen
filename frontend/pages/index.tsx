@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useProducts } from 'medusa-react';
+import SplashScreen from '../components/splash-screen/splash-screen';
 
 const Home: NextPage = () => {
 	const products = useProducts();
@@ -29,7 +30,10 @@ const Home: NextPage = () => {
 	}, [setMedusaBS]);
 
 	return (
-		<main>
+		<main className=''>
+			<div className='h-[90vh]'>
+				<SplashScreen />
+			</div>
 			<div>
 				<h1 className='text-another text-3xl font-bold underline'>from strapi</h1>
 				<p>{asdfs}</p>

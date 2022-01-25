@@ -7,6 +7,7 @@ module.exports = {
   darkMode: 'media', // or 'class'
   theme: {
     screens: {
+      xs: '375px',
       sm: '640px',
       md: '768px',
       lg: '1024px',
@@ -607,13 +608,14 @@ module.exports = {
       max: 'max-content',
       fit: 'fit-content',
     },
-    minWidth: {
+    minWidth: ({ theme, breakpoints }) => ({
       0: '0px',
       full: '100%',
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
-    },
+      ...breakpoints(theme('screens')),
+    }),
     objectPosition: {
       bottom: 'bottom',
       center: 'center',
