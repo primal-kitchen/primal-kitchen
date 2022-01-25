@@ -18,8 +18,8 @@ const SplashScreen = () => {
 			</div>
 			<div className='bg-red grid justify-items-center'>
 				<BodyClamp className='bg-red'>
-					<div className='grid auto-rows-auto gap-3 justify-center splash-screen-instructions-copy px-1 pt-1'>
-						{/*<img src='chef.png' className='hidden lg:block row-span-4 col-span-1 place-self-end'/>*/}
+					<div className='grid md:grid-cols-[max-content_auto] grid-rows-[repeat(4,auto)] gap-3 justify-center px-1 pt-1'>
+						<img src='chef.png' className='hidden md:block row-span-full place-self-end'/>
 						<div className='text-white contents w-[60%] overflow-x-scroll'>
 							<h1 className='text-2xl font-bold self-end'>We cook and deliver fresh twice per week</h1>
 							<p>

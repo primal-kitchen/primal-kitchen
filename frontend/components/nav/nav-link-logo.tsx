@@ -4,6 +4,7 @@ const NavLinkLogo = () => {
 	return (
 		 <NavLink to='/'>
 			 <picture>
+				 {/* TODO: if height shrinks heaps logo gets small when shouldn't */}
 				 {/* TODO: use tailwind breakpoints here */}
 				 <source media='(min-width: 640px)' srcSet='logo-large.png'/>
 				 <source media='(min-width: 1px)' srcSet='logo-small.png'/>

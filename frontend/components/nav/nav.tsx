@@ -51,6 +51,7 @@ const Nav = () => {
 					</div>
 				</div>
 				{
+					// TODO: bug if window sized down then menu opened, then resized up can't close window...
 					showingMenu &&
 					// top-auto is the important class here
 					<div
