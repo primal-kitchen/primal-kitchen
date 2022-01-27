@@ -1,5 +1,6 @@
 import ProductSection from './product-section';
 import BodyClamp from '../utilities/body-clamp';
+import React from 'react';
 
 type TProductSection = {
 	heading: string,
@@ -45,13 +46,20 @@ const productSections: TProductSection[] = [
 const ProductSections = () => (
 	<section className=''>
 		{/* TODO: margin-bottom stuff needs to match menu heading */}
-		<div className='text-red text-lg font-bold uppercase mb-9 md:mb-16'>
-			<BodyClamp className='pb-1'>
-				<div className='flex flex-row justify-center gap-2 md:gap-5'>
+		{/* TODO: top calc should be based off of nav css variables */}
+		<BodyClamp>
+			{/* TODO: margin bottom calculation is based off of padding to secondary menu below */}
+			<div className='flex items-center justify-center w-full font-roboto font-bold uppercase text-4xl my-9 md:mt-16 md:mb-13'>
+				our menu
+			</div>
+		</BodyClamp>
+		<div className='sticky top-[calc(5vh+1rem)] text-red text-lg font-bold uppercase mb-9 md:mb-16 pt-3 bg-white'>
+			<BodyClamp className='pb-2'>
+				<div className='flex flex-row justify-center gap-3 md:gap-5'>
 					{
 						productSections.map(productSection => (
 							<div key={productSection.heading}
-								 className={`underline-offset-4 decoration-4 ${productSection.active ? 'underline' : ''}`}>
+								 className={`underline-offset-8 decoration-4 ${productSection.active ? 'underline' : ''}`}>
 								{productSection.heading}
 							</div>
 						))
@@ -70,6 +78,24 @@ const ProductSections = () => (
 									description={productSection.description}/>
 				))
 			}
+		</div>
+		<div className='flex flex-col gap-2'>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
+			<span className='bg-black py-96'>x</span>
 		</div>
 	</section>
 );

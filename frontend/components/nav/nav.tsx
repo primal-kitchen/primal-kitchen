@@ -55,8 +55,8 @@ const Nav = () => {
 						// TODO: bug if window sized down then menu opened, then resized up can't close window...
 						showingMenu &&
 						// top-auto is the important class here
-						<div
-							className='bg-dark-grey h-[95vh] flex flex-col items-center justify-center gap-8'>
+						// TODO: height calc should be based off of nav css variables
+						<div className='bg-dark-grey h-[calc(95vh-1rem)] flex flex-col items-center justify-center gap-8'>
 							<NavLinks/>
 						</div>
 					}
