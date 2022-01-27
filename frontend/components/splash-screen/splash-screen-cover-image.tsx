@@ -2,7 +2,7 @@ import SplashScreenCoverImageListItem from './splash-screen-cover-image-list-ite
 import BodyClamp from '../utilities/body-clamp';
 
 const SplashScreenCoverImage = () => (
-	<BodyClamp className="h-full bg-cover bg-[url('/images/cover.png')]">
+	<BodyClamp className="h-full bg-cover bg-center bg-[url('/images/cover.png')]">
 		<div className='w-max flex flex-col justify-center items-center mt-8 text-white'>
 			<h1 className='font-libre-franklin font-bold text-5xl self-start'>Paleo Meals</h1>
 			<h2 className='font-libre-franklin font-bold text-3xl mt-5 mb-[25%] self-start'>... delivered fresh</h2>
