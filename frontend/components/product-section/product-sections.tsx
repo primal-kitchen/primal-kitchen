@@ -1,12 +1,13 @@
 import ProductSection from './product-section';
 import BodyClamp from '../utilities/body-clamp';
 import React from 'react';
+import { Day, Options, ProductProps } from '../product/product';
 
 type TProductSection = {
 	heading: string,
 	headingExtension?: string,
 	description?: any,
-	items: [],
+	items: ProductProps[],
 	active?: boolean,
 }
 const productSections: TProductSection[] = [
@@ -21,7 +22,33 @@ const productSections: TProductSection[] = [
 				className='text-red underline'>shopping cart</a>.
 			</p>
 		),
-		items: [],
+		items: [
+			{
+				daysProductIsFor: [Day.MONDAY],
+				imageUrl: 'images/delete-me/spinach-dijon-chicken.png',
+				title: 'Spinach Djion Chicken',
+			},
+			{
+				daysProductIsFor: [Day.MONDAY],
+				imageUrl: 'images/delete-me/spinach-tandori-chicken.png',
+				title: 'Spinach Tandoori Chicken',
+			},
+			{
+				daysProductIsFor: [Day.MONDAY],
+				imageUrl: 'images/delete-me/tandoori-meatballs.png',
+				title: 'Tandoori Meatballs',
+			},
+			{
+				daysProductIsFor: [Day.MONDAY],
+				imageUrl: 'images/delete-me/hungarian-braised-beef.png',
+				title: 'Hungarian Braised Beef',
+			},
+			{
+				daysProductIsFor: [Day.MONDAY],
+				imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
+				title: 'Crumbed Chicken Parmigiana',
+			},
+		],
 		active: true,
 	},
 	{
@@ -33,14 +60,74 @@ const productSections: TProductSection[] = [
 				See the menu above for the meals in next week’s packs.
 			</p>
 		),
-		items: [],
+		items: [
+			{
+				daysProductIsFor: [Day.MONDAY, Day.FRIDAY],
+				imageUrl: 'images/delete-me/meal-pack.png',
+				title: '5 meal packs',
+				options: [Options.REGULAR, Options.WARRIOR, Options.FAMILY],
+			},
+			{
+				daysProductIsFor: [Day.MONDAY, Day.SATURDAY],
+				imageUrl: 'images/delete-me/meal-pack.png',
+				title: '6 meal packs',
+				options: [Options.REGULAR, Options.WARRIOR, Options.FAMILY],
+			},
+			{
+				daysProductIsFor: [Day.MONDAY, Day.SUNDAY],
+				imageUrl: 'images/delete-me/meal-pack.png',
+				title: '7 meal packs',
+				options: [Options.REGULAR, Options.WARRIOR, Options.FAMILY],
+			},
+			{
+				daysProductIsFor: [Day.NONE],
+				imageUrl: 'images/delete-me/meal-pack.png',
+				title: '10 meal packs',
+				options: [Options.REGULAR, Options.WARRIOR, Options.FAMILY],
+			},
+		],
 	},
 	{
 		heading: 'deli',
 		description: (<p>Breakfast Granola, Paleo Bars, Baking Premixes and treats</p>),
-		items: [],
+		items: [
+			{
+				daysProductIsFor: [Day.NONE],
+				imageUrl: 'images/delete-me/granola-cherry-and-pecan.png',
+				title: 'Granola - Cherry and Pecan',
+			},
+			{
+				daysProductIsFor: [Day.NONE],
+				imageUrl: 'images/delete-me/granola-cinnamon-vanilla.png',
+				title: 'Granola - Cinnamon Vanilla',
+			},
+			{
+				daysProductIsFor: [Day.NONE],
+				imageUrl: 'images/delete-me/muffin-mix-chocolate-chip.png',
+				title: 'Muffin Mix - Chocolate Chip',
+			},
+			{
+				daysProductIsFor: [Day.NONE],
+				imageUrl: 'images/delete-me/muffin-mix-cinnamon-raisin.png',
+				title: 'Muffin Mix - Cinnamon Raisin',
+			},
+		],
 	},
-	{heading: 'extras', items: []},
+	{
+		heading: 'extras',
+		items: [
+			{
+				daysProductIsFor: [Day.NONE],
+				imageUrl: 'images/delete-me/cooler-bag.png',
+				title: 'Cooler Bag',
+			},
+			{
+				daysProductIsFor: [Day.NONE],
+				imageUrl: 'images/delete-me/chilltainer.png',
+				title: 'Chilltainer',
+			},
+		],
+	},
 ];
 
 const ProductSections = () => (
