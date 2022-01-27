@@ -37,7 +37,7 @@ const Nav = () => {
 
 	return (
 		// shitty solution with the double coloring to do with clamping i cbf explaining
-		<div className='bg-dark-grey sticky top-0 min-h-[35px]'>
+		<div className='bg-dark-grey sticky top-0 z-10 min-h-[35px]'>
 			<BodyClamp>
 				<nav className='w-full bg-dark-grey text-white'>
 					<div className='flex items-center justify-end gap-8 h-[5vh] m-2'>
@@ -56,7 +56,7 @@ const Nav = () => {
 						showingMenu &&
 						// top-auto is the important class here
 						// TODO: height calc should be based off of nav css variables
-						<div className='bg-dark-grey h-[calc(95vh-1rem)] flex flex-col items-center justify-center gap-8'>
+						<div className='bg-dark-grey h-[calc(95vh-1rem)] flex flex-col items-center justify-center gap-8 overscroll-contain'>
 							<NavLinks/>
 						</div>
 					}
