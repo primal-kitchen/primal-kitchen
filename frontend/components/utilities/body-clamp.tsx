@@ -4,14 +4,15 @@ import React from 'react';
 type Props = {
 	children: any,
 	className?: string,
-	style?: any,
 }
 
-const BodyClamp: React.FC<Props> = ({children, className = '', style}) => {
+const BodyClamp: React.FC<Props> = ({children, className = ''}) => {
 	// TODO: maybe need to strip spaces from front and back of className
 	return (
-		<div className={`grid justify-items-center max-w-screen-xl min-w-screen-xs w-full overflow-x-scroll ${className}`} style={style}>
-			{children}
+		<div className={`grid justify-items-center overflow-x-scroll ${className}`}>
+			<div className={`w-full max-w-screen-xl min-w-screen-xs grid justify-items-center content-center`}>
+				{children}
+			</div>
 		</div>
 	);
 };

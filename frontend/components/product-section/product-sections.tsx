@@ -35,19 +35,19 @@ const ProductSections = () => (
 	<section className=''>
 		{/* TODO: margin-bottom stuff needs to match menu heading */}
 		<div className='text-red text-lg font-bold uppercase mb-9 md:mb-16'>
-			<BodyClamp>
+			<BodyClamp className='pb-1'>
 				<div className='flex flex-row justify-center gap-2 md:gap-5'>
 					{
 						productSections.map(productSection => (
 							<div key={productSection.heading}
-								 className={`underline-offset-4 decoration-4 pb-2 ${productSection.active ? 'underline' : ''}`}>
+								 className={`underline-offset-4 decoration-4 ${productSection.active ? 'underline' : ''}`}>
 								{productSection.heading}
 							</div>
 						))
 					}
 				</div>
-				<hr className='text-light-grey'/>
 			</BodyClamp>
+			<hr className='text-light-grey'/>
 		</div>
 		{
 			productSections.map(productSection => (
