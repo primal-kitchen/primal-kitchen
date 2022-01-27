@@ -25,9 +25,20 @@ const productSections: TProductSection[] = [
 	},
 	{
 		heading: 'meal packs',
+		description: (
+			<p>
+				Available in a range of sizes - Regular, Warrior and Family (designed for families with 2 adults and 2 children under 12).
+				<br/>
+				See the menu above for the meals in next week’s packs.
+			</p>
+		),
 		items: [],
 	},
-	{heading: 'deli', items: []},
+	{
+		heading: 'deli',
+		description: (<p>Breakfast Granola, Paleo Bars, Baking Premixes and treats</p>),
+		items: [],
+	},
 	{heading: 'extras', items: []},
 ];
 
@@ -49,14 +60,17 @@ const ProductSections = () => (
 			</BodyClamp>
 			<hr className='text-light-grey'/>
 		</div>
-		{
-			productSections.map(productSection => (
-				<ProductSection key={productSection.heading}
-								heading={`${productSection.heading}${productSection.headingExtension ?? ''}`}
-								items={productSection.items}
-								description={productSection.description}/>
-			))
-		}
+		{/* TODO: gap stuff needs to match menu heading */}
+		<div className='flex flex-col gap-9 md:gap-16'>
+			{
+				productSections.map(productSection => (
+					<ProductSection key={productSection.heading}
+									heading={`${productSection.heading}${productSection.headingExtension ?? ''}`}
+									items={productSection.items}
+									description={productSection.description}/>
+				))
+			}
+		</div>
 	</section>
 );
 
