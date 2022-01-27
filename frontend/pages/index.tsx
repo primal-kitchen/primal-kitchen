@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useProducts } from 'medusa-react';
 import SplashScreen from '../components/splash-screen/splash-screen';
+import ProductSections from  '../components/product-section/product-sections';
 
 const Home: NextPage = () => {
 	const products = useProducts();
@@ -31,8 +32,11 @@ const Home: NextPage = () => {
 
 	return (
 		<main className=''>
-			<div className='h-[90vh]'>
+			{/*<div className='h-[90vh]'>*/}
 				<SplashScreen />
+			{/*</div>*/}
+			<div>
+				<ProductSections/>
 			</div>
 			{/*<div>*/}
 			{/*	<h1 className='text-another text-3xl font-bold underline'>from strapi</h1>*/}

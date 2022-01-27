@@ -20,7 +20,7 @@ module.exports = {
       transparent: colors.transparent,
       // site specific colours
       'dark-grey': '#2E2E2E',
-      'light-grey': '#1A000000',
+      'light-grey': '#CECECE',
       red: '#C22227',
       white: '#FFFFFF',
       black: '#000000',

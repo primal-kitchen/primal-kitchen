@@ -18,12 +18,12 @@ const Nav = () => {
 	const NavLinkSelectStore = () => <NavLink>{selectedStore ?? 'Select store'}</NavLink>;
 	const NavLinkShoppingCart = () =>
 		<NavLink>
-			<img src='shopping-cart.svg'/>
+			<img src='icons/shopping-cart.svg'/>
 		</NavLink>;
 	const NavLinkMenuToggle = () =>
 		<div onClick={toggleShowingMenu}>
 			<NavLink>
-				<img src={showingMenu ? 'menu-close.svg' : 'menu-open.svg'}/>
+				<img src={showingMenu ? 'icons/menu-close.svg' : 'icons/menu-open.svg'}/>
 			</NavLink>
 		</div>;
 	const NavLinks = () =>
@@ -37,30 +37,32 @@ const Nav = () => {
 
 	return (
 		// shitty solution with the double coloring to do with clamping i cbf explaining
-		<nav className='bg-dark-grey sticky top-0 min-h-[35px]'>
-			<BodyClamp className='m-auto bg-dark-grey text-white'>
-				<div className='flex items-center justify-end gap-8 h-[5vh] m-2'>
-					<div className='mr-auto h-full'>
-						<NavLinkLogo/>
+		<div className='bg-dark-grey sticky top-0 min-h-[35px]'>
+			<BodyClamp>
+				<nav className='w-full bg-dark-grey text-white'>
+					<div className='flex items-center justify-end gap-8 h-[5vh] m-2'>
+						<div className='mr-auto h-full'>
+							<NavLinkLogo/>
+						</div>
+						<div className='hidden lg:contents'>
+							<NavLinks/>
+						</div>
+						<div className='lg:hidden'>
+							<NavLinkMenuToggle/>
+						</div>
 					</div>
-					<div className='hidden lg:contents'>
-						<NavLinks/>
-					</div>
-					<div className='lg:hidden'>
-						<NavLinkMenuToggle/>
-					</div>
-				</div>
-				{
-					// TODO: bug if window sized down then menu opened, then resized up can't close window...
-					showingMenu &&
-					// top-auto is the important class here
-					<div
-						className='bg-dark-grey h-[95vh] flex flex-col items-center justify-center gap-8'>
-						<NavLinks/>
-					</div>
-				}
+					{
+						// TODO: bug if window sized down then menu opened, then resized up can't close window...
+						showingMenu &&
+						// top-auto is the important class here
+						<div
+							className='bg-dark-grey h-[95vh] flex flex-col items-center justify-center gap-8'>
+							<NavLinks/>
+						</div>
+					}
+				</nav>
 			</BodyClamp>
-		</nav>
+		</div>
 	);
 };
 

@@ -7,13 +7,13 @@ const SplashScreen = () => (
 	<section className=''>
 		<div className='h-[60vh]'>
 			<SplashScreenCoverImage/>
-			<SplashScreenDeliveryExplanation/>
-			<BodyClamp>
-				<div className='flex items-center justify-center font-roboto font-bold uppercase text-4xl my-9 md:my-16'>
-					our menu
-				</div>
-			</BodyClamp>
 		</div>
+		<SplashScreenDeliveryExplanation/>
+		<BodyClamp>
+			<div className='flex items-center justify-center w-full font-roboto font-bold uppercase text-4xl my-9 md:my-16'>
+				our menu
+			</div>
+		</BodyClamp>
 	</section>
 );
 
