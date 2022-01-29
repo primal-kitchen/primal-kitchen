@@ -37,7 +37,7 @@ const Nav = () => {
 
 	return (
 		// shitty solution with the double coloring to do with clamping i cbf explaining
-		<div className='bg-dark-grey sticky top-0 z-10 min-h-[35px]'>
+		<div className='bg-dark-grey sticky top-0 z-10 min-h-[35px]' id='nav'>
 			<BodyClamp>
 				<nav className='w-full bg-dark-grey text-white'>
 					<div className='flex items-center justify-end gap-8 h-[5vh] m-2'>

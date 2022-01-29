@@ -1,6 +1,6 @@
 import ProductSection from './product-section';
 import BodyClamp from '../utilities/body-clamp';
-import React from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import { Day, Options, ProductProps } from '../product/product';
 
 type TProductSection = {
@@ -9,7 +9,9 @@ type TProductSection = {
 	description?: any,
 	items: ProductProps[],
 	active?: boolean,
+	ref: any,
 }
+
 const productSections: TProductSection[] = [
 	{
 		heading: 'single meals',
@@ -22,6 +24,7 @@ const productSections: TProductSection[] = [
 				className='text-red underline'>shopping cart</a>.
 			</p>
 		),
+		ref: createRef(),
 		items: [
 			{
 				daysProductIsFor: [Day.MONDAY],
@@ -60,6 +63,7 @@ const productSections: TProductSection[] = [
 				See the menu above for the meals in next week’s packs.
 			</p>
 		),
+		ref: createRef(),
 		items: [
 			{
 				daysProductIsFor: [Day.MONDAY, Day.FRIDAY],
@@ -90,6 +94,7 @@ const productSections: TProductSection[] = [
 	{
 		heading: 'deli',
 		description: (<p>Breakfast Granola, Paleo Bars, Baking Premixes and treats</p>),
+		ref: createRef(),
 		items: [
 			{
 				daysProductIsFor: [Day.NONE],
@@ -115,6 +120,7 @@ const productSections: TProductSection[] = [
 	},
 	{
 		heading: 'extras',
+		ref: createRef(),
 		items: [
 			{
 				daysProductIsFor: [Day.NONE],
@@ -130,61 +136,93 @@ const productSections: TProductSection[] = [
 	},
 ];
 
-const ProductSections = () => (
-	<section className=''>
-		{/* TODO: margin-bottom stuff needs to match menu heading */}
-		{/* TODO: top calc should be based off of nav css variables */}
-		<BodyClamp>
-			{/* TODO: margin bottom calculation is based off of padding to secondary menu below */}
-			<div className='flex items-center justify-center w-full font-roboto font-bold uppercase text-4xl my-9 md:mt-16 md:mb-13'>
-				our menu
-			</div>
-		</BodyClamp>
-		<div className='sticky top-[calc(5vh+1rem)] text-red text-lg font-bold uppercase mb-9 md:mb-16 pt-3 bg-white'>
-			<BodyClamp className='pb-2'>
-				<div className='flex flex-row justify-center gap-3 md:gap-5'>
-					{
-						productSections.map(productSection => (
-							<div key={productSection.heading}
-								 className={`underline-offset-8 decoration-4 ${productSection.active ? 'underline' : ''}`}>
-								{productSection.heading}
-							</div>
-						))
-					}
+const useNavHeight = () => {
+	// return document?.getElementById('nav')?.clientHeight;
+	// TODO: get nav height properly...
+	return 50;
+};
+
+const ProductSections = () => {
+	const [activeProductSection, setActiveProductSection] = useState(productSections[0]);
+	// useEffect onscroll to calculate active product section
+	// useEffect(() => {
+	// 	window.onscroll.
+	// }, [])
+
+	const productSectionsMenuRef = useRef<HTMLElement>();
+	const navHeight = useNavHeight();
+
+	const scrollToProductSection = (productSection: TProductSection): void => {
+		const productSectionsMenuHeight = productSectionsMenuRef.current?.clientHeight;
+		const productSectionDistanceFromViewPortTop = productSection.ref.current.getBoundingClientRect().y;
+		// TODO: properly calculate this dodgy extra. it's mostly because not calculating the bottom margin from product sections menu i think
+		const extra = 36;
+		const amountToScroll = productSectionDistanceFromViewPortTop - (productSectionsMenuHeight + navHeight + extra);
+		window.scrollBy({top: amountToScroll, behavior: 'smooth'});
+	};
+
+	return (
+		<section className=''>
+			{/* TODO: margin-bottom stuff needs to match menu heading */}
+			{/* TODO: top calc should be based off of nav css variables */}
+			<BodyClamp>
+				{/* TODO: margin bottom calculation is based off of padding to secondary menu below */}
+				<div className='flex items-center justify-center w-full font-roboto font-bold uppercase text-4xl my-9 md:mt-16 md:mb-13'>
+					our menu
 				</div>
 			</BodyClamp>
-			<hr className='text-light-grey'/>
-		</div>
-		{/* TODO: gap stuff needs to match menu heading */}
-		<div className='flex flex-col gap-9 md:gap-16'>
-			{
-				productSections.map(productSection => (
-					<ProductSection key={productSection.heading}
-									heading={`${productSection.heading}${productSection.headingExtension ?? ''}`}
-									items={productSection.items}
-									description={productSection.description}/>
-				))
-			}
-		</div>
-		{/*<div className='flex flex-col gap-2'>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*	<span className='bg-black py-96'>x</span>*/}
-		{/*</div>*/}
-	</section>
-);
+			<div className='sticky top-[calc(5vh+1rem)] text-red text-lg font-bold uppercase mb-9 md:mb-16 pt-3 bg-white'
+				 ref={productSectionsMenuRef}>
+				<BodyClamp className='pb-2'>
+					<div className='flex flex-row justify-center gap-3 md:gap-5'>
+						{
+							productSections.map(productSection => (
+								<div key={productSection.heading}
+									 className={`underline-offset-8 decoration-4 ${productSection.active ? 'underline' : ''}`}
+									 onClick={event => {
+										 event.preventDefault();
+										 scrollToProductSection(productSection);
+									 }}>
+									{productSection.heading}
+								</div>
+							))
+						}
+					</div>
+				</BodyClamp>
+				<hr className='text-light-grey'/>
+			</div>
+			{/* TODO: gap stuff needs to match menu heading */}
+			<div className='flex flex-col gap-9 md:gap-16'>
+				{
+					productSections.map(productSection => (
+						<ProductSection key={productSection.heading}
+										heading={`${productSection.heading}${productSection.headingExtension ?? ''}`}
+										items={productSection.items}
+										description={productSection.description}
+										ref={productSection.ref}/>
+					))
+				}
+			</div>
+			<div className='flex flex-col gap-2'>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+				<span className='bg-black py-96'>x</span>
+			</div>
+		</section>
+	);
+};
 
 export default ProductSections;

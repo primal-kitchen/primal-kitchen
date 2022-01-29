@@ -8,8 +8,8 @@ type Props = {
 	items: ProductProps[],
 };
 
-const ProductSection: React.FC<Props> = ({heading, description, items}) => (
-	<div className=''>
+const ProductSection: React.FC<Props> = React.forwardRef(({heading, description, items}, ref) => (
+	<div className='' ref={ref}>
 		<BodyClamp>
 			<h1 className='font-bold text-lg uppercase'>{heading}</h1>
 			<div className='text-center'>{description}</div>
@@ -25,6 +25,6 @@ const ProductSection: React.FC<Props> = ({heading, description, items}) => (
 			</div>
 		</BodyClamp>
 	</div>
-);
+));
 
 export default ProductSection;
