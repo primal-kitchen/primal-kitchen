@@ -166,24 +166,24 @@ const ProductSections = () => (
 				))
 			}
 		</div>
-		<div className='flex flex-col gap-2'>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-			<span className='bg-black py-96'>x</span>
-		</div>
+		{/*<div className='flex flex-col gap-2'>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*	<span className='bg-black py-96'>x</span>*/}
+		{/*</div>*/}
 	</section>
 );
 

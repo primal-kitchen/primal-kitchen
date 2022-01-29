@@ -31,10 +31,10 @@ const Home: NextPage = () => {
 	}, [setMedusaBS]);
 
 	return (
-		<main className=''>
-			{/*<div className='h-[90vh]'>*/}
+		<main>
+			<div className='h-[90vh]'>
 				<SplashScreen />
-			{/*</div>*/}
+			</div>
 			<div>
 				<ProductSections/>
 			</div>

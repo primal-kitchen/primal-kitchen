@@ -9,7 +9,7 @@ type Props = {
 const BodyClamp: React.FC<Props> = ({children, className = ''}) => {
 	// TODO: maybe need to strip spaces from front and back of className
 	return (
-		<div className={`grid justify-items-center overflow-x-scroll ${className}`}>
+		<div className={`grid justify-items-center overflow-x-auto ${className}`}>
 			<div className={`w-full max-w-screen-xl min-w-screen-xs grid justify-items-center content-center`}>
 				{children}
 			</div>
