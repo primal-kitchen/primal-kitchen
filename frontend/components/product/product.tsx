@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ProductExpanded from './product-expanded';
+import InvisibleFixedPageOverlay from '../utilities/invisible-fixed-page-overlay';
 
 enum Day {
 	MONDAY,
@@ -42,32 +44,42 @@ type ProductProps = {
 	title: string,
 	daysProductIsFor: Day[],
 	options?: Options[],
-};
+	cost: number,
+	description?: string,
+}
 
-const Product: React.FC<ProductProps> = ({imageUrl, title, daysProductIsFor, options}) => (
-	<article className='flex flex-col items-center border border-light-grey rounded-md overflow-clip'>
-		<img className='w-full aspect-[3/2] object-cover' src={imageUrl}/>
-		<div className='p-3 text-center'>
-			<h1 className='text-red text-lg font-bold'>{title}</h1>
-			{
-				options !== undefined &&
-				<div className='flex flex-row justify-center gap-2 text-sm pb-3'>
-					{
-						options.map(option => Options[option])
-							.map(capitalize)
-							.map(option => <div key={option}>{option}</div>)
-					}
-				</div>
-			}
-			{
-				daysProductIsFor[0] !== Day.NONE &&
-				<div className=''>
-					{daysProductIsForToText(daysProductIsFor)} <b>delivered {daysToDeliveryDay(daysProductIsFor)}</b>
-				</div>
-			}
-		</div>
-	</article>
-);
+const Product: React.FC<ProductProps> = (product) => {
+	const [isProductExpandedVisible, setIsProductExpandedVisible] = useState(false);
+
+	return (
+		<article className='flex flex-col items-center border border-light-grey rounded-md overflow-clip' onClick={() => setIsProductExpandedVisible(true)}>
+			<img className='w-full aspect-[3/2] object-cover' src={product.imageUrl}/>
+			<div className='p-3 text-center'>
+				<h1 className='text-red text-lg font-bold'>{product.title}</h1>
+				{
+					product.options !== undefined &&
+					<div className='flex flex-row justify-center gap-2 text-sm pb-3'>
+						{
+							product.options.map(option => Options[option])
+								.map(capitalize)
+								.map(option => <div key={option}>{option}</div>)
+						}
+					</div>
+				}
+				{
+					product.daysProductIsFor[0] !== Day.NONE &&
+					<div className=''>
+						{daysProductIsForToText(product.daysProductIsFor)} <b>delivered {daysToDeliveryDay(product.daysProductIsFor)}</b>
+					</div>
+				}
+			</div>
+			<InvisibleFixedPageOverlay isVisible={isProductExpandedVisible}
+									   onOutsideContentClicked={() => setIsProductExpandedVisible(false)}>
+				<ProductExpanded product={product}/>
+			</InvisibleFixedPageOverlay>
+		</article>
+	);
+};
 
 export default Product;
 export {

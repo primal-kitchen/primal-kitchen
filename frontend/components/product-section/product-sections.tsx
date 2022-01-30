@@ -30,26 +30,31 @@ const productSections: TProductSection[] = [
 				daysProductIsFor: [Day.MONDAY],
 				imageUrl: 'images/delete-me/spinach-dijon-chicken.png',
 				title: 'Spinach Djion Chicken',
+				cost: 10,
 			},
 			{
 				daysProductIsFor: [Day.MONDAY],
 				imageUrl: 'images/delete-me/spinach-tandori-chicken.png',
 				title: 'Spinach Tandoori Chicken',
+				cost: 11.50,
 			},
 			{
 				daysProductIsFor: [Day.MONDAY],
 				imageUrl: 'images/delete-me/tandoori-meatballs.png',
 				title: 'Tandoori Meatballs',
+				cost: 12.00,
 			},
 			{
 				daysProductIsFor: [Day.MONDAY],
 				imageUrl: 'images/delete-me/hungarian-braised-beef.png',
 				title: 'Hungarian Braised Beef',
+				cost: 18,
 			},
 			{
 				daysProductIsFor: [Day.MONDAY],
 				imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
 				title: 'Crumbed Chicken Parmigiana',
+				cost: 500,
 			},
 		],
 		active: true,
@@ -70,24 +75,28 @@ const productSections: TProductSection[] = [
 				imageUrl: 'images/delete-me/meal-pack.png',
 				title: '5 meal packs',
 				options: [Options.REGULAR, Options.WARRIOR, Options.FAMILY],
+				cost: 0,
 			},
 			{
 				daysProductIsFor: [Day.MONDAY, Day.SATURDAY],
 				imageUrl: 'images/delete-me/meal-pack.png',
 				title: '6 meal packs',
 				options: [Options.REGULAR, Options.WARRIOR, Options.FAMILY],
+				cost: 30,
 			},
 			{
 				daysProductIsFor: [Day.MONDAY, Day.SUNDAY],
 				imageUrl: 'images/delete-me/meal-pack.png',
 				title: '7 meal packs',
 				options: [Options.REGULAR, Options.WARRIOR, Options.FAMILY],
+				cost: 16,
 			},
 			{
 				daysProductIsFor: [Day.NONE],
 				imageUrl: 'images/delete-me/meal-pack.png',
 				title: '10 meal packs',
 				options: [Options.REGULAR, Options.WARRIOR, Options.FAMILY],
+				cost: 5.50,
 			},
 		],
 	},
@@ -100,21 +109,25 @@ const productSections: TProductSection[] = [
 				daysProductIsFor: [Day.NONE],
 				imageUrl: 'images/delete-me/granola-cherry-and-pecan.png',
 				title: 'Granola - Cherry and Pecan',
+				cost: 5.50,
 			},
 			{
 				daysProductIsFor: [Day.NONE],
 				imageUrl: 'images/delete-me/granola-cinnamon-vanilla.png',
 				title: 'Granola - Cinnamon Vanilla',
+				cost: 6.50,
 			},
 			{
 				daysProductIsFor: [Day.NONE],
 				imageUrl: 'images/delete-me/muffin-mix-chocolate-chip.png',
 				title: 'Muffin Mix - Chocolate Chip',
+				cost: 7.50,
 			},
 			{
 				daysProductIsFor: [Day.NONE],
 				imageUrl: 'images/delete-me/muffin-mix-cinnamon-raisin.png',
 				title: 'Muffin Mix - Cinnamon Raisin',
+				cost: 7.85,
 			},
 		],
 	},
@@ -126,11 +139,13 @@ const productSections: TProductSection[] = [
 				daysProductIsFor: [Day.NONE],
 				imageUrl: 'images/delete-me/cooler-bag.png',
 				title: 'Cooler Bag',
+				cost: 20,
 			},
 			{
 				daysProductIsFor: [Day.NONE],
 				imageUrl: 'images/delete-me/chilltainer.png',
 				title: 'Chilltainer',
+				cost: 15,
 			},
 		],
 	},
@@ -153,7 +168,7 @@ const ProductSections = () => {
 	const navHeight = useNavHeight();
 
 	const scrollToProductSection = (productSection: TProductSection): void => {
-		const productSectionsMenuHeight = productSectionsMenuRef.current?.clientHeight;
+		const productSectionsMenuHeight = productSectionsMenuRef.current?.clientHeight ?? 0;
 		const productSectionDistanceFromViewPortTop = productSection.ref.current.getBoundingClientRect().y;
 		// TODO: properly calculate this dodgy extra. it's mostly because not calculating the bottom margin from product sections menu i think
 		const extra = 36;
