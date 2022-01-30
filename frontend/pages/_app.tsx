@@ -6,6 +6,9 @@ import { MedusaProvider } from 'medusa-react';
 import { QueryClient } from 'react-query';
 import Nav from '../components/nav/nav';
 
+// TODO: ❗️ stop ignoring @next/next/no-img-element rule in .eslintrc
+// TODO: ❗️ stop ignoring jsx-a11y/alt-text rule in .eslintrc
+
 // react-query config stuff used by medusa-react library
 const queryClient = new QueryClient({
 	defaultOptions: {

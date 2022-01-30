@@ -1,4 +1,4 @@
-import ProductSection from './product-section';
+import ProductSection, { ProductSectionRef } from './product-section';
 import BodyClamp from '../utilities/body-clamp';
 import React, { createRef, useEffect, useRef, useState } from 'react';
 import { Day, Options, ProductProps } from '../product/product';
@@ -9,7 +9,7 @@ type TProductSection = {
 	description?: any,
 	items: ProductProps[],
 	active?: boolean,
-	ref: any,
+	ref: React.RefObject<ProductSectionRef>,
 }
 
 const productSections: TProductSection[] = [
@@ -164,12 +164,12 @@ const ProductSections = () => {
 	// 	window.onscroll.
 	// }, [])
 
-	const productSectionsMenuRef = useRef<HTMLElement>();
+	const productSectionsMenuRef = useRef<HTMLDivElement>(null);
 	const navHeight = useNavHeight();
 
 	const scrollToProductSection = (productSection: TProductSection): void => {
 		const productSectionsMenuHeight = productSectionsMenuRef.current?.clientHeight ?? 0;
-		const productSectionDistanceFromViewPortTop = productSection.ref.current.getBoundingClientRect().y;
+		const productSectionDistanceFromViewPortTop = productSection.ref.current?.getBoundingClientRect().y ?? 0;
 		// TODO: properly calculate this dodgy extra. it's mostly because not calculating the bottom margin from product sections menu i think
 		const extra = 36;
 		const amountToScroll = productSectionDistanceFromViewPortTop - (productSectionsMenuHeight + navHeight + extra);

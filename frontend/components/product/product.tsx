@@ -53,6 +53,7 @@ const Product: React.FC<ProductProps> = (product) => {
 
 	return (
 		<article className='flex flex-col items-center border border-light-grey rounded-md overflow-clip' onClick={() => setIsProductExpandedVisible(true)}>
+			{/* TODO: move to next/image */}
 			<img className='w-full aspect-[3/2] object-cover' src={product.imageUrl}/>
 			<div className='p-3 text-center'>
 				<h1 className='text-red text-lg font-bold'>{product.title}</h1>
