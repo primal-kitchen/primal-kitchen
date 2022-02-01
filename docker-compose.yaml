@@ -159,7 +159,8 @@ services:
       - ./data/certbot/conf/:/etc/letsencrypt/:rw
       - ./data/log/letsencrypt/:/var/log/letsencrypt/
     profiles:
-      - certbot
+      - certificate-creation
+      - certificate-setup
     depends_on:
       - reverse-proxy
 

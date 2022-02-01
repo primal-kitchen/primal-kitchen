@@ -1,0 +1,28 @@
+# TODO: DRY this as shared logic with other nginx template
+
+events {}
+http {
+	# upstream frontend {}
+	# upstream strapi-admin {}
+	# upstream medusa-admin {}
+	# needed for uploading files
+	client_max_body_size 20M;
+
+	server {
+		listen	80;
+		server_name	*.${APP_DOMAIN}; # * very important for redirecting to subdomains on https
+		server_tokens off; # what does this do? is it needed?
+
+		# needed for ssl acme challenge
+		location /.well-known/acme-challenge/ {
+			allow all; # what does this do? is it needed?
+			root ${NGINX_WEBROOT};
+			default_type text/plain; # what does this do? is it needed?
+		}
+
+		# otherwise, redirect to https url to force secure
+		location / {
+			return 301 https://$host$request_uri;
+		}
+	}
+}

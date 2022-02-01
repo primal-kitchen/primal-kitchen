@@ -3,7 +3,9 @@
 
 FROM nginx
 
-COPY nginx.conf.template /etc/nginx/templates/
+ARG NGINX_CONFIG_TEMPLATE=nginx.conf.template
+
+COPY $NGINX_CONFIG_TEMPLATE /etc/nginx/templates/nginx.conf.template
 
 # this is very important. it will try to put in /etc/nginx/conf.d otherwise. might need to use a multistage build if doing other nginx
 # 	templates (such as /etc/nginx/sites-available or whatever instead of putting all config in nginx.conf).

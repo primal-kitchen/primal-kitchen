@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  reverse-proxy:
+    build:
+      context: reverse-proxy
+      args:
+        - NGINX_CONFIG_TEMPLATE=nginx.conf.setup.template
+
+  certbot:
+    volumes:
+      - ./scripts/certbot-create-certificates.sh .
+    command:
+      - sh ./certbot-create-certificates.sh
