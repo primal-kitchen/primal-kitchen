@@ -1,11 +1,21 @@
 version: '3.9'
 
 services:
-  reverse-proxy:
+  setup-reverse-proxy:
+    env_file:
+      - .env
     build:
       context: reverse-proxy
       args:
         - NGINX_CONFIG_TEMPLATE=nginx.conf.setup.template
+    volumes:
+      - ./data/certbot/www/:${NGINX_WEBROOT}:ro
+      - ./data/certbot/conf/:/etc/nginx/ssl/:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    profiles:
+      - certificate-creation
 
   certbot:
     volumes:
