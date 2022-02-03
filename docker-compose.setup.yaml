@@ -31,5 +31,5 @@ services:
       - certificate-setup
     depends_on:
       - setup-reverse-proxy
-    command:
+    entrypoint:
       - ./certbot-create-certificate.sh
