@@ -25,11 +25,11 @@ services:
       - ./data/certbot/www/:${NGINX_WEBROOT}:rw
       - ./data/certbot/conf/:/etc/letsencrypt/:rw
       - ./data/log/letsencrypt/:/var/log/letsencrypt/
-      - ./scripts/certbot-create-certificates.sh .
+      - ./scripts/certbot-create-certificate.sh .
     profiles:
       - certificate-creation
       - certificate-setup
     depends_on:
       - setup-reverse-proxy
     command:
-      - ./certbot-create-certificates.sh
+      - /bin/sh ./certbot-create-certificate.sh
