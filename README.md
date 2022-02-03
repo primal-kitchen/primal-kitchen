@@ -71,6 +71,9 @@ github actions etc etc
 
 # TECH DEBT
 - primal-kitchen-postgres | 2021-12-15 00:29:24.400 UTC [32] WARNING:  could not open statistics file "pg_stat_tmp/global.stat": Operation not permitted
+- redis writing all diskspace?
+- some docker images way bigger than should be
+- dry out nginx stuff
 
 # TODOS FOR SETUP - move this somewhere else...
 - !!! **git submodules or subtree for medusa-admin** !!!
