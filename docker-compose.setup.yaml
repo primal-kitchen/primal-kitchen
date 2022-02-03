@@ -32,4 +32,4 @@ services:
     depends_on:
       - setup-reverse-proxy
     command:
-      - sh ./certbot-create-certificates.sh
+      - ./certbot-create-certificates.sh
