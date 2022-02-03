@@ -150,20 +150,6 @@ services:
       - medusa-admin
       - frontend
 
-  certbot:
-    container_name: primal-kitchen-certbot
-    image: certbot/certbot
-    env_file: .env
-    volumes:
-      - ./data/certbot/www/:${NGINX_WEBROOT}:rw
-      - ./data/certbot/conf/:/etc/letsencrypt/:rw
-      - ./data/log/letsencrypt/:/var/log/letsencrypt/
-    profiles:
-      - certificate-creation
-      - certificate-setup
-    depends_on:
-      - reverse-proxy
-
 networks:
   primal-kitchen-backend-network:
     driver: bridge

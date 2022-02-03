@@ -18,7 +18,18 @@ services:
       - certificate-creation
 
   certbot:
+    container_name: primal-kitchen-certbot
+    image: certbot/certbot
+    env_file: .env
     volumes:
+      - ./data/certbot/www/:${NGINX_WEBROOT}:rw
+      - ./data/certbot/conf/:/etc/letsencrypt/:rw
+      - ./data/log/letsencrypt/:/var/log/letsencrypt/
       - ./scripts/certbot-create-certificates.sh .
+    profiles:
+      - certificate-creation
+      - certificate-setup
+    depends_on:
+      - setup-reverse-proxy
     command:
       - sh ./certbot-create-certificates.sh
