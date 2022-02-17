@@ -1,7 +1,9 @@
 import ProductSection, { ProductSectionRef } from './product-section';
 import BodyClamp from '../utilities/body-clamp';
-import React, { createRef, useEffect, useRef, useState } from 'react';
+import React, { createRef, RefObject, useEffect, useRef, useState } from 'react';
 import { Day, Options, ProductProps } from '../product/product';
+import useIsVisible from '../utilities/use-is-visible';
+import ProductSectionMenuItem from './product-section-menu-item';
 
 type TProductSection = {
 	heading: string,
@@ -160,9 +162,9 @@ const useNavHeight = () => {
 const ProductSections = () => {
 	const [activeProductSection, setActiveProductSection] = useState(productSections[0]);
 	// useEffect onscroll to calculate active product section
-	// useEffect(() => {
-	// 	window.onscroll.
-	// }, [])
+
+	const ref = createRef<HTMLDivElement>();
+	const isVisible = useIsVisible(ref);
 
 	const productSectionsMenuRef = useRef<HTMLDivElement>(null);
 	const navHeight = useNavHeight();
@@ -178,6 +180,10 @@ const ProductSections = () => {
 
 	return (
 		<section className=''>
+			{
+				isVisible &&
+				<div className='font-bold text-3xl bg-black text-red fixed grid place-items-center w-full uppercase'>visible</div>
+			}
 			{/* TODO: margin-bottom stuff needs to match menu heading */}
 			{/* TODO: top calc should be based off of nav css variables */}
 			<BodyClamp>
@@ -192,22 +198,26 @@ const ProductSections = () => {
 					<div className='flex flex-row justify-center gap-3 md:gap-5'>
 						{
 							productSections.map(productSection => (
-								<div key={productSection.heading}
-									 className={`underline-offset-8 decoration-4 ${productSection.active ? 'underline' : ''}`}
-									 onClick={event => {
-										 event.preventDefault();
-										 scrollToProductSection(productSection);
-									 }}>
-									{productSection.heading}
-								</div>
-							))
+									<ProductSectionMenuItem
+										key={productSection.heading}
+										heading={productSection.heading}
+										productSectionRef={productSection.ref}
+										onClick={
+											(event: any) => {
+												event.preventDefault();
+												scrollToProductSection(productSection);
+											}
+										}
+									/>
+								),
+							)
 						}
 					</div>
 				</BodyClamp>
 				<hr className='text-light-grey'/>
 			</div>
 			{/* TODO: gap stuff needs to match menu heading */}
-			<div className='flex flex-col gap-9 md:gap-16'>
+			<div className='flex flex-col gap-9 md:gap-16' ref={ref}>
 				{
 					productSections.map(productSection => (
 						<ProductSection key={productSection.heading}
@@ -219,6 +229,7 @@ const ProductSections = () => {
 				}
 			</div>
 			<div className='flex flex-col gap-2'>
+				<span className='bg-black py-96'>x</span>
 				<span className='bg-black py-96'>x</span>
 				<span className='bg-black py-96'>x</span>
 				<span className='bg-black py-96'>x</span>
