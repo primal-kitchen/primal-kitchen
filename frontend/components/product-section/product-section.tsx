@@ -10,30 +10,29 @@ type Props = {
 
 type ProductSectionRef = HTMLDivElement;
 
-const ProductSection = React.forwardRef<ProductSectionRef, Props>(({heading, description, items}, ref) => (
-		<div className='' ref={ref}>
-			<BodyClamp>
-				<h1 className='font-bold text-lg uppercase'>{heading}</h1>
-				<div className='text-center'>{description}</div>
-				<div className='grid justify-center gap-6 w-full mt-6' style={{gridTemplateColumns: 'repeat(auto-fit, 300px)'}}>
-					{
-						items.map(item => <Product key={item.title}
-												   title={item.title}
-												   imageUrl={item.imageUrl}
-												   daysProductIsFor={item.daysProductIsFor}
-												   options={item?.options}
-												   cost={item.cost}/>,
-						)
-					}
-				</div>
-			</BodyClamp>
-		</div>
-	),
+const ProductSection = ({heading, description, items}: Props, ref: React.ForwardedRef<ProductSectionRef>) => (
+	<div className='' ref={ref}>
+		<BodyClamp>
+			<h1 className='font-bold text-lg uppercase'>{heading}</h1>
+			<div className='text-center'>{description}</div>
+			<div className='grid justify-center gap-6 w-full mt-6' style={{gridTemplateColumns: 'repeat(auto-fit, 300px)'}}>
+				{
+					items.map(item => <Product key={item.title}
+											   title={item.title}
+											   imageUrl={item.imageUrl}
+											   daysProductIsFor={item.daysProductIsFor}
+											   options={item?.options}
+											   cost={item.cost}/>,
+					)
+				}
+			</div>
+		</BodyClamp>
+	</div>
 );
 
 ProductSection.displayName = 'ProductSection';
 
-export default ProductSection;
+export default React.forwardRef(ProductSection);
 
 export type {
 	ProductSectionRef,

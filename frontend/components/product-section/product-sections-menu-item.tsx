@@ -6,7 +6,7 @@ type Props = {
 	heading: string, productSectionRef: React.RefObject<ProductSectionRef>, onClick?: React.MouseEventHandler<HTMLDivElement>,
 }
 
-const ProductSectionMenuItem: React.FC<Props> = ({heading, productSectionRef, onClick}) => {
+const ProductSectionsMenuItem: React.FC<Props> = ({heading, productSectionRef, onClick}) => {
 	const isProductSectionVisible = useIsVisible(productSectionRef);
 
 	return (
@@ -17,4 +17,4 @@ const ProductSectionMenuItem: React.FC<Props> = ({heading, productSectionRef, on
 	);
 };
 
-export default ProductSectionMenuItem;
+export default ProductSectionsMenuItem;
