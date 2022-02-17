@@ -3,16 +3,26 @@ import React, { createRef, useCallback } from 'react';
 import { TProductSection } from './product-sections';
 import ProductSectionsMenuItem from './product-sections-menu-item';
 import useNavHeight from '../nav/use-nav-height';
+import useFirstItemInView from '../utilities/use-first-item-in-view';
+import useElementHeight from '../utilities/use-element-height';
+import { NAV_ID } from '../nav/nav';
 
 type ProductSectionMenuRef = HTMLDivElement;
+const PRODUCT_SECTION_MENU_ID = 'product-section-menu';
 
 type Props = {
 	productSections: TProductSection[],
 }
 
 const ProductSectionsMenu = (props: Props) => {
-	const navHeight = useNavHeight();
+	const navHeight = useElementHeight(NAV_ID);
+	const productSectionsMenuHeight = useElementHeight(PRODUCT_SECTION_MENU_ID);
 	const ref = createRef<ProductSectionMenuRef>();
+	const activeProductSection = useFirstItemInView(props.productSections, item => item.ref.current, {
+		// root: rootRef, // to check thingo is visble within
+		// threshold: 1.0, // fire when it's 20% visible
+		rootMargin: `${navHeight + productSectionsMenuHeight}px 0px 0px 0px`,
+	});
 
 	const scrollToProductSection = useCallback((productSection: TProductSection): void => {
 		const height = ref.current?.clientHeight ?? 0;
@@ -31,7 +41,8 @@ const ProductSectionsMenu = (props: Props) => {
 					our menu
 				</div>
 			</BodyClamp>
-			<div className='sticky top-[calc(5vh+1rem)] text-red text-lg font-bold uppercase mb-9 md:mb-16 pt-3 bg-white' ref={ref}>
+			<div className='sticky top-[calc(5vh+1rem)] text-red text-lg font-bold uppercase mb-9 md:mb-16 pt-3 bg-white' ref={ref}
+				 id={PRODUCT_SECTION_MENU_ID}>
 				<BodyClamp className='pb-2'>
 					<div className='flex flex-row justify-center gap-3 md:gap-5'>
 						{
@@ -40,6 +51,7 @@ const ProductSectionsMenu = (props: Props) => {
 										key={productSection.heading}
 										heading={productSection.heading}
 										productSectionRef={productSection.ref}
+										isActive={activeProductSection?.heading === productSection.heading}
 										onClick={
 											(event: any) => {
 												event.preventDefault();
@@ -56,9 +68,13 @@ const ProductSectionsMenu = (props: Props) => {
 			</div>
 		</>
 	);
-}
+};
 
 export default ProductSectionsMenu;
+
+export {
+	PRODUCT_SECTION_MENU_ID,
+};
 
 export type {
 	ProductSectionMenuRef,
