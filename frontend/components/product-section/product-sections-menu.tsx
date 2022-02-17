@@ -2,18 +2,13 @@ import BodyClamp from '../utilities/body-clamp';
 import React, { createRef, useCallback } from 'react';
 import { TProductSection } from './product-sections';
 import ProductSectionsMenuItem from './product-sections-menu-item';
+import useNavHeight from '../nav/use-nav-height';
 
 type ProductSectionMenuRef = HTMLDivElement;
 
 type Props = {
 	productSections: TProductSection[],
 }
-
-const useNavHeight = () => {
-	// return document?.getElementById('nav')?.clientHeight;
-	// TODO: get nav height properly...
-	return 50;
-};
 
 const ProductSectionsMenu = (props: Props) => {
 	const navHeight = useNavHeight();
