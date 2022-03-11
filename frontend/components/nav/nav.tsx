@@ -19,7 +19,7 @@ const Nav = () => {
 	const NavLinkOrderMeals = () => <NavLink to='/'>Order meals</NavLink>;
 	const NavLinkSelectStore = () => <NavLink>{selectedStore ?? 'Select store'}</NavLink>;
 	const NavLinkShoppingCart = () =>
-		<NavLink>
+		<NavLink to='/cart'>
 			<img src='icons/shopping-cart.svg'/>
 		</NavLink>;
 	const NavLinkMenuToggle = () =>

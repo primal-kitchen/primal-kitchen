@@ -1,5 +1,6 @@
-import BodyClamp from '../utilities/body-clamp';
 import React from 'react';
+import BodyClamp from '../utilities/body-clamp';
+import Button, { Colour, Proportion, Size } from '../button/button';
 
 const SplashScreenDeliveryExplanation = () => (
 	<BodyClamp className='bg-red'>
@@ -21,7 +22,9 @@ const SplashScreenDeliveryExplanation = () => (
 				<p>
 					We recommend you select a store before continuing as some items are not available at all stores.
 				</p>
-				<button className='w-fit h-fit p-2 mb-1 rounded bg-white text-red'>Select store</button>
+				<div className='mb-1'>
+					<Button padding={Size.MEDIUM} width={Proportion.FIT} colour={Colour.RED_INVERTED}>Select store</Button>
+				</div>
 			</div>
 		</div>
 	</BodyClamp>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ProductProps } from './product';
 import ProductExpandedDropdown from './product-expanded-dropdown';
+import Button, { Colour, Proportion, Size } from '../button/button';
 
 type ProductExpandedProps = {
 	product: ProductProps,
@@ -50,7 +51,8 @@ const ProductExpanded: React.FC<ProductExpandedProps> = ({product}) => (
 				{/* TODO: import actual postive icon */}
 				<div>+</div>
 			</div>
-			<button className='w-full bg-red text-white p-3 rounded'>Add to cart - ${product.cost}</button>
+			<Button padding={Size.LARGE} width={Proportion.FULL} colour={Colour.RED}>Add to cart - ${product.cost}</Button>
+			{/*<Button className='!w-full bg-red text-white p-3'>Add to cart - ${product.cost}</Button>*/}
 		</div>
 	</article>
 );
