@@ -18,9 +18,9 @@ const ProductSectionsMenu = (props: Props) => {
 	const navHeight = useElementHeight(NAV_ID);
 	const productSectionsMenuHeight = useElementHeight(PRODUCT_SECTION_MENU_ID);
 	const ref = createRef<ProductSectionMenuRef>();
-	const activeProductSection = useFirstItemInView(props.productSections, item => item.ref.current, {
-		// root: rootRef, // to check thingo is visble within
-		// threshold: 1.0, // fire when it's 20% visible
+	const activeProductSection = useFirstItemInView(props.productSections, item => item.ref.current, item => item.heading, {
+		// root: null, // to check thingo is visble within
+		threshold: [0.9], // fire when it's 20% visible
 		rootMargin: `${navHeight + productSectionsMenuHeight}px 0px 0px 0px`,
 	});
 

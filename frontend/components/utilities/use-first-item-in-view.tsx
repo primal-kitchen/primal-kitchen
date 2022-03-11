@@ -1,24 +1,66 @@
-import { useEffect, useState } from 'react';
-import useNavHeight from '../nav/use-nav-height';
-import useElementHeight from './use-element-height';
-import { PRODUCT_SECTION_MENU_ID } from '../product-section/product-sections-menu';
+import { useCallback, useDebugValue, useEffect, useMemo, useState } from 'react';
+import { useMap } from 'react-use';
 
-export default function useFirstItemInView<Type>(items: Type[], getElement: (item: Type) => Element | null, options: IntersectionObserverInit) {
-	const [firstItemInView, setFirstItemInView] = useState<Type>();
-	const navHeight = useNavHeight();
+// TODO: refactor this entire function it's overly complex
+export default function useFirstItemInView<Type, TypeIdentifier>(items: Type[],
+																 getElement: (item: Type) => Element | null,
+																 getIdentifier: (item: Type) => TypeIdentifier,
+																 options: IntersectionObserverInit): Type | undefined {
+	// does this maybe need to be a useCallback? summn summn closures summn summn
+	const createItemVisibilityMap = (): Map<TypeIdentifier, boolean> => {
+		const map = new Map<TypeIdentifier, boolean>();
+		items.forEach(item => map.set(getIdentifier(item), false));
+		return map;
+	};
+
+	const createItemIdentifierMap = (): Map<TypeIdentifier, Type> => {
+		const map = new Map<TypeIdentifier, Type>();
+		items.forEach(item => map.set(getIdentifier(item), item));
+		return map;
+	};
+
+	const [itemIdentifierMap] = useState<Map<TypeIdentifier, Type>>(createItemIdentifierMap());
+	// const [itemVisibilityMap, setItemVisibilityMap] = useState<Map<TypeIdentifier, boolean>>(createItemVisibilityMap());
+	const [itemVisibilityMap, {set: }] = useMap<Map<TypeIdentifier, boolean>>(createItemVisibilityMap());
+	// TODO: this is shitty...
+	const [shouldRecalculateFirstItemInView, setShouldRecalculateFirstItemInView] = useState<boolean>(false);
+
+	// are we sure this preserves order of items??
+	const firstItemInView = useMemo<Type | undefined>(() => {
+		console.log('first item in biew updating');
+		for (const [itemIdentifier, itemIsVisible] of itemVisibilityMap)
+			if (itemIsVisible) {
+				console.log('setting to: ');
+				console.log(itemIdentifier);
+				return itemIdentifierMap.get(itemIdentifier);
+			}
+	}, [itemVisibilityMap, shouldRecalculateFirstItemInView]);
+
+	useDebugValue<Type | undefined>(firstItemInView);
+
+	// probably want to use a map here for improved lookup performance
+	const getItemUsingElement = (element: Element): Type | undefined => {
+		return items.find(item => {
+			if (!item) return false;
+			return getElement(item) === element;
+		});
+	};
 
 	useEffect(() => {
-
 		// WE WANT: first element with intersection ratio above .9
-		const callback: IntersectionObserverCallback = (entries: IntersectionObserverEntry[]) => {
-			const entriesInView = entries.filter(entry => entry.isIntersecting);
-			if (entriesInView.length === 0) return;
-			const newItem = items.filter(item => {
-				const elem = getElement(item);
-				if (elem === null) return false;
-				return entries.map(entry => entry.target).includes(elem);
-			})[0]
-			setFirstItemInView(currentValue => newItem ?? currentValue);
+		const callback: IntersectionObserverCallback = (entries: IntersectionObserverEntry[], observer) => {
+			entries.forEach(entry => {
+				setItemVisibilityMap(itemsToVisibility => {
+					// mutability bad? should create new map?
+					const item = getItemUsingElement(entry.target);
+					if (item !== undefined) {
+						console.log(item);
+						console.log(`setting to ${entry.isIntersecting}`);
+						itemsToVisibility.set(getIdentifier(item), entry.isIntersecting);
+					}
+					return itemsToVisibility;
+				});
+			});
 		};
 
 		const intersectionObserver = new IntersectionObserver(callback, options);
