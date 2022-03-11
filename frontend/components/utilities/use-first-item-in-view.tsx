@@ -1,44 +1,40 @@
-import { useCallback, useDebugValue, useEffect, useMemo, useState } from 'react';
-import { useMap } from 'react-use';
+import { useDebugValue, useEffect, useState } from 'react';
+import { Map, OrderedMap } from 'immutable';
 
-// TODO: refactor this entire function it's overly complex
+// TODO: refactor this entire hook; it's overly complex
 export default function useFirstItemInView<Type, TypeIdentifier>(items: Type[],
 																 getElement: (item: Type) => Element | null,
 																 getIdentifier: (item: Type) => TypeIdentifier,
 																 options: IntersectionObserverInit): Type | undefined {
-	// does this maybe need to be a useCallback? summn summn closures summn summn
-	const createItemVisibilityMap = (): Map<TypeIdentifier, boolean> => {
-		const map = new Map<TypeIdentifier, boolean>();
-		items.forEach(item => map.set(getIdentifier(item), false));
-		return map;
+	const createItemVisibilityMap = (): OrderedMap<TypeIdentifier, boolean> => {
+		// can't extract mapping out to variable to clean this code up. very weird js behaviour... think some weird inference is going on?
+		// 	same with the similar function below...
+		return OrderedMap<TypeIdentifier, boolean>(items.map(item => ([getIdentifier(item), false])));
 	};
 
 	const createItemIdentifierMap = (): Map<TypeIdentifier, Type> => {
-		const map = new Map<TypeIdentifier, Type>();
-		items.forEach(item => map.set(getIdentifier(item), item));
-		return map;
+		return Map<TypeIdentifier, Type>(items.map(item => ([getIdentifier(item), item])));
 	};
 
+	// just for performance/convenience
 	const [itemIdentifierMap] = useState<Map<TypeIdentifier, Type>>(createItemIdentifierMap());
-	// const [itemVisibilityMap, setItemVisibilityMap] = useState<Map<TypeIdentifier, boolean>>(createItemVisibilityMap());
-	const [itemVisibilityMap, {set: }] = useMap<Map<TypeIdentifier, boolean>>(createItemVisibilityMap());
-	// TODO: this is shitty...
-	const [shouldRecalculateFirstItemInView, setShouldRecalculateFirstItemInView] = useState<boolean>(false);
+	// tracks which items are currently visible
+	const [itemVisibilityMap, setItemVisibilityMap] = useState<OrderedMap<TypeIdentifier, boolean>>(createItemVisibilityMap());
+	const [firstItemInView, setFirstItemInView] = useState<Type | undefined>();
 
-	// are we sure this preserves order of items??
-	const firstItemInView = useMemo<Type | undefined>(() => {
-		console.log('first item in biew updating');
-		for (const [itemIdentifier, itemIsVisible] of itemVisibilityMap)
-			if (itemIsVisible) {
-				console.log('setting to: ');
-				console.log(itemIdentifier);
-				return itemIdentifierMap.get(itemIdentifier);
-			}
-	}, [itemVisibilityMap, shouldRecalculateFirstItemInView]);
+	// change the first item in view as the visibility of items changes
+	useEffect(() => {
+		const firstVisible: Type | undefined = itemVisibilityMap
+			.filter((itemIsVisible: boolean) => itemIsVisible)
+			.take(1) // as the list is ordered the first will be the first element on the page (TODO: clean up this wording)
+			.map((_, itemIdentifier: TypeIdentifier) => itemIdentifier)
+			.map(itemIdentifier => itemIdentifierMap.get(itemIdentifier))
+			.toList()
+			.get(0);
+		setFirstItemInView(firstVisible);
+	}, [itemVisibilityMap, itemIdentifierMap]);
 
-	useDebugValue<Type | undefined>(firstItemInView);
-
-	// probably want to use a map here for improved lookup performance
+	// probably want to use a map here for improved lookup performance. could do something smart here like lazily building map as go (memoize?)
 	const getItemUsingElement = (element: Element): Type | undefined => {
 		return items.find(item => {
 			if (!item) return false;
@@ -46,20 +42,15 @@ export default function useFirstItemInView<Type, TypeIdentifier>(items: Type[],
 		});
 	};
 
+	// could look into simplifying with a hook. maybe from react-use?
+	// essentially, update the itemVisibilityMap as the items change their visibility status...
 	useEffect(() => {
-		// WE WANT: first element with intersection ratio above .9
 		const callback: IntersectionObserverCallback = (entries: IntersectionObserverEntry[], observer) => {
 			entries.forEach(entry => {
-				setItemVisibilityMap(itemsToVisibility => {
-					// mutability bad? should create new map?
-					const item = getItemUsingElement(entry.target);
-					if (item !== undefined) {
-						console.log(item);
-						console.log(`setting to ${entry.isIntersecting}`);
-						itemsToVisibility.set(getIdentifier(item), entry.isIntersecting);
-					}
-					return itemsToVisibility;
-				});
+				const item = getItemUsingElement(entry.target);
+				if (item !== undefined) {
+					setItemVisibilityMap(itemVisibilityMap => itemVisibilityMap.set(getIdentifier(item), entry.isIntersecting));
+				}
 			});
 		};
 
@@ -72,7 +63,9 @@ export default function useFirstItemInView<Type, TypeIdentifier>(items: Type[],
 		});
 
 		return () => intersectionObserver.disconnect();
-	}, []);
+	}, [setItemVisibilityMap]);
+
+	useDebugValue<Type | undefined>(firstItemInView);
 
 	return firstItemInView;
 };
