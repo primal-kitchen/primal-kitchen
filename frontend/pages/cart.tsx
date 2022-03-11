@@ -2,14 +2,79 @@ import { NextPage } from 'next';
 import BodyClamp from '../components/utilities/body-clamp';
 import Button, { Colour, Proportion, Size } from '../components/button/button';
 import React from 'react';
+import { Day, ProductProps } from '../components/product/product';
+
+type OrderProduct = ProductProps & { quantity: number };
+const products: OrderProduct[] = [
+	{
+		title: 'Herb Roasted Lamb Shoulder',
+		cost: 16.95,
+		daysProductIsFor: [Day.MONDAY],
+		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
+		quantity: 5,
+	},
+	{
+		title: 'Herb Roasted Lamb Shoulder',
+		cost: 16.95,
+		daysProductIsFor: [Day.THURSDAY],
+		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
+		quantity: 3,
+	},
+];
+
+enum TrayType {
+	PLASTIC = 'plastic',
+	COMPOSTABLE = 'compostable',
+}
 
 const Cart: NextPage = () => {
 
 	return (
-		<BodyClamp className='w-screen h-screen grid items-center'>
-			<Button padding={Size.LARGE} width={Proportion.FIT} colour={Colour.RED}>TEST</Button>
+		<BodyClamp className='w-full h-full'>
+			<div className='flex flex-col gap-4 w-full px-2'>
+				<div className='flex flex-col gap-2'>
+					{products.map(product => (
+						<div className='grid grid-template-rows bg-light-grey'>
+							<img src={product.imageUrl} className='object-cover h-24 w-24'/>
+							<div>
+								<h1 className='text-red underline capitalize'>{product.title}</h1>
+								<div className='bg-black w-fit'>
+									<img src='icons/menu-close.svg'/>
+								</div>
+								<h2>delivered <b className='capitalize'>{Day[product.daysProductIsFor[0]]}</b></h2>
+								<h2>${product.cost}</h2>
+							</div>
+						</div>
+					))}
+				</div>
+				<h1 className='text-2xl font-bold'>Specific requests</h1>
+				<div>
+					<h2 className='text-lg font-bold'>Meals — tray type</h2>
+					{
+						Object.keys(TrayType).map(value =>
+							(<div key={value} className='flex flex-row gap-1'>
+								<input id={value} name='size' type='radio' value={value}/>
+								<label htmlFor={value}>{value}</label>
+							</div>),
+						)
+					}
+					<div></div>
+				</div>
+				<div>
+					<p className='pb-1'><b>Instructions.</b> NB: we offer dairy free, nut free and low starch (keto).</p>
+					<textarea className='w-full min-h-[5rem] border'/>
+				</div>
+				<div className='flex flex-row gap-4 text-2xl font-bold place-self-end'>
+					<h1>Subtotal</h1>
+					<h1>$32.90</h1>
+				</div>
+				<div className='place-self-end'>
+					<Button padding={Size.LARGE} width={Proportion.FIT} colour={Colour.RED}>Next</Button>
+				</div>
+
+			</div>
 		</BodyClamp>
-	)
-}
+	);
+};
 
 export default Cart;
