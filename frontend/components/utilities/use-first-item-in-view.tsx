@@ -31,7 +31,8 @@ export default function useFirstItemInView<Type, TypeIdentifier>(items: Type[],
 			.map(itemIdentifier => itemIdentifierMap.get(itemIdentifier))
 			.toList()
 			.get(0);
-		setFirstItemInView(firstVisible);
+		// can't set the first item in view to nothing
+		if (firstVisible !== undefined) setFirstItemInView(firstVisible);
 	}, [itemVisibilityMap, itemIdentifierMap]);
 
 	// probably want to use a map here for improved lookup performance. could do something smart here like lazily building map as go (memoize?)

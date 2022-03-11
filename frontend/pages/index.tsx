@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useProducts } from 'medusa-react';
 import SplashScreen from '../components/splash-screen/splash-screen';
 import ProductSections from  '../components/product-section/product-sections';
@@ -37,6 +37,12 @@ const Home: NextPage = () => {
 			</div>
 			<div>
 				<ProductSections/>
+			</div>
+			{/* just some lorem ipsum for checking scrolling and shit works */}
+			<div className='flex flex-col gap-2'>
+				{Array(10).fill('').map((_, index) =>
+					<span key={index} className='bg-black py-96 text-white text-3xl grid place-items-center'>{index + 1}</span>,
+				)}
 			</div>
 			{/*<div>*/}
 			{/*	<h1 className='text-another text-3xl font-bold underline'>from strapi</h1>*/}

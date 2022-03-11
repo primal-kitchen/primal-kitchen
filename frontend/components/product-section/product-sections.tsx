@@ -179,12 +179,6 @@ const ProductSections = () => {
 					))
 				}
 			</div>
-			{/* TODO: delete filler elements */}
-			<div className='flex flex-col gap-2'>
-				{Array(10).fill('').map((_, index) =>
-					<span key={index} className='bg-black py-96 text-white text-3xl grid place-items-center'>{index + 1}</span>,
-				)}
-			</div>
 		</section>
 	);
 };
