@@ -2,9 +2,10 @@
 
 import NavLink from './nav-link';
 import NavLinkAccount from './nav-link-account';
-import { useCallback, useLayoutEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import NavLinkLogo from './nav-link-logo';
 import BodyClamp from '../utilities/body-clamp';
+import Icon, { Colour, IconName } from '../icon/icon';
 
 const NAV_ID = 'nav';
 
@@ -20,12 +21,12 @@ const Nav = () => {
 	const NavLinkSelectStore = () => <NavLink>{selectedStore ?? 'Select store'}</NavLink>;
 	const NavLinkShoppingCart = () =>
 		<NavLink to='/cart'>
-			<img src='icons/shopping-cart.svg'/>
+			<Icon iconName={IconName.SHOPPING_CART} colour={Colour.WHITE}/>
 		</NavLink>;
 	const NavLinkMenuToggle = () =>
 		<div onClick={toggleShowingMenu}>
 			<NavLink>
-				<img src={showingMenu ? 'icons/menu-close.svg' : 'icons/menu-open.svg'}/>
+				<Icon iconName={showingMenu ? IconName.MENU_CLOSE : IconName.MENU_OPEN} colour={Colour.WHITE}/>
 			</NavLink>
 		</div>;
 	const NavLinks = () =>

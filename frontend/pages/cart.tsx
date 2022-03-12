@@ -1,8 +1,9 @@
 import { NextPage } from 'next';
 import BodyClamp from '../components/utilities/body-clamp';
-import Button, { Colour, Proportion, Size } from '../components/button/button';
+import Button, { Proportion, Size } from '../components/button/button';
 import React from 'react';
 import { Day, ProductProps } from '../components/product/product';
+import Icon, { Colour, IconName } from '../components/icon/icon';
 
 type OrderProduct = ProductProps & { quantity: number };
 const products: OrderProduct[] = [
@@ -30,20 +31,18 @@ enum TrayType {
 const Cart: NextPage = () => {
 
 	return (
-		<BodyClamp className='w-full h-full'>
+		<BodyClamp className='mt-4 w-full h-full'>
 			<div className='flex flex-col gap-4 w-full px-2'>
 				<div className='flex flex-col gap-2'>
 					{products.map(product => (
-						<div className='grid grid-template-rows bg-light-grey'>
+						<div className='grid grid-cols-[max-content_auto_min-content] gap-4 bg-light-grey'>
 							<img src={product.imageUrl} className='object-cover h-24 w-24'/>
-							<div>
+							<div className=''>
 								<h1 className='text-red underline capitalize'>{product.title}</h1>
-								<div className='bg-black w-fit'>
-									<img src='icons/menu-close.svg'/>
-								</div>
 								<h2>delivered <b className='capitalize'>{Day[product.daysProductIsFor[0]]}</b></h2>
 								<h2>${product.cost}</h2>
 							</div>
+							<Icon iconName={IconName.MENU_CLOSE} colour={Colour.BLACK} />
 						</div>
 					))}
 				</div>
