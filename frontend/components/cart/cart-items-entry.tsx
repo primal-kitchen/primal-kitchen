@@ -7,7 +7,7 @@ import React from 'react';
 type OrderProduct = ProductProps & { quantity: number }
 
 const CartItemsEntry: React.FC<{product: OrderProduct}> = ({ product }) => (
-	<div key={product.title} className='md:contents w-min gap-4 grid grid-cols-[max-content_auto_min-content]'>
+	<div key={product.title} className='md:contents w-min gap-6 grid grid-cols-[max-content_auto_min-content]'>
 		<img src={product.imageUrl} className='md:hidden object-cover aspect-square w-[12.5vmin] min-w-[45px]'/>
 		<div className='md:contents'>
 			<div className='justify-self-start w-max'>
@@ -25,7 +25,7 @@ const CartItemsEntry: React.FC<{product: OrderProduct}> = ({ product }) => (
 			</div>
 			<h2 className=''>${product.cost}</h2>
 		</div>
-		<Icon iconName={IconName.MENU_CLOSE} colour={IconColour.BLACK}/>
+		<Icon iconName={IconName.MENU_CLOSE} colour={IconColour.BLACK} widthInPixels={20}/>
 	</div>
 )
 

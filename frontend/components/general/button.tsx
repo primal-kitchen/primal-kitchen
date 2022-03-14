@@ -19,15 +19,16 @@ type Props = {
 	width: Proportion,
 	colour: Colour,
 	padding: Size,
+	className: string,
 }
 
-const Button: React.FC<Props> = ({width = Proportion.FIT, colour = Colour.RED, padding = Size.MEDIUM, children}) => {
+const Button: React.FC<Props> = ({width = Proportion.FIT, colour = Colour.RED, padding = Size.MEDIUM, className = '', children}) => {
 	const widthClass = width === Proportion.FIT ? 'w-fit' : 'w-full';
 	const colourClass = colour === Colour.RED ? 'bg-red text-white' : 'bg-white text-red';
 	const paddingClass = padding === Size.MEDIUM ? 'p-2' : 'py-3 px-6';
 
 	return (
-		<button className={`${widthClass} h-fit rounded ${colourClass} ${paddingClass}`}>{children}</button>
+		<button className={`${widthClass} h-fit rounded ${colourClass} ${paddingClass} ${className}`}>{children}</button>
 	);
 };
 

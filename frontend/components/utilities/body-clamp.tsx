@@ -10,7 +10,7 @@ const BodyClamp: React.FC<Props> = ({children, className = ''}) => {
 	// TODO: maybe need to strip spaces from front and back of className
 	return (
 		<div className={`grid justify-items-center overflow-x-auto p-2 ${className}`}>
-			<div className={`w-full max-w-screen-xl min-w-screen-xs grid justify-items-center content-center`}>
+			<div className={`max-w-screen-xl min-w-screen-xs grid justify-items-center content-center`}>
 				{children}
 			</div>
 		</div>
