@@ -19,24 +19,23 @@ type Props = {
 	colour: Colour,
 	widthInPixels?: number,
 	heightInPixels?: number,
+	className?: string,
 }
 
 const defaultSizeInPixels = 30;
 
-const Icon: React.FC<Props> = ({iconName, colour, widthInPixels, heightInPixels}) => {
+const Icon: React.FC<Props> = ({iconName, colour, widthInPixels, heightInPixels, className = ''}) => {
 	const svgReference = iconName;
 	const colourClass: string = colour;
 
 	return (
-		<div>
-			<svg className={colourClass}
-				 width={`${widthInPixels ?? heightInPixels ?? defaultSizeInPixels}px`}
-				 height={`${heightInPixels ?? widthInPixels ?? defaultSizeInPixels}px`}
-				 viewBox='0 0 100 100'
-				 xmlns='http://www.w3.org/2000/svg' version='1.1'>
-				<use xlinkHref={svgReference}/>
-			</svg>
-		</div>
+		<svg className={`${colourClass} ${className}`}
+			 width={`${widthInPixels ?? heightInPixels ?? defaultSizeInPixels}px`}
+			 height={`${heightInPixels ?? widthInPixels ?? defaultSizeInPixels}px`}
+			 viewBox='0 0 100 100'
+			 xmlns='http://www.w3.org/2000/svg' version='1.1'>
+			<use xlinkHref={svgReference}/>
+		</svg>
 	);
 };
 

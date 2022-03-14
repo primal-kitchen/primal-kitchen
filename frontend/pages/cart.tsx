@@ -31,24 +31,32 @@ enum TrayType {
 }
 
 const Cart: NextPage = () => {
-
 	return (
 		<BodyClamp className='mt-4 w-full h-full'>
 			<div className='flex flex-col gap-4 w-full px-2'>
-				<div className='flex flex-col gap-2'>
+				<div className='flex flex-col gap-2 lg:grid grid-cols-[repeat(6,min-content)] lg:gap-x-12 lg:place-items-center'>
+					<div className='hidden lg:contents font-bold capitalize'>
+						<h1 className='justify-self-start col-span-2 text-2xl'>summary</h1>
+						<h1 className='justify-self-start'>size</h1>
+						<h1 className='self-end'>quantity</h1>
+						<h1 className='self-end'>total</h1>
+						<h1 className='self-end'>remove</h1>
+					</div>
 					{products.map(product => (
-						<div key={product.title} className='grid grid-cols-[max-content_auto_min-content] gap-4 border border-light-grey'>
-							<img src={product.imageUrl} className='object-cover aspect-square w-[12.5vmin] min-w-[45px]'/>
-							<div className=''>
-								<h1 className='text-red underline capitalize'>{product.title}</h1>
-								<h2>delivered <b className='capitalize'>{Day[product.daysProductIsFor[0]]}</b></h2>
-								<div className='flex flex-row gap-4 py-2'>
+						<div key={product.title} className='lg:contents w-min gap-4 grid grid-cols-[max-content_auto_min-content]'>
+							<img src={product.imageUrl} className='object-cover aspect-square w-[12.5vmin] min-w-[45px] lg:max-w-[60px] justify-self-start'/>
+							<div className='lg:contents'>
+								<div className='justify-self-start w-max lg:pr-12'>
+									<h1 className='text-red underline capitalize'>{product.title}</h1>
+									<h2>delivered <b className='capitalize'>{Day[product.daysProductIsFor[0]]}</b></h2>
+								</div>
+								<div className='lg:contents flex flex-row gap-4 py-2'>
 									<Dropdown options={['Warrior', 'Regular']}/>
 									<Counter ref={createCounterRef()}/>
 								</div>
-								<h2>${product.cost}</h2>
+								<h2 className=''>${product.cost}</h2>
 							</div>
-							<Icon iconName={IconName.MENU_CLOSE} colour={IconColour.BLACK} />
+							<Icon iconName={IconName.MENU_CLOSE} colour={IconColour.BLACK}/>
 						</div>
 					))}
 				</div>
@@ -76,7 +84,6 @@ const Cart: NextPage = () => {
 				<div className='place-self-end'>
 					<Button padding={Size.LARGE} width={Proportion.FIT} colour={ButtonColour.RED}>Next</Button>
 				</div>
-
 			</div>
 		</BodyClamp>
 	);
