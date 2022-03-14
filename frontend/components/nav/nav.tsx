@@ -43,7 +43,7 @@ const Nav = () => {
 		<div className='bg-dark-grey sticky top-0 z-10 min-h-[35px]' id={NAV_ID}>
 			<BodyClamp>
 				<nav className='w-full bg-dark-grey text-white'>
-					<div className='flex items-center justify-end gap-8 h-[5vh] m-2'>
+					<div className='flex items-center justify-end gap-8 h-[5vh]'>
 						<div className='mr-auto h-full'>
 							<NavLinkLogo/>
 						</div>
