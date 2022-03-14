@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
 import BodyClamp from '../components/utilities/body-clamp';
-import Button, { Proportion, Size, Colour as ButtonColour } from '../components/button/button';
+import Button, { Proportion, Size, Colour as ButtonColour } from '../components/general/button';
 import React from 'react';
 import { Day, ProductProps } from '../components/product/product';
-import Icon, { Colour as IconColour, IconName } from '../components/icon/icon';
+import Icon, { Colour as IconColour, IconName } from '../components/general/icon';
 import Counter, { createCounterRef } from '../components/general/counter';
 import Dropdown from '../components/general/dropdown';
 

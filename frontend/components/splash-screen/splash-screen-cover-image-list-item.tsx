@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon, { Colour, IconName } from '../icon/icon';
+import Icon, { Colour, IconName } from '../general/icon';
 
 type Props = { children: any }
 

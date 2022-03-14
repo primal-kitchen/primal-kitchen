@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import Icon, { Colour, IconName } from '../components/icon/icon';
+import Icon, { Colour, IconName } from '../components/general/icon';
 import Dropdown from '../components/general/dropdown';
 
 const Testing: NextPage = ({}) => (

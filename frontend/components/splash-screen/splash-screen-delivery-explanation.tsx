@@ -1,6 +1,6 @@
 import React from 'react';
 import BodyClamp from '../utilities/body-clamp';
-import Button, { Colour, Proportion, Size } from '../button/button';
+import Button, { Colour, Proportion, Size } from '../general/button';
 
 const SplashScreenDeliveryExplanation = () => (
 	<BodyClamp className='bg-red'>

@@ -1,6 +1,6 @@
 import React, { ForwardedRef, useImperativeHandle } from 'react';
 import { useCounter } from 'react-use';
-import Icon, { Colour, IconName } from '../icon/icon';
+import Icon, { Colour, IconName } from '../general/icon';
 
 type CounterProps = {
 	startingCount?: number,

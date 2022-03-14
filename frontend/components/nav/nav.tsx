@@ -5,7 +5,7 @@ import NavLinkAccount from './nav-link-account';
 import React, { useCallback, useState } from 'react';
 import NavLinkLogo from './nav-link-logo';
 import BodyClamp from '../utilities/body-clamp';
-import Icon, { Colour, IconName } from '../icon/icon';
+import Icon, { Colour, IconName } from '../general/icon';
 
 const NAV_ID = 'nav';
 

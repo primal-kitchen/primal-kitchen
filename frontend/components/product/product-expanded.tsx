@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProductProps } from './product';
 import ProductExpandedDropdown from './product-expanded-dropdown';
-import Button, { Colour, Proportion, Size } from '../button/button';
+import Button, { Colour, Proportion, Size } from '../general/button';
 import Counter, { CounterHandle, CounterRef, createCounterRef } from '../general/counter';
 
 type ProductExpandedProps = {
