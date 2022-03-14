@@ -5,7 +5,7 @@ import CartItemsEntry, { OrderProduct } from './cart-items-entry';
 type CartItemsProps = { products: OrderProduct[] }
 
 const CartItems: React.FC<CartItemsProps> = ({products}) => (
-	<div className='flex flex-col gap-2 w-full md:grid grid-cols-[1fr,repeat(4,min-content)] auto-rows-min place-items-center md:gap-x-11 lg:gap-x-20 overflow-y-scroll h-full'>
+	<div className='flex flex-col gap-2 w-full md:grid grid-cols-[1fr,repeat(4,min-content)] auto-rows-min place-items-center md:gap-x-11 lg:gap-x-20 overflow-y-auto h-full'>
 		<CartItemsHeading className='hidden md:contents'/>
 		<div className='contents h-full overflow-y-scroll'>
 			{products.map(product =>
