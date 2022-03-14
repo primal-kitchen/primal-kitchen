@@ -36,11 +36,11 @@ const ProductSectionsMenu = (props: Props) => {
 		<>
 			<BodyClamp>
 				{/* TODO: margin bottom calculation is based off of padding to secondary menu below */}
-				<div className='flex items-center justify-center w-full font-roboto font-bold uppercase text-4xl my-9 md:mt-16 md:mb-13'>
+				<div className='flex items-center justify-center w-full font-roboto font-bold uppercase text-4xl my-9 md:mt-16 md:mb-13 pb-3'>
 					our menu
 				</div>
 			</BodyClamp>
-			<div className='sticky top-[calc(5vh+1rem)] text-red text-lg font-bold uppercase mb-9 md:mb-16 pt-3 bg-white' ref={ref}
+			<div className='sticky top-[calc(5vh+1rem)] text-red text-lg font-bold uppercase mb-9 md:mb-16 bg-white' ref={ref}
 				 id={PRODUCT_SECTION_MENU_ID}>
 				<BodyClamp className='pb-2'>
 					<div className='flex flex-row justify-center gap-3 md:gap-5'>

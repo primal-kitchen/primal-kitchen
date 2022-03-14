@@ -3,6 +3,7 @@ import CartItems from '../components/cart/cart-items';
 import { Day } from '../components/product/product';
 import { OrderProduct } from '../components/cart/cart-items-entry';
 import BodyClamp from '../components/utilities/body-clamp';
+import React from 'react';
 
 const products: OrderProduct[] = [
 	{
@@ -25,6 +26,11 @@ const Testing: NextPage = ({}) => (
 		<BodyClamp>
 			<CartItems products={products}/>
 		</BodyClamp>
+		<div className='flex flex-col gap-2'>
+			{Array(100).fill('').map((_, index) =>
+				<span key={index} className='bg-black py-96 text-white text-3xl grid place-items-center'>{index + 1}</span>,
+			)}
+		</div>
 		{/*<Icon iconName={IconName.TICK} colour={Colour.WHITE}/>*/}
 		{/*<Icon iconName={IconName.TICK} colour={Colour.BLACK}/>*/}
 		{/*<Icon iconName={IconName.SHOPPING_CART} colour={Colour.WHITE}/>*/}
