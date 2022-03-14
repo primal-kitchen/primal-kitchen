@@ -5,6 +5,8 @@ enum IconName {
 	MENU_OPEN = 'icons/menu-open.svg#menu-open',
 	SHOPPING_CART = 'icons/shopping-cart.svg#shopping-cart',
 	TICK = 'icons/tick.svg#tick',
+	PLUS = 'icons/plus.svg#plus',
+	MINUS = 'icons/minus.svg#minus',
 }
 
 enum Colour {
@@ -15,24 +17,27 @@ enum Colour {
 type Props = {
 	iconName: IconName,
 	colour: Colour,
+	sizeInPixels?: number,
 }
 
-const Icon: React.FC<Props> = ({iconName, colour}) => {
+const Icon: React.FC<Props> = ({iconName, colour, sizeInPixels = 30}) => {
 	const svgReference = iconName;
 	const colourClass: string = colour;
 
-	console.log(`😃 ${svgReference} ${colour}`);
-
 	return (
-		<svg className={`w-[30px] h-[30px] ${colourClass}`} viewBox='0 0 100 100' xmlns="http://www.w3.org/2000/svg" version="1.1">
-			<use xlinkHref={svgReference}/>
-		</svg>
-	)
-}
+		<div className={`max-w-[${sizeInPixels}px] max-h-[${sizeInPixels}px]`}>
+			<svg className={`${colourClass}`}
+				 viewBox='0 0 100 100'
+				 xmlns='http://www.w3.org/2000/svg' version='1.1'>
+				<use xlinkHref={svgReference}/>
+			</svg>
+		</div>
+	);
+};
 
 export {
 	IconName,
 	Colour,
-}
+};
 
 export default Icon;

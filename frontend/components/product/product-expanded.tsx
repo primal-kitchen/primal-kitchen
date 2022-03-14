@@ -46,7 +46,9 @@ const ProductExpanded: React.FC<ProductExpandedProps> = ({product}) => {
 						}
 					</div>
 				}
-				<Counter ref={counterRef}/>
+				<div className='pt-4'>
+					<Counter ref={counterRef}/>
+				</div>
 				<Button padding={Size.LARGE} width={Proportion.FULL} colour={Colour.RED}>Add to cart - ${product.cost}</Button>
 			</div>
 		</article>

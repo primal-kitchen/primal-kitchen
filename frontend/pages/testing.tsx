@@ -1,12 +1,12 @@
 import { NextPage } from 'next';
-import Product, { Day, Options } from '../components/product/product';
-import BodyClamp from '../components/utilities/body-clamp';
+import Icon, { Colour, IconName } from '../components/icon/icon';
 
 const Testing: NextPage = ({}) => (
-	<BodyClamp>
-		{/* needs to be auto fit because centers if less items than 1 full row, but place remaining on left on final row*/}
-		<section ></section>
-	</BodyClamp>
+	<div className='bg-red'>
+		<Icon iconName={IconName.TICK} colour={Colour.WHITE}/>
+		<Icon iconName={IconName.TICK} colour={Colour.BLACK}/>
+		<Icon iconName={IconName.SHOPPING_CART} colour={Colour.WHITE}/>
+	</div>
 );
 
 export default Testing;
