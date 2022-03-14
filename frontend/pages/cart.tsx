@@ -34,8 +34,8 @@ const Cart: NextPage = () => {
 	return (
 		<BodyClamp className='mt-4 w-full h-full'>
 			<div className='flex flex-col gap-4 w-full px-2'>
-				<div className='flex flex-col gap-2 lg:grid grid-cols-[repeat(6,min-content)] lg:gap-x-12 lg:place-items-center'>
-					<div className='hidden lg:contents font-bold capitalize'>
+				<div className='flex flex-col gap-2 md:grid grid-cols-[repeat(6,min-content)] md:gap-x-8 lg:gap-x-14 md:place-items-center'>
+					<div className='hidden md:contents font-bold capitalize'>
 						<h1 className='justify-self-start col-span-2 text-2xl'>summary</h1>
 						<h1 className='justify-self-start'>size</h1>
 						<h1 className='self-end'>quantity</h1>
@@ -43,14 +43,14 @@ const Cart: NextPage = () => {
 						<h1 className='self-end'>remove</h1>
 					</div>
 					{products.map(product => (
-						<div key={product.title} className='lg:contents w-min gap-4 grid grid-cols-[max-content_auto_min-content]'>
-							<img src={product.imageUrl} className='object-cover aspect-square w-[12.5vmin] min-w-[45px] lg:max-w-[60px] justify-self-start'/>
-							<div className='lg:contents'>
-								<div className='justify-self-start w-max lg:pr-12'>
+						<div key={product.title} className='md:contents w-min gap-4 grid grid-cols-[max-content_auto_min-content]'>
+							<img src={product.imageUrl} className='object-cover aspect-square w-[12.5vmin] min-w-[45px] md:max-w-[60px] justify-self-start'/>
+							<div className='md:contents'>
+								<div className='justify-self-start w-max md:pr-12'>
 									<h1 className='text-red underline capitalize'>{product.title}</h1>
 									<h2>delivered <b className='capitalize'>{Day[product.daysProductIsFor[0]]}</b></h2>
 								</div>
-								<div className='lg:contents flex flex-row gap-4 py-2'>
+								<div className='md:contents flex flex-row gap-4 py-2'>
 									<Dropdown options={['Warrior', 'Regular']}/>
 									<Counter ref={createCounterRef()}/>
 								</div>
@@ -62,7 +62,7 @@ const Cart: NextPage = () => {
 				</div>
 				<h1 className='text-2xl font-bold'>Specific requests</h1>
 				<div>
-					<h2 className='text-lg font-bold'>Meals — tray type</h2>
+					<h2 className='text-md font-bold'>Meals — tray type</h2>
 					{
 						Object.keys(TrayType).map(value =>
 							(<div key={value} className='flex flex-row gap-1'>
