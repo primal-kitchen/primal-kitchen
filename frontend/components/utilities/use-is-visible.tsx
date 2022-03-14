@@ -16,7 +16,7 @@ const useIsVisible = (
 		intersectionObserver.observe(ref.current);
 
 		return () => intersectionObserver.disconnect();
-	}, []);
+	}, [ref]);
 
 	return isVisible;
 };

@@ -64,7 +64,7 @@ export default function useFirstItemInView<Type, TypeIdentifier>(items: Type[],
 		});
 
 		return () => intersectionObserver.disconnect();
-	}, [setItemVisibilityMap]);
+	}, [setItemVisibilityMap, getItemUsingElement, getIdentifier, getElement, items, options]);
 
 	useDebugValue<Type | undefined>(firstItemInView);
 

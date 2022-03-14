@@ -6,7 +6,7 @@ export default function useElementHeight(id: string): number {
 	useEffect(() => {
 		const updatedNavHeight = document?.getElementById(id)?.clientHeight;
 		if (updatedNavHeight !== undefined) setNavHeight(updatedNavHeight);
-	}, []);
+	}, [id]);
 
 	return navHeight;
 }
