@@ -6,7 +6,7 @@ type DropdownProps = {
 
 const Dropdown: React.FC<DropdownProps> = ({options}) => {
 	return (
-		<select className='border px-2'>
+		<select className='bg-white border px-2'>
 			{options.map(option =>
 				<option value={option} key={option}>{option}</option>,
 			)}

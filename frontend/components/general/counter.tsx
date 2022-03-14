@@ -24,13 +24,13 @@ const Counter = ({startingCount = 1}: CounterProps, ref: ForwardedRef<CounterHan
 			{/* TODO: copy theme rounding*/}
 			{/* TODO: import actual negative icon */}
 			<div onClick={event => decrement()}>
-				<Icon sizeInPixels={15} iconName={IconName.MINUS} colour={Colour.BLACK} />
+				<Icon widthInPixels={15} heightInPixels={15} iconName={IconName.MINUS} colour={Colour.BLACK} />
 			</div>
 			{/* TODO: this will blow up with bigger nums */}
-			<div className='text-center p-2 border w-[40px] h-[40px]'>{count}</div>
+			<div className='text-center p-2 border border-light-grey w-[40px] h-[40px]'>{count}</div>
 			{/* TODO: import actual postive icon */}
 			<div onClick={event => increment()}>
-				<Icon sizeInPixels={15} iconName={IconName.PLUS} colour={Colour.BLACK} />
+				<Icon widthInPixels={15} heightInPixels={15} iconName={IconName.PLUS} colour={Colour.BLACK} />
 			</div>
 		</div>
 	);

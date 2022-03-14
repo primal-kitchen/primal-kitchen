@@ -17,16 +17,21 @@ enum Colour {
 type Props = {
 	iconName: IconName,
 	colour: Colour,
-	sizeInPixels?: number,
+	widthInPixels?: number,
+	heightInPixels?: number,
 }
 
-const Icon: React.FC<Props> = ({iconName, colour, sizeInPixels = 30}) => {
+const defaultSizeInPixels = 30;
+
+const Icon: React.FC<Props> = ({iconName, colour, widthInPixels, heightInPixels}) => {
 	const svgReference = iconName;
 	const colourClass: string = colour;
 
 	return (
-		<div className={`max-w-[${sizeInPixels}px] max-h-[${sizeInPixels}px]`}>
-			<svg className={`${colourClass}`}
+		<div>
+			<svg className={colourClass}
+				 width={`${widthInPixels ?? heightInPixels ?? defaultSizeInPixels}px`}
+				 height={`${heightInPixels ?? widthInPixels ?? defaultSizeInPixels}px`}
 				 viewBox='0 0 100 100'
 				 xmlns='http://www.w3.org/2000/svg' version='1.1'>
 				<use xlinkHref={svgReference}/>
