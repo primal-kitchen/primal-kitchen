@@ -9,127 +9,13 @@ import useNavHeight from '../components/nav/use-nav-height';
 import { useWindowSize } from 'react-use';
 
 type OrderProduct = ProductProps & { quantity: number };
-const products: OrderProduct[] = [
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.MONDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 5,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-	{
-		title: 'Herb Roasted Lamb Shoulder',
-		cost: 16.95,
-		daysProductIsFor: [Day.THURSDAY],
-		imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
-		quantity: 3,
-	},
-];
+const products: OrderProduct[] = Array(5).fill({
+	title: 'Herb Roasted Lamb Shoulder',
+	cost: 16.95,
+	daysProductIsFor: [Day.MONDAY],
+	imageUrl: 'images/delete-me/crumbed-chicken-parmigiana.png',
+	quantity: 5,
+});
 
 const Cart: NextPage = () => {
 	const navHeight = useNavHeight();
