@@ -6,6 +6,9 @@ import React, { useCallback, useState } from 'react';
 import NavLinkLogo from './nav-link-logo';
 import BodyClamp from '../utilities/body-clamp';
 import Icon, { Colour, IconName } from '../general/icon';
+import AddressPopup from '../address-popup/address-popup';
+import { useToggle } from 'react-use';
+import InvisibleFixedPageOverlay from '../utilities/invisible-fixed-page-overlay';
 
 const NAV_ID = 'nav';
 
@@ -15,10 +18,17 @@ const Nav = () => {
 	const {selectedStore} = useSelectedStore();
 	const [showingMenu, setShowingMenu] = useState(false);
 	const toggleShowingMenu = useCallback(() => setShowingMenu(showingMenu => !showingMenu), [setShowingMenu]);
+	const [isAddressPopupVisible, toggleAddressPopupVisibility] = useToggle(false);
 
 	const NavLinkAboutUs = () => <NavLink to='/about-us'>About us</NavLink>;
 	const NavLinkOrderMeals = () => <NavLink to='/'>Order meals</NavLink>;
-	const NavLinkSelectStore = () => <NavLink>{selectedStore ?? 'Select store'}</NavLink>;
+	const NavLinkSelectStore = () =>
+		<div onClick={toggleAddressPopupVisibility}>
+			<NavLink>{selectedStore ?? 'Select store'}</NavLink>
+			<InvisibleFixedPageOverlay isVisible={isAddressPopupVisible} onOutsideContentClicked={toggleAddressPopupVisibility}>
+				<AddressPopup/>
+			</InvisibleFixedPageOverlay>
+		</div>;
 	const NavLinkShoppingCart = () =>
 		<NavLink to='/cart'>
 			<Icon iconName={IconName.SHOPPING_CART} colour={Colour.WHITE}/>
