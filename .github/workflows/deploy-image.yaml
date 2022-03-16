@@ -38,7 +38,7 @@ jobs:
             mkdir ~/.config # doctl command below won't work if directory doesn't exist
             doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
             # doctl registry login --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-            # doctl registry get
+            doctl registry get
             # pull corresponding image
             # docker pull $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE
             # restart container in place
