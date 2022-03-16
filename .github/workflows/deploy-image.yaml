@@ -19,6 +19,7 @@ env:
   REGISTRY_NAME: primal-kitchen
   IMAGE: frontend
   SERVICE: frontend
+  APPLICATION_DIRECTORY: ~/primal-kitchen/primal-kitchen
 
 jobs:
   deploy_image:
@@ -41,9 +42,7 @@ jobs:
             # pull corresponding image
             docker pull ${{ env.REGISTRY_HOST }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE }}
             # restart container in place
-            ls
-            cd primal-kitchen/primal-kitchen
-            ls
+            cd ${{ env.APPLICATION_DIRECTORY }}
             docker-compose up --detach --no-deps ${{ env.SERVICE }}
             # TODO: remove old container
             # TODO: remove old image
