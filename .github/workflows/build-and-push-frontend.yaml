@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: test
-      - run: echo $REGISTRY_NAME
+        run: echo $REGISTRY_NAME
 
       - name: build image
         run: docker image build --tag $REGISTRY_NAME/$IMAGE_NAME
