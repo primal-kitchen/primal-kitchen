@@ -34,7 +34,7 @@ jobs:
           command: |
             echo "hello world"
             # login to container registry
-            docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} $REGISTRY_HOST
+            echo ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} | docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} --password-stdin $REGISTRY_HOST
             # pull corresponding image
             # docker pull $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE
             # restart container in place
