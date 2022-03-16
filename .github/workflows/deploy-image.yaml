@@ -25,6 +25,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2 # needed to access docker-compose.yaml
+
+      - name: 'test'
         run: pwd
 
       - name: 'pull and deploy image'
