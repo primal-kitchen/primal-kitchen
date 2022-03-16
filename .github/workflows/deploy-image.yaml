@@ -19,7 +19,7 @@ env:
   REGISTRY_NAME: primal-kitchen
   IMAGE: frontend
   SERVICE: frontend
-  APPLICATION_DIRECTORY: ~/primal-kitchen/primal-kitchen
+  APPLICATION_DIRECTORY: ~/primal-kitchen
 
 jobs:
   deploy_image:
