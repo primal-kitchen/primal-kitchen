@@ -32,13 +32,13 @@ jobs:
           privatekey: ${{ secrets.SERVER_PRIVATE_KEY }}
           passphrase: ${{ secrets.SERVER_PRIVATE_KEY_PASSPHRASE }}
           command: |
-            echo "hello world"
             # login to container registry
             # echo ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} | docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} --password-stdin $REGISTRY_HOST
             mkdir -p ~/.config # doctl command below won't work if directory doesn't exist
             doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
             # doctl registry login --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
             # pull corresponding image
+            doctl registry login
             docker pull $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE
             # restart container in place
             # docker compose up --detach --no-deps $SERVICE
