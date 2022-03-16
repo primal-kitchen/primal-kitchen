@@ -28,7 +28,7 @@ jobs:
       - name: install doctl
         uses: digitalocean/action-doctl@v2
         with:
-          token: {{ secrets.PRIMAL_KITCHEN_DIGITALOCEAN_ACCESS_TOKEN }}
+          token: ${{ secrets.PRIMAL_KITCHEN_DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: login to digital ocean container registry
         run: doctl registry login # --expiry-seconds 600 # short-lived credentials?
