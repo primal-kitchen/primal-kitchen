@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: test
-        run: pwd && ls
+        run: ls
 
       - name: build image
-        run: docker image build --tag $REGISTRY_NAME/$IMAGE_NAME ./frontend
+        run: docker image build --tag $REGISTRY_NAME/$IMAGE_NAME frontend
 
       - name: tag image to registry. unsure really what this is for
         run: docker tag $REGISTRY_NAME/$IMAGE_NAME $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE_NAME
