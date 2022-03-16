@@ -41,7 +41,7 @@ jobs:
             # pull corresponding image
             docker pull ${{ env.REGISTRY_HOST }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE }}
             # restart container in place
-            docker compose up --detach --no-deps ${{ env.SERVICE }}
+            docker-compose up --detach --no-deps ${{ env.SERVICE }}
             # TODO: remove old container
             # TODO: remove old image
 
