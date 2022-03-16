@@ -1,4 +1,4 @@
-import { useDebugValue, useEffect, useState } from 'react';
+import { useCallback, useDebugValue, useEffect, useState } from 'react';
 import { Map, OrderedMap } from 'immutable';
 
 // TODO: refactor this entire hook; it's overly complex
@@ -36,12 +36,13 @@ export default function useFirstItemInView<Type, TypeIdentifier>(items: Type[],
 	}, [itemVisibilityMap, itemIdentifierMap]);
 
 	// probably want to use a map here for improved lookup performance. could do something smart here like lazily building map as go (memoize?)
-	const getItemUsingElement = (element: Element): Type | undefined => {
+	type GetItemUsingElement = (element: Element) => Type | undefined;
+	const getItemUsingElement = useCallback<GetItemUsingElement>(element => {
 		return items.find(item => {
 			if (!item) return false;
 			return getElement(item) === element;
 		});
-	};
+	}, [items, getElement]);
 
 	// could look into simplifying with a hook. maybe from react-use?
 	// essentially, update the itemVisibilityMap as the items change their visibility status...
