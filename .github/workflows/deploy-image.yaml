@@ -42,7 +42,9 @@ jobs:
             docker pull ${{ env.REGISTRY_HOST }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE }}
             # restart container in place
             ls
-            docker-compose --file ~/primal-kitchen/primal-kitchen/docker-compose.yaml up --detach --no-deps ${{ env.SERVICE }}
+            cd ~/primal-kitchen/primal-kitchen/
+            ls
+            docker-compose up --detach --no-deps ${{ env.SERVICE }}
             # TODO: remove old container
             # TODO: remove old image
 
