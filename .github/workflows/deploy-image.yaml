@@ -30,6 +30,7 @@ jobs:
           host: ${{ secrets.SERVER_HOSTNAME }}
           username: ${{ secrets.SERVER_USERNAME }}
           privatekey: ${{ secrets.SERVER_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SERVER_PRIVATE_KEY_PASSPHRASE }}
           command: |
             # login to container registry
             docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} $REGISTRY_HOST
