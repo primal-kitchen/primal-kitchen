@@ -17,6 +17,8 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v2 # needed when doing stuff on code from repo it seems...
+        
       - name: test
         run: ls
 
