@@ -1,0 +1,49 @@
+name: 'deploy'
+on:
+  workflow_dispatch:
+    inputs:
+      image:
+        description: 'choose the image to deploy'
+        type: choice
+        options:
+          - frontend
+          - reverse-proxy
+          - medusa
+          - medusa-admin
+          - strapi
+        required: true
+
+env:
+  REGISTRY_HOST: registry.digitalocean.com
+  REGISTRY_NAME: primal-kitchen
+  IMAGE: frontend
+  SERVICE: frontend
+
+jobs:
+  configure_ssh:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: ''
+
+  deploy_image:
+    runs-on: ubuntu-20.04
+
+    steps:
+      # TODO: get image and service name from inputs
+      - name: 'connect to server via ssh'
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          host: ${{ secrets.SERVER_HOSTNAME }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          privatekey: ${{ secrets.SERVER_PRIVATE_KEY }}
+          command: |
+            # login to container registry
+            docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} $REGISTRY_HOST
+            # pull corresponding image
+            docker pull $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE
+            # restart container in place
+            docker compose up --detach --no-deps $SERVICE
+            # TODO: remove old container
+            # TODO: remove old image
+
+
