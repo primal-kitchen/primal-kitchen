@@ -35,7 +35,7 @@ jobs:
             echo "hello world"
             # login to container registry
             # echo ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} | docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} --password-stdin $REGISTRY_HOST
-            mkdir ~/.config # doctl command below won't work if directory doesn't exist
+            mkdir -p ~/.config # doctl command below won't work if directory doesn't exist
             doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
             # doctl registry login --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
             doctl registry get
