@@ -32,12 +32,13 @@ jobs:
           privatekey: ${{ secrets.SERVER_PRIVATE_KEY }}
           passphrase: ${{ secrets.SERVER_PRIVATE_KEY_PASSPHRASE }}
           command: |
+            echo "hello world"
             # login to container registry
-            docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} $REGISTRY_HOST
+            # docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} $REGISTRY_HOST
             # pull corresponding image
-            docker pull $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE
+            # docker pull $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE
             # restart container in place
-            docker compose up --detach --no-deps $SERVICE
+            # docker compose up --detach --no-deps $SERVICE
             # TODO: remove old container
             # TODO: remove old image
 
