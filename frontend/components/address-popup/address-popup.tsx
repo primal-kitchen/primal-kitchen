@@ -27,7 +27,7 @@ const AddressPopup: React.FC<{}> = () => {
 				<>
 					<div>Please note for your location:</div>
 					<ul className='list-disc pl-6'>
-						{notes.map(note => <li>{note}</li>)}
+						{notes.map(note => <li key={note}>{note}</li>)}
 					</ul>
 				</>
 			}
