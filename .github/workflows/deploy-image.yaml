@@ -39,7 +39,7 @@ jobs:
             # doctl registry login --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
             # pull corresponding image
             doctl registry login
-            docker pull ${{ REGISTRY_HOST }}/${{ REGISTRY_NAME }}/${{ IMAGE }}
+            docker pull ${{ env.REGISTRY_HOST }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE }}
             # restart container in place
             # docker compose up --detach --no-deps $SERVICE
             # TODO: remove old container
