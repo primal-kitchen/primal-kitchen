@@ -21,11 +21,10 @@ env:
 jobs:
   build-and-push-image:
     runs-on: ubuntu-20.04
-    # env:
-    #  IMAGE_NAME: ${{ env.REGISTRY_HOST }}/${{ env.REGISTRY_NAME }}/${{ env.SERVICE_NAME }}
     steps:
+      # unfortunately can't use github action "env" section to set this env variable...
       - name: set $IMAGE_NAME environment varaible
-        run: echo "IMAGE_NAME=$REGISTRY_HOST/$REGISTRY_NAME/$SERVICE_NAME" >> $GITHUB_ENV
+        run: echo "IMAGE_NAME=$REGISTRY_HOST/$REGISTRY_NAME/${{ inputs.SERVICE_NAME }}" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2 # needed when doing stuff on code from repo it seems...
 
