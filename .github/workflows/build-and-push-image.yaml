@@ -3,9 +3,16 @@ on:
   workflow_call:
     inputs:
       SERVICE_NAME:
+        description: 'used to name the image — convention is matching this in docker-compose'
+        required: true
+        type: string
       DIRECTORY_NAME:
+        description: 'the directory in the repo this service lives — needed to build the image'
+        required: true
+        type: string
     secrets:
-      PRIMAL_KITCHEN_DIGITALOCEAN_ACCESS_TOKEN
+      DIGITALOCEAN_ACCESS_TOKEN:
+        required: true
 
 env:
   REGISTRY_HOST: registry.digitalocean.com
