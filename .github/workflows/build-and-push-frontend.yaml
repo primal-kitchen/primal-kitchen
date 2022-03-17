@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-push-frontend:
-    uses: primal-kitchen/primal-kitchen/.github/workflows/build-and-push-image.yaml@main
+    uses: primal-kitchen/primal-kitchen/.github/workflows/build-and-push-image.yaml@master
     with:
       SERVICE_NAME: frontend
       DIRECTORY_NAME: frontend
