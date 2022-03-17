@@ -26,6 +26,9 @@ jobs:
       - name: set $IMAGE_NAME environment varaible
         run: echo "IMAGE_NAME=$REGISTRY_HOST/$REGISTRY_NAME/${{ inputs.SERVICE_NAME }}" >> $GITHUB_ENV
 
+      - name: test
+        run: echo $IMAGE_NAME
+
       - uses: actions/checkout@v2 # needed when doing stuff on code from repo it seems...
 
       - name: build image
