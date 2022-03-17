@@ -8,32 +8,11 @@ on:
       - 'frontend/**'
   workflow_dispatch: # allow manual triggering
 
-env:
-  REGISTRY_HOST: registry.digitalocean.com
-  REGISTRY_NAME: primal-kitchen
-  IMAGE_NAME: frontend
-
 jobs:
-  build:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2 # needed when doing stuff on code from repo it seems...
-
-      - name: build image
-        run: docker image build --tag $REGISTRY_NAME/$IMAGE_NAME frontend
-
-      - name: tag image to registry. unsure really what this is for
-        run: docker tag $REGISTRY_NAME/$IMAGE_NAME $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE_NAME
-
-      - name: install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.PRIMAL_KITCHEN_DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: login to digital ocean container registry
-        run: doctl registry login # --expiry-seconds 600 # short-lived credentials?
-
-      - name: push image
-        run: docker push $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE_NAME
+  build-and-push-frontend:
+    uses: primal-kitchen/primal-kitchen/.github/workflows/build-and-push-image.yaml@main
+    with:
+      SERVICE_NAME: frontend
+      DIRECTORY_NAME: frontend
 
 

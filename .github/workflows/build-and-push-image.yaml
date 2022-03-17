@@ -1,0 +1,34 @@
+name: 'build-and-push-image'
+on:
+  workflow_call:
+    inputs:
+      SERVICE_NAME:
+      DIRECTORY_NAME:
+    secrets:
+      PRIMAL_KITCHEN_DIGITALOCEAN_ACCESS_TOKEN
+
+env:
+  REGISTRY_HOST: registry.digitalocean.com
+  REGISTRY_NAME: primal-kitchen
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-20.04
+    env:
+      IMAGE_NAME: $REGISTRY_HOST/$REGISTRY_NAME/$IMAGE_NAME
+    steps:
+      - uses: actions/checkout@v2 # needed when doing stuff on code from repo it seems...
+
+      - name: build image
+        run: docker image build --tag $IMAGE_NAME
+
+      - name: install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.PRIMAL_KITCHEN_DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: login to digital ocean container registry
+        run: doctl registry login # --expiry-seconds 600 # short-lived credentials?
+
+      - name: push image
+        run: docker push $IMAGE_NAME
