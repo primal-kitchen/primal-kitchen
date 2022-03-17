@@ -15,10 +15,8 @@ on:
 
 # TODO: get image and service name from inputs
 env:
-  REGISTRY_HOST: registry.digitalocean.com
-  REGISTRY_NAME: primal-kitchen
-  IMAGE: frontend
-  SERVICE: frontend
+  IMAGE: registry.digitalocean.com/primal-kitchen/${{ inputs.image }}
+  SERVICE: ${{ inputs.image }}
   APPLICATION_DIRECTORY: ~/primal-kitchen
 
 jobs:
@@ -40,7 +38,7 @@ jobs:
             doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
             # doctl registry login
             # pull corresponding image
-            docker pull ${{ env.REGISTRY_HOST }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE }}
+            docker pull ${{ env.IMAGE }}
             # restart container in place
             cd ${{ env.APPLICATION_DIRECTORY }}
             docker-compose up --detach --no-deps ${{ env.SERVICE }}
