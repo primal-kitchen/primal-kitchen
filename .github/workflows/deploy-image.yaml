@@ -13,9 +13,8 @@ on:
           - strapi
         required: true
 
-# TODO: get image and service name from inputs
 env:
-  IMAGE: registry.digitalocean.com/primal-kitchen/${{ inputs.image }}
+  IMAGE: registry.digitalocean.com/primal-kitchen/${{ github.event.inputs.image }}
   SERVICE: ${{ inputs.image }}
   APPLICATION_DIRECTORY: ~/primal-kitchen
 
@@ -33,12 +32,6 @@ jobs:
           # TODO: fingerprint validation
           script_stop: true # stop after first failure in script
           script: |
-            echo 'test blah'
-            echo ${{ github.event.inputs.image }}
-            echo 'test just inputs.image'
-            echo ${{ inputs.image }}
-            echo 'IMAGE: '
-            echo ${{ env.IMAGE }}
             # login to container registry
             mkdir -p ~/.config # doctl command below won't work if directory doesn't exist
             doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
