@@ -33,7 +33,11 @@ jobs:
           # TODO: fingerprint validation
           script_stop: true # stop after first failure in script
           script: |
-            echo 'test'
+            echo 'test blah'
+            echo ${{ github.event.inputs.image }}
+            echo 'test just inputs.image'
+            echo ${{ inputs.image }}
+            echo 'IMAGE: '
             echo ${{ env.IMAGE }}
             # login to container registry
             mkdir -p ~/.config # doctl command below won't work if directory doesn't exist
