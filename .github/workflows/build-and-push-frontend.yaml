@@ -14,5 +14,6 @@ jobs:
     with:
       SERVICE_NAME: frontend
       DIRECTORY_NAME: frontend
+      DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.PRIMAL_KITCHEN_DIGITALOCEAN_ACCESS_TOKEN }}
 
 
