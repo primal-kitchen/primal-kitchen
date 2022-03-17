@@ -1,0 +1,18 @@
+name: 'build-and-push-medusa'
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/build-and-push-medusa.yaml'
+      - 'medusa/**'
+  workflow_dispatch: # allow manual triggering
+
+jobs:
+  build-and-push-medusa:
+    uses: primal-kitchen/primal-kitchen/.github/workflows/build-and-push-image.yaml@master
+    with:
+      SERVICE_NAME: medusa
+      SERVICE_DIRECTORY: medusa
+    secrets:
+      DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
