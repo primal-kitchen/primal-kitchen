@@ -15,7 +15,7 @@ on:
 
 env:
   IMAGE: registry.digitalocean.com/primal-kitchen/${{ github.event.inputs.image }}
-  SERVICE: ${{ inputs.image }}
+  SERVICE: ${{ github.event.inputs.image }}
   APPLICATION_DIRECTORY: ~/primal-kitchen
 
 jobs:
