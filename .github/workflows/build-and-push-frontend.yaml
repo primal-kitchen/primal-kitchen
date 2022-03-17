@@ -1,4 +1,4 @@
-name: 'build-and-push-fronted'
+name: 'build-and-push-frontend'
 on:
   push:
     branches:

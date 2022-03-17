@@ -22,7 +22,7 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-20.04
     env:
-      IMAGE_NAME: $REGISTRY_HOST/$REGISTRY_NAME/$SERVICE_NAME
+      IMAGE_NAME: ${{ env.REGISTRY_HOST }}/${{ env.REGISTRY_NAME }}/${{ env.SERVICE_NAME }}
     steps:
       - uses: actions/checkout@v2 # needed when doing stuff on code from repo it seems...
 
