@@ -33,6 +33,8 @@ jobs:
           # TODO: fingerprint validation
           script_stop: true # stop after first failure in script
           script: |
+            echo 'test'
+            echo ${{ env.IMAGE }}
             # login to container registry
             mkdir -p ~/.config # doctl command below won't work if directory doesn't exist
             doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
