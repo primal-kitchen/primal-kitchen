@@ -13,7 +13,7 @@ jobs:
     uses: primal-kitchen/primal-kitchen/.github/workflows/build-and-push-image.yaml@master
     with:
       SERVICE_NAME: frontend
-      DIRECTORY_NAME: frontend
+      SERVICE_DIRECTORY: frontend
     secrets:
       DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 

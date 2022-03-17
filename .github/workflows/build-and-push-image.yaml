@@ -6,7 +6,7 @@ on:
         description: 'used to name the image — convention is matching this in docker-compose'
         required: true
         type: string
-      DIRECTORY_NAME:
+      SERVICE_DIRECTORY:
         description: 'the directory in the repo this service lives — needed to build the image'
         required: true
         type: string
@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v2 # needed when doing stuff on code from repo it seems...
 
       - name: build image
-        run: docker image build --tag $IMAGE_NAME
+        run: docker image build --tag $IMAGE_NAME $SERVICE_DIRECTORY
 
       - name: install doctl
         uses: digitalocean/action-doctl@v2
