@@ -14,9 +14,8 @@ on:
         required: true
 
 env:
-  IMAGE: registry.digitalocean.com/primal-kitchen/${{ github.event.inputs.image }}
+  IMAGE: ${{ secrets.APP_CONTAINER_REGISTRY }}/${{ github.event.inputs.image }}
   SERVICE: ${{ github.event.inputs.image }}
-  APPLICATION_DIRECTORY: ~/primal-kitchen
 
 jobs:
   deploy_image:
@@ -27,19 +26,19 @@ jobs:
         with:
           host: ${{ secrets.SERVER_HOSTNAME }}
           username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_PRIVATE_KEY }}
-          passphrase: ${{ secrets.SERVER_PRIVATE_KEY_PASSPHRASE }} # added security
+          key: ${{ secrets.CD_SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.CD_SSH_PRIVATE_KEY_PASSPHRASE }} # added security
           # TODO: fingerprint validation
           script_stop: true # stop after first failure in script
           script: |
             # login to container registry
             mkdir -p ~/.config # doctl command below won't work if directory doesn't exist
-            doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+            doctl auth init --access-token ${{ secrets.CD_DIGITALOCEAN_ACCESS_TOKEN }}
             # doctl registry login
             # pull corresponding image
             docker pull ${{ env.IMAGE }}
             # restart container in place
-            cd ${{ env.APPLICATION_DIRECTORY }}
+            cd ${{ secrets.SERVER_APP_DIRECTORY }}
             docker-compose up --detach --no-deps ${{ env.SERVICE }}
             # TODO: remove old container
             # TODO: remove old image

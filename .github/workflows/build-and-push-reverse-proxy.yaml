@@ -15,4 +15,4 @@ jobs:
       SERVICE_NAME: reverse-proxy
       SERVICE_DIRECTORY: reverse-proxy
     secrets:
-      DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.CD_DIGITALOCEAN_ACCESS_TOKEN }}
