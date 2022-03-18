@@ -5,7 +5,7 @@
 # unsure if --force-renewal is smart?
 
 certonly --webroot --webroot-path ${NGINX_WEBROOT} \
-	--email ${DEVELOPER_EMAIL} --agree-tos --no-eff-email \
+	--email ${APP_DEVELOPER_EMAIL} --agree-tos --no-eff-email \
 	--staging \
 	--force-renewal \
 	--expand \
