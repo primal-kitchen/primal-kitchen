@@ -15,4 +15,4 @@ jobs:
       SERVICE_NAME: medusa-admin
       SERVICE_DIRECTORY: medusa-admin
     secrets:
-      DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.CD_DIGITALOCEAN_ACCESS_TOKEN }}
+      CD_DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.CD_DIGITALOCEAN_ACCESS_TOKEN }}

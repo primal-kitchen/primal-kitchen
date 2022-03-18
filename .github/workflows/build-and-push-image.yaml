@@ -11,7 +11,7 @@ on:
         required: true
         type: string
     secrets:
-      DIGITALOCEAN_ACCESS_TOKEN:
+      CD_DIGITALOCEAN_ACCESS_TOKEN:
         required: true
 
 jobs:

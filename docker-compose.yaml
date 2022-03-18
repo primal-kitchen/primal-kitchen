@@ -25,7 +25,7 @@ services:
 
   strapi:
     container_name: primal-kitchen-strapi
-    image: ${CONTAINER_REGISTRY}/strapi
+    image: ${APP_CONTAINER_REGISTRY}/strapi
     build:
       context: strapi
     env_file:
@@ -74,7 +74,7 @@ services:
 
   medusa:
     container_name: ${MEDUSA_STOREFRONT_CONTAINER_NAME}
-    image: ${CONTAINER_REGISTRY}/medusa
+    image: ${APP_CONTAINER_REGISTRY}/medusa
     build:
       context: medusa
     environment:
@@ -107,7 +107,7 @@ services:
 
   medusa-admin:
     container_name: ${MEDUSA_ADMIN_PANEL_CONTAINER_NAME}
-    image: ${CONTAINER_REGISTRY}/medusa-admin
+    image: ${APP_CONTAINER_REGISTRY}/medusa-admin
     build:
       context: medusa-admin
       args:
@@ -120,7 +120,7 @@ services:
 
   frontend:
     container_name: ${FRONTEND_CONTAINER_NAME}
-    image: ${CONTAINER_REGISTRY}/frontend
+    image: ${APP_CONTAINER_REGISTRY}/frontend
     build:
       context: frontend
     networks:
@@ -132,7 +132,7 @@ services:
   # TODO: look into if we need to "warm up" nginx as first load can be really slow...
   reverse-proxy:
     container_name: primal-kitchen-reverse-proxy
-    image: ${CONTAINER_REGISTRY}/reverse-proxy
+    image: ${APP_CONTAINER_REGISTRY}/reverse-proxy
     env_file: .env
     build:
       context: reverse-proxy
