@@ -13,6 +13,8 @@ on:
     secrets:
       CD_DIGITALOCEAN_ACCESS_TOKEN:
         required: true
+      APP_CONTAINER_REGISTRY:
+        required: true
 
 jobs:
   build-and-push-image:
