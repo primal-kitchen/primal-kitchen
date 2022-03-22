@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: build image
-        run: docker image build --tag $IMAGE_NAME ${{ inputs.SERVICE_DIRECTORY }}
+        run: docker image build --tag ${{ env.IMAGE_NAME }} ${{ inputs.SERVICE_DIRECTORY }}
 
       - name: install doctl
         uses: digitalocean/action-doctl@v2
@@ -37,4 +37,4 @@ jobs:
         run: doctl registry login # --expiry-seconds 600 # short-lived credentials?
 
       - name: push image
-        run: docker push $IMAGE_NAME
+        run: docker push ${{ env.IMAGE_NAME }}
