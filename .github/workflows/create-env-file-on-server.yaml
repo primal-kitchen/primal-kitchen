@@ -15,7 +15,7 @@ jobs:
           script_stop: true # stop after first failure in script
           script: |
             cd ${{ secrets.SERVER_APP_DIRECTORY }}
-            rm .env
+            rm --force .env # force is needed to prevent error if not exists
             cat << EOF > .env
             APP_ENVIRONMENT=${{ secrets.APP_ENVIRONMENT }}
             APP_DOMAIN=${{ secrets.APP_DOMAIN }}
