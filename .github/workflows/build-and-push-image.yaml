@@ -20,6 +20,8 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-20.04
     steps:
+      - run: echo ${{ secrets.APP_CONTAINER_REGISTRY }}
+
       # unfortunately can't use github action "env" section to set this env variable...
       - name: set $IMAGE_NAME environment varaible
         run: echo "IMAGE_NAME=${{ secrets.APP_CONTAINER_REGISTRY }}/${{ inputs.SERVICE_NAME }}" >> $GITHUB_ENV
