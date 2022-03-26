@@ -16,5 +16,6 @@ jobs:
       SERVICE_DIRECTORY: frontend
     secrets:
       CD_DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.CD_DIGITALOCEAN_ACCESS_TOKEN }}
+      APP_CONTAINER_REGISTRY: ${{ secrets.APP_CONTAINER_REGISTRY }}
 
 
