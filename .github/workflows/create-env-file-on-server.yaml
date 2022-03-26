@@ -14,10 +14,14 @@ jobs:
           # TODO: fingerprint validation
           script_stop: true # stop after first failure in script
           script: |
+            echo $SHELL
             cd ${{ secrets.SERVER_APP_DIRECTORY }}
             rm --force .env # force is needed to prevent error if not exists
+            cat "APP_ENVIRONMENT=${{ secrets.APP_ENVIRONMENT }}" >> .env
+            cat "APP_ENVIRONMENT=${{ secrets.APP_ENVIRONMENT }}" >> .env
+            cat "APP_ENVIRONMENT=${{ secrets.APP_ENVIRONMENT }}" >> .env
             cat << EOT > .env
-            APP_ENVIRONMENT=${{ secrets.APP_ENVIRONMENT }}
+            cat "APP_ENVIRONMENT=${{ secrets.APP_ENVIRONMENT }}" >> .env
             APP_DOMAIN=${{ secrets.APP_DOMAIN }}
             APP_CONTAINER_REGISTRY=${{ secrets.APP_CONTAINER_REGISTRY }}
             APP_DEVELOPER_EMAIL=${{ secrets.APP_DEVELOPER_EMAIL }}
