@@ -16,7 +16,7 @@ jobs:
           script: |
             cd ${{ secrets.SERVER_APP_DIRECTORY }}
             rm --force .env # force is needed to prevent error if not exists
-            cat << EOF > .env
+            cat << EOT > .env
             APP_ENVIRONMENT=${{ secrets.APP_ENVIRONMENT }}
             APP_DOMAIN=${{ secrets.APP_DOMAIN }}
             APP_CONTAINER_REGISTRY=${{ secrets.APP_CONTAINER_REGISTRY }}
@@ -86,4 +86,4 @@ jobs:
 
             # nginx
             NGINX_WEBROOT=${{ secrets.NGINX_WEBROOT }}
-            EOF
+            EOT
