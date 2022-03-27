@@ -79,4 +79,4 @@ jobs:
             add_line_to_env "FRONTEND_CONTAINER_NAME=${{ secrets.FRONTEND_CONTAINER_NAME }}"
 
             # add_line_to_env "# nginx"
-            add_line_to_env "NGINX_WEBROOT=${{ secrets.NGINX_WEBROOT }} \"
+            add_line_to_env "NGINX_WEBROOT=${{ secrets.NGINX_WEBROOT }}"
