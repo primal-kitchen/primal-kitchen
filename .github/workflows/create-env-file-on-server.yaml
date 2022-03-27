@@ -27,11 +27,6 @@ jobs:
             add_line_to_env "SSL_CERTIFICATE_FILE=${{ secrets.SSL_CERTIFICATE_FILE }}"
             add_line_to_env "SSL_CERTIFICATE_PRIVATE_KEY_FILE=${{ secrets.SSL_CERTIFICATE_PRIVATE_KEY_FILE }}"
 
-            add_line_to_env "# github actions CI/CD stuff"
-            add_line_to_env "CD_SSH_PRIVATE_KEY=${{ secrets.CD_SSH_PRIVATE_KEY }}"
-            add_line_to_env "CD_SSH_PRIVATE_KEY_PASSPHRASE=${{ secrets.CD_SSH_PRIVATE_KEY_PASSPHRASE }}"
-            add_line_to_env "CD_DIGITALOCEAN_ACCESS_KEY=${{ secrets.CD_DIGITALOCEAN_ACCESS_KEY }}"
-
             add_line_to_env "# postgres"
             add_line_to_env "POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }}"
             add_line_to_env "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}"
