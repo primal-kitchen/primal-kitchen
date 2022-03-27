@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: 'calculate-timestamp'
         id: timestamp
-        run: echo "::set-output name=timestamp::$(date --iso-8601)"
+        run: echo "::set-output name=timestamp::$(date --utc +'%FT%TZ')"
 
       - name: 'create-env-file'
         uses: appleboy/ssh-action@master
