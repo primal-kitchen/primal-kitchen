@@ -39,6 +39,7 @@
         url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
         dest: /usr/local/bin/docker-compose
         group: docker 
+        mode: g+x
 
     - name: symlink docker-compose
       file:
@@ -46,6 +47,7 @@
         src: /usr/local/bin/docker-compose
         path: /usr/bin/docker-compose
         group: docker
+        mode: g+x
 
     - name: setup ssl
       command: docker-compose --file docker-compose.setup.yaml up
