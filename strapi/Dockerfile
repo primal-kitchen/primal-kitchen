@@ -13,7 +13,10 @@ COPY public public
 COPY extensions extensions
 COPY api api
 
-RUN ["yarn", "build"]
+# --no-optimization option fixes js heap running out of memory error.
+#   was previously needing to fix this by allocationing docker more ram
+RUN ["yarn", "build", "--no-optimization"]
+
 
 # delete and use stage here maybe?
 
