@@ -27,6 +27,12 @@
 - `mkcert --install` setup mkcert for local machine
 - `./scripts/generate-local-ssl-certificates.sh`
 ... consider using pebble local acme server instead of m
+
+
+# VAGRANT SETUP — TODO: ORGANISE
+- `vagrant plugin install vagrant-env`
+- `vagrant ssh-config > vagrant-ssh-config`
+- `kitty +kitten ssh -F .vagrant-ssh-config <username>`
  
 ### code completion
 - may need to `npm clean-install` for code completion in frontend
