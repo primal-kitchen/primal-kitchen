@@ -1,6 +1,6 @@
 # needs to live in this directory as medusa-admin subfolder is git submodule
 
-FROM node:12 AS build-stage
+FROM node:14 AS build-stage
 WORKDIR /srv/app
 # TODO: might need "ENV NODE_OPTIONS=--openssl-legacy-provider" (it's in medusa docker docs)
 # install the dependencies
