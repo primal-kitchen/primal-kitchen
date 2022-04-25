@@ -1,0 +1,49 @@
+- name: install mkcert
+  hosts: all
+  become: yes
+  tasks:
+    - name: install libnss3-tools mkcert prequisite
+      apt:
+        name: libnss3-tools
+        state: present
+
+    - name: download and install mkcert
+      get_url: 
+        url:  https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
+        dest: /usr/local/bin/mkcert
+        mode: u+x
+
+- name: setup local self-signed ssl for development
+  hosts: all
+  become: yes
+
+  vars:
+    ca_cert_name: "rootCA.pem"
+    ca_cert_local: "/Users/solomon/Library/Application Support/mkcert/" 
+    ca_cert_remote: /home/primal-kitchen/primal-kitchen/data/mkcert/
+
+  tasks:
+    - name: ensure mkcert is installed on local machine
+      command: echo "hello?"
+
+    - name: create directory for certificate on remote machine
+      file:
+        path: '{{ ca_cert_remote }}'
+        state: directory
+
+    # TODO: use variable set by $(mkcert -CAROOT)
+    # TODO: use variable for destination in script?
+    - name: copy file across
+      become: yes
+      copy:
+        src: "{{ ca_cert_local }}/{{ ca_cert_name }}"
+        dest: "{{ ca_cert_remote }}/{{ ca_cert_name }}"
+
+    - name: set location of self-signed certificate authority in variable expected by mkcert
+      copy:
+        dest: /etc/profile.d/custom-path.sh
+        content: 'PATH=$PATH:"{{ ca_cert_remote }}/{{ ca_cert_name }}"'
+        mode: 644
+      
+    - name: install the certificate authority
+      command: mkcert -install
