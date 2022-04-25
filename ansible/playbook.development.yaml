@@ -15,17 +15,6 @@
         path: '{{ app_directory }}'
         state: directory
 
-    - name: copy across development setup docker-compose file
-      copy:
-        src: '{{ playbook_dir }}/../docker-compose.setup.yaml'
-        dest: '{{ app_directory }}/docker-compose.setup.yaml'
-
-    - name: setup ssl
-      docker_compose:
-        project_src: '{{ app_directory }}'
-        files:
-          - docker-compose.setup.yaml
-
     - name: copy across development docker-compose file
       become: yes
       copy:
