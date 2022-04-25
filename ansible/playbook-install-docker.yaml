@@ -1,4 +1,4 @@
-- name: no more pets
+- name: install docker
   hosts: all
   become: yes
   tasks:
@@ -48,12 +48,27 @@
         path: /usr/bin/docker-compose
         group: docker
         mode: g+x
+          
+- name: install anisible community.docker.docker_compose dependencies
+  hosts: all
+  become: yes
+  tasks:
+    - name: install pip — python3 is preinstalled on ubuntu 20.04
+      apt:
+        name: python3-pip
+        state: present
+    
+    - name: install python docker sdk
+      pip:
+        name: docker
 
-    - name: setup ssl
-      command: docker-compose --file docker-compose.setup.yaml up
+    - name: install python docker-compose sdk
+      pip:
+        name: docker-compose
 
-    - name: start services
-      command: docker-compose --file docker-compose.development.yaml --file docker-compose.yaml up
+    - name: install pyaml
+      pip:
+        name: pyaml
 
 # install docker 
 # install docker compose
