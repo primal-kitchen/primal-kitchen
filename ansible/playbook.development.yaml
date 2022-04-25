@@ -1,0 +1,40 @@
+#- name: setup locally signed ssl by mkcert
+- import_playbook: playbook-ssl.development.yaml
+
+# - name: install docker etc
+- import_playbook: playbook-install-docker.yaml
+
+- name:
+  hosts: all
+  vars:
+    app_directory: /home/primal-kitchen/primal-kitchen
+
+  tasks: 
+    - name: ensure destination directory for docker-compose files exists
+      file: 
+        path: '{{ app_directory }}'
+        state: directory
+
+    - name: copy across development setup docker-compose file
+      copy:
+        src: '{{ playbook_dir }}/../docker-compose.setup.yaml'
+        dest: '{{ app_directory }}/docker-compose.setup.yaml'
+
+    - name: setup ssl
+      docker_compose:
+        project_src: '{{ app_directory }}'
+        files:
+          - docker-compose.setup.yaml
+
+    - name: copy across development docker-compose file
+      become: yes
+      copy:
+        src: '{{ playbook_dir }}/../docker-compose.yaml'
+        dest: '{{ app_directory }}/docker-compose.yaml'
+
+    - name: start services
+      docker_compose:
+        project_src: '{{ app_directory }}'
+        files:
+          - docker-compose.development.yaml
+          - docker-compose.yaml
