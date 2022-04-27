@@ -5,7 +5,7 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder ".", ENV["SERVER_APP_DIRECTORY"]
 
   config.vm.network "forwarded_port", guest: 80, host: 80
-  config.vm.network "forwarded_port", guest: 433, host: 433
+  config.vm.network "forwarded_port", guest: 443, host: 443
 
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "ansible/playbook.development.yaml"
