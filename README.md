@@ -53,7 +53,9 @@
 
 # MAINTIANENCE
 ### npm packages
+`docker container exec -it <service-name> /bin/bash` to get shell on container
 `npm outdated` in various services is helpful when updating
+`npm update --save` in development docker-compose most package.json and package-lock.json are volumed!
 TODO: learn how to replace running docker compose container in place??
 ### inplace docker contianer upgrade
 i'm sure that there's a 0 downtime way to do this
