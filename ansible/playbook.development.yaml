@@ -21,9 +21,4 @@
         src: '{{ playbook_dir }}/../docker-compose.yaml'
         dest: '{{ app_directory }}/docker-compose.yaml'
 
-    - name: start services
-      docker_compose:
-        project_src: '{{ app_directory }}'
-        files:
-          - docker-compose.development.yaml
-          - docker-compose.yaml
+- import_playbook: playbook-start.development.yaml

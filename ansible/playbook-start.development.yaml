@@ -1,0 +1,13 @@
+
+- name:
+  hosts: all
+  vars:
+    app_directory: /home/primal-kitchen/primal-kitchen
+
+  tasks:
+    - name: start services
+      docker_compose:
+        project_src: '{{ app_directory }}'
+        files:
+          - docker-compose.development.yaml
+          - docker-compose.yaml
