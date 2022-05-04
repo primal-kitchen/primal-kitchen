@@ -25,6 +25,10 @@ services:
   medusa:
     ports:
       - ${MEDUSA_STOREFRONT_API_PORT}:80
+    volumes:
+      # volume package.json etc so can update
+      - ./medusa/package.json:/srv/app/package.json
+      - ./medusa/package-lock.json:/srv/app/package-lock.json
 
   minio:
     command: server /data --address ":${MINIO_PORT}" --console-address ":${MINIO_CONSOLE_PORT}"
