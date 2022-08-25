@@ -1,7 +1,7 @@
 Vagrant.configure(2) do |config|
   config.env.enable # enable plugin for reading local .env file
 
-  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.box = "ubuntu/jammy64"
   config.vm.synced_folder ".", ENV["SERVER_APP_DIRECTORY"]
 
   config.vm.network "forwarded_port", guest: 80, host: 80
