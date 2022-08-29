@@ -19,7 +19,7 @@
 
   vars:
     ca_cert_name: "rootCA.pem"
-    ca_cert_local: "/Users/solomon/Library/Application Support/mkcert/" 
+    ca_cert_local: "/Users/sol/Library/Application Support/mkcert/" 
     ca_cert_remote: /home/primal-kitchen/primal-kitchen/data/mkcert/
 
   tasks:
