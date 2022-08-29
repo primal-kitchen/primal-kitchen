@@ -28,6 +28,11 @@
 - `./scripts/generate-local-ssl-certificates.sh`
 ... consider using pebble local acme server instead of m
 
+- install vagrant, ansible, ansible extension for ???
+- vagrant up (fails)
+- vagrant ssh and sudo apt update to fix for libnss someshit
+- vagrant provision
+
 
 # VAGRANT SETUP — TODO: ORGANISE
 - `vagrant plugin install vagrant-env`
