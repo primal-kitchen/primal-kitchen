@@ -2,6 +2,10 @@
   hosts: all
   become: yes
   tasks:
+    - name: update packages
+      apt:
+        update_cache: yes
+
     - name: install libnss3-tools mkcert prequisite
       apt:
         name: libnss3-tools
