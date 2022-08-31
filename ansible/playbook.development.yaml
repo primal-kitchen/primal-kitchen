@@ -15,10 +15,23 @@
         path: '{{ app_directory }}'
         state: directory
 
-    - name: copy across development docker-compose file
+    - name: copy across docker-compose file
       become: yes
       copy:
         src: '{{ playbook_dir }}/../docker-compose.yaml'
         dest: '{{ app_directory }}/docker-compose.yaml'
 
-- import_playbook: playbook-start.development.yaml
+    - name: copy across development docker-compose file
+      become: yes
+      copy:
+        src: '{{ playbook_dir }}/../docker-compose.development.yaml'
+        dest: '{{ app_directory }}/docker-compose.development.yaml'
+
+    - name: copy across env
+      become: yes
+      copy:
+        src: '{{ playbook_dir }}/../.env'
+        dest: '{{ app_directory }}/.env'
+
+# - import_playbook: playbook-start.development.yaml
+- import_playbook: playbook-start.development.frontend-only.yaml
