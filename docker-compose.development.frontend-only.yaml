@@ -2,9 +2,9 @@ version: '3.9'
 
 services:
   frontend:
-#    build:
-#      context: frontend
-#      dockerfile: development.dockerfile
+    build:
+      context: frontend
+      dockerfile: Dockerfile 
     volumes:
       # TODO: where is serve??
       # TODO: gotta be a better way to do this... done to avoid crap getting put on local disk
@@ -16,4 +16,6 @@ services:
       - ./frontend/next-env.d.ts:/srv/app/next-env.d.ts
       - ./frontend/tsconfig.json:/srv/app/tsconfig.json
       - ./frontend/.eslintrc.json:/srv/app/eslintrc.json
+    ports:
+      - "80:3000"
     command: [ 'npm', 'run', 'dev' ]
