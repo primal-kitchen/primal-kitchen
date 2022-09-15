@@ -1,0 +1,166 @@
+openapi: 3.0.0
+info:
+  title: primal kitchen api
+  version: 0.0.1
+  
+  
+components:
+  schemas:
+  
+    error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+          
+    meal:
+      type: object
+      properties:
+        id:
+         type: string
+        name:
+          type: string
+        price:
+          type: integer
+          format: int32
+          description: "cents"
+
+    user:
+      type: object
+      properties:
+        id:
+          type: string
+        first-name:
+          type: string
+        last-name:
+          type: string
+        
+  responses:
+    success-ok:
+      description: '200'
+    success-created: 
+      description: '201'
+    success-no-content:
+      description: '204'
+    
+    error-bad-request:
+      description: '400'
+    error-unauthorized:
+      description: '401'
+    error-forbidden:
+      description: '403'
+    error-not-found:
+      description: '404'
+    error-request-timeout:
+      description: '408'  
+    error-conflict:
+      description: '409'
+    error-gone:
+      description: '410'
+    error-precondition-failed:
+      description: '412'
+    error-payload-too-large:
+      description: '413'
+    error-unsupported-media-type:
+      description: '415'
+    error-too-many-requests:
+      description: '429'
+    error-request-header-too-large:
+      description: '431'
+      
+    error-internal-server-error:
+      description: '500'
+    error-not-implemented:
+      description: '501'
+    error-service-unavailable:
+      description: '503'
+    
+paths:
+  /menu/single-meals:
+    get:
+      responses:
+        '200':
+          description: recipes
+          content:
+            application/json:
+              schema:
+                type:
+                  object
+   
+  /menu/meals-packs:
+    get:
+      responses:
+        '200':
+          description: recipes
+          content:
+            application/json:
+              schema:
+                type:
+                  object
+                  
+  /menu/deli:
+    get:
+      responses:
+        '200':
+          description: recipes
+          content:
+            application/json:
+              schema:
+                type:
+                  object
+                  
+  /menu/extras:
+    get:
+      responses:
+        '200':
+          description: recipes
+          content:
+            application/json:
+              schema:
+                type:
+                  object
+                  
+  /account/login:
+    post:
+      responses:
+        '200':
+          description: logged in
+          content:
+            application/json:
+              schema:
+                type: object               
+                
+                
+  /account/logout:
+    post:
+      responses:
+        '200':
+          description: logged in
+          content:
+            application/json:
+              schema:
+                type: object               
+                
+  /account/signup:
+    post:
+      responses:
+        '200':
+          description: logged in
+          content:
+            application/json:
+              schema:
+                type: object               
+                
+  /order/create:
+    post:
+      responses:
+        '200':
+          description: logged in
+          content:
+            application/json:
+              schema:
+                type: object               
+                
