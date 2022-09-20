@@ -1,12 +1,10 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
   title: primal kitchen api
   version: 0.0.1
   
-  
 components:
   schemas:
-  
     error:
       type: object
       properties:
@@ -27,6 +25,53 @@ components:
           type: integer
           format: int32
           description: "cents"
+          minimum: 0 
+        day-delivered:
+          type: string
+          enum:
+            - monday
+            - tuesday
+            - wednesday
+            - thursday
+            - friday
+            - saturday
+            - sunday
+        sizes:
+          type: array
+          items:
+            type: string
+            enum:
+              - regular
+              - warrior
+              - family
+
+    meal-pack:
+      type: object
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        meals:
+          type: array
+          items:
+            $ref: "#/components/schemas/meal"
+
+    address:
+      description: "doesn't include rural, po box, or private bag"
+      type: object
+      properties:
+        unit-number:
+          description: ""
+          type: string
+        street-number:
+          type: string
+        street:
+          type: string
+        suburb:
+          type: string
+
+
 
     user:
       type: object
@@ -37,7 +82,7 @@ components:
           type: string
         last-name:
           type: string
-        
+
   responses:
     success-ok:
       description: '200'
@@ -163,4 +208,3 @@ paths:
             application/json:
               schema:
                 type: object               
-                
