@@ -55,7 +55,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          $ref: "#/components/schemas/item-id"
         description:
           type: string
         meals:
@@ -103,11 +103,13 @@ components:
   
   parameters:
     item-id:
-      name: item-id
+      name: item_id # remember! can't use - in path parameter name. must be _
       in: path
       required: true
       schema:
-        type: string
+        $ref: "#/components/schemas/item-id"
+      style: simple
+      allowReserved: false
 
   responses:
     success-ok:
@@ -197,11 +199,11 @@ paths:
                 items:
                   $ref: '#/components/schemas/meal'
 
-  /menu/extras/{item-id}:
+  /menu/extras/{item_id}:
+    parameters:
+      - $ref: "#/components/parameters/item-id"
+
     get:
-      parameters:
-        - $ref: '#/components/parameters/item-id'
-          
       responses:
         '200':
           description: get extra
@@ -247,7 +249,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/order"
+                type: array
+                items:
+                  $ref: "#/components/schemas/order"
 
     post:
       responses:
@@ -285,19 +289,16 @@ paths:
                   item:
                     $ref: "#/components/schemas/meal"
 
-  /user/me/cart/items/{item-id}:
+  /user/me/cart/items/{item_id}:
+    parameters:
+      - $ref: '#/components/parameters/item-id'
+
     delete:
-      parameters:
-        - $ref: '#/components/parameters/item-id'
-        
       responses:
         '200':
           description: remove item from cart
 
     patch:
-      parameters:
-        - $ref: '#/components/parameters/item-id'
-        
       responses:
         '200':
           description: update quantity
