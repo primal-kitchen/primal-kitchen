@@ -4,11 +4,11 @@
     app_directory: /home/primal-kitchen/primal-kitchen
 
   tasks:
-    - name: copy across frontend
-      become: yes
-      copy:
-        src: '{{ playbook_dir }}/../frontend'
-        dest: '{{ app_directory }}/frontend'
+    #- name: copy across frontend
+    #  become: yes
+    #  copy:
+    #    src: '{{ playbook_dir }}/../frontend'
+    #    dest: '{{ app_directory }}/frontend'
 
     - name: start services (just frontend)
       docker_compose:
