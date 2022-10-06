@@ -3,16 +3,16 @@ version: '3.9'
 services:
   mock-api:
     image: mockoon/cli:2.1.0
+    container_name: mock-api
     volumes:
       - ./openapi.yaml:/srv/app/openapi.yaml
-    command: [ 'mockoon-cli', 'start', '--data', '/srv/app/openapi.yaml' ]
-    ports:
-      - '81:3000'
+    command: [ 'mockoon-cli', 'start', '--data', '/srv/app/openapi.yaml', '--port', '80' ]
 
   frontend:
     build:
       context: frontend
       dockerfile: Dockerfile 
+    container_name: frontend
     volumes:
       # TODO: where is serve??
       # TODO: gotta be a better way to do this... done to avoid crap getting put on local disk
@@ -24,6 +24,20 @@ services:
       - ./frontend/next-env.d.ts:/srv/app/next-env.d.ts
       - ./frontend/tsconfig.json:/srv/app/tsconfig.json
       - ./frontend/.eslintrc.json:/srv/app/eslintrc.json
-    ports:
-      - "80:3000"
     command: [ 'npm', 'run', 'dev' ]
+    depends_on: 
+      - mock-api
+
+  reverse-proxy:
+    image: nginx:1.23
+    container_name: reverse-proxy
+    volumes:
+      - ./reverse-proxy/frontend-only/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - mock-api
+      - frontend
+
+  # TODO: do need network for nginx to find images???
