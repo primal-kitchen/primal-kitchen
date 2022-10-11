@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState } from 'react';
 import BodyClamp from '../utilities/body-clamp';
 import Button, { Colour, Proportion, Size } from '../general/button';
 import InvisibleFixedPageOverlay from '../utilities/invisible-fixed-page-overlay';
@@ -7,6 +7,23 @@ import { useToggle } from 'react-use';
 
 const SplashScreenDeliveryExplanation = () => {
 	const [isAddressPopupVisible, toggleAddressPopupVisibility] = useToggle(false);
+
+	const [deleteMe, setDeleteMe] = useState("");
+	useEffect(() => {
+    const url = "http://api.primalkitchen.co.nz.local/menu/extras";
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const json = await response.json();
+        setDeleteMe(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    fetchData();
+}, []);
 
 	return (
 		<BodyClamp className='bg-red'>
@@ -33,6 +50,10 @@ const SplashScreenDeliveryExplanation = () => {
 						<InvisibleFixedPageOverlay isVisible={isAddressPopupVisible} onOutsideContentClicked={toggleAddressPopupVisibility}>
 							<AddressPopup/>
 						</InvisibleFixedPageOverlay>
+					</div>
+					<div>
+						delete meeee
+						{deleteMe}
 					</div>
 				</div>
 			</div>
