@@ -10,13 +10,13 @@ const SplashScreenDeliveryExplanation = () => {
 
 	const [deleteMe, setDeleteMe] = useState("");
 	useEffect(() => {
-    const url = "http://api.primalkitchen.co.nz.local/menu/extras";
+    const url = "http://api.primalkitchen.co.nz.local/menu/single-meals";
 
     const fetchData = async () => {
       try {
         const response = await fetch(url);
         const json = await response.json();
-        setDeleteMe(json);
+        setDeleteMe(JSON.stringify(json));
       } catch (error) {
         console.log("error", error);
       }
@@ -52,7 +52,7 @@ const SplashScreenDeliveryExplanation = () => {
 						</InvisibleFixedPageOverlay>
 					</div>
 					<div>
-						delete meeee
+						delete meeee????
 						{deleteMe}
 					</div>
 				</div>
