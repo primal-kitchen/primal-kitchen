@@ -5,8 +5,8 @@ services:
     image: mockoon/cli:2.1.0
     container_name: mock-api
     volumes:
-      - ./openapi.yaml:/srv/app/openapi.yaml
-    command: [ 'mockoon-cli', 'start', '--data', '/srv/app/openapi.yaml', '--port', '80' ]
+      - ./mockoon.json:/srv/app/mockoon.json
+    command: [ 'mockoon-cli', 'start', '--data', '/srv/app/mockoon.json', '--port', '80' ]
 
   frontend:
     build:

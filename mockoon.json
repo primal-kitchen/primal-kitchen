@@ -1,0 +1,474 @@
+{
+  "uuid": "713d3df7-0552-46bf-8c3c-9a32a8048129",
+  "lastMigration": 22,
+  "name": "primal kitchen api atm no admin only routes...",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "b9bd099e-ba4c-4515-885f-18825c67a721",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "menu/single-meals",
+      "responses": [
+        {
+          "uuid": "b64ca316-a357-48ea-bb7f-1e8dc749f72b",
+          "body": "[\n  {\n    \"id\": \"\",\n    \"name\": \"\",\n    \"price\": {{faker 'datatype.number'}},\n    \"day-delivered\": \"{{oneOf (array 'monday' 'tuesday' 'wednesday' 'thursday' 'friday' 'saturday' 'sunday')}}\",\n    \"sizes\": [\n      \"{{oneOf (array 'regular' 'warrior' 'family')}}\"\n    ]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "recipes",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "access-control-allow-origin",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "750d3302-2dd3-4de9-b965-da24df992999",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "menu/meal-packs",
+      "responses": [
+        {
+          "uuid": "513bfcba-8d4f-4aae-90ef-b4a65bb0162c",
+          "body": "[\n  {\n    \"id\": \"\",\n    \"description\": \"\",\n    \"meals\": [\n      {\n        \"id\": \"\",\n        \"name\": \"\",\n        \"price\": {{faker 'datatype.number'}},\n        \"day-delivered\": \"{{oneOf (array 'monday' 'tuesday' 'wednesday' 'thursday' 'friday' 'saturday' 'sunday')}}\",\n        \"sizes\": [\n          \"{{oneOf (array 'regular' 'warrior' 'family')}}\"\n        ]\n      }\n    ]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "recipes",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "12287866-bbc6-4bb6-8b49-90a9544cb9e9",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "menu/deli",
+      "responses": [
+        {
+          "uuid": "45e96827-3e19-4049-9723-b061f2007704",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "recipes",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "58039493-fc11-45b3-9a39-79cf0dc960c2",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "menu/extras",
+      "responses": [
+        {
+          "uuid": "12bc7184-ba26-4218-b310-4eddf2b0a521",
+          "body": "[\n  {\n    \"id\": \"\",\n    \"name\": \"\",\n    \"price\": {{faker 'datatype.number'}},\n    \"day-delivered\": \"{{oneOf (array 'monday' 'tuesday' 'wednesday' 'thursday' 'friday' 'saturday' 'sunday')}}\",\n    \"sizes\": [\n      \"{{oneOf (array 'regular' 'warrior' 'family')}}\"\n    ]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "recipes",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "a1a78c4f-dbd7-4191-b427-e6bf2939f267",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "menu/extras/:item_id",
+      "responses": [
+        {
+          "uuid": "d7409ace-92de-4eca-8385-5a503c31d690",
+          "body": "{\n  \"id\": \"\",\n  \"name\": \"\",\n  \"price\": {{faker 'datatype.number'}},\n  \"day-delivered\": \"{{oneOf (array 'monday' 'tuesday' 'wednesday' 'thursday' 'friday' 'saturday' 'sunday')}}\",\n  \"sizes\": [\n    \"{{oneOf (array 'regular' 'warrior' 'family')}}\"\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "get extra",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "92b6daba-3c9b-4438-92ac-91c6b5bcbb07",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "user",
+      "responses": [
+        {
+          "uuid": "8f27e655-431b-438a-9ea9-ca999f0a3198",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "logged in",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "545b2fbe-c432-4a80-b2ee-c84dfe729cc1",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "user/me",
+      "responses": [
+        {
+          "uuid": "1633a66c-6087-4b53-b9bf-cf05795ca4ac",
+          "body": "{\n  \"id\": \"\",\n  \"first-name\": \"\",\n  \"last-name\": \"\",\n  \"email-address\": \"\",\n  \"phone-number\": \"\",\n  \"address\": {\n    \"unit-number\": \"\",\n    \"street-number\": \"\",\n    \"street\": \"\",\n    \"suburb\": \"\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "get info incase forgor",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "c1411079-a043-4bb0-8f8c-0e406d37ee94",
+      "documentation": "",
+      "method": "patch",
+      "endpoint": "user/me",
+      "responses": [
+        {
+          "uuid": "999732c1-00e2-4b9c-969c-45f4a3f36d65",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "update say address...",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "fe916ea0-fe48-4a6b-8096-2d09ef99a3be",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "user/me/orders",
+      "responses": [
+        {
+          "uuid": "09d50c89-34d8-4289-991e-c1bbe20391de",
+          "body": "[\n  {\n    \"id\": \"\",\n    \"timestamp\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "logged in",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "58becef9-988c-451e-b430-2f1b3657fdde",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "user/me/orders",
+      "responses": [
+        {
+          "uuid": "f5fe40d9-5415-48ad-a6b4-99a3f12e3dcf",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "create an order",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "c13bbf38-a2f0-402b-8ccc-91ffce0f7596",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "user/me/cart",
+      "responses": [
+        {
+          "uuid": "8c20dde8-7822-444b-bc58-bd4fb32729f3",
+          "body": "[\n  {\n    \"id\": \"\",\n    \"name\": \"\",\n    \"price\": {{faker 'datatype.number'}},\n    \"day-delivered\": \"{{oneOf (array 'monday' 'tuesday' 'wednesday' 'thursday' 'friday' 'saturday' 'sunday')}}\",\n    \"sizes\": [\n      \"{{oneOf (array 'regular' 'warrior' 'family')}}\"\n    ]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "cart",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "12601bcc-ea97-4f40-8821-9978d44a72fd",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "user/me/cart/items",
+      "responses": [
+        {
+          "uuid": "accfe176-79f2-4611-b31b-b69f3d7a89fc",
+          "body": "{\n  \"quantity\": {{faker 'datatype.number'}},\n  \"item\": {\n    \"id\": \"\",\n    \"name\": \"\",\n    \"price\": {{faker 'datatype.number'}},\n    \"day-delivered\": \"{{oneOf (array 'monday' 'tuesday' 'wednesday' 'thursday' 'friday' 'saturday' 'sunday')}}\",\n    \"sizes\": [\n      \"{{oneOf (array 'regular' 'warrior' 'family')}}\"\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "add an item to cart",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "5fe80fa0-9d6c-4fd4-a191-42fa07494e48",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "user/me/cart/items/:item_id",
+      "responses": [
+        {
+          "uuid": "3b7c9eef-b002-47bb-8c0d-ae732c2da3fa",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "remove item from cart",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "a0a36303-3f2f-43be-9fa7-18abf04ecf84",
+      "documentation": "",
+      "method": "patch",
+      "endpoint": "user/me/cart/items/:item_id",
+      "responses": [
+        {
+          "uuid": "5c8ffa7d-ab5d-4c92-918c-b430c199fd24",
+          "body": "{\n  \"quantity\": {{faker 'datatype.number'}}\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "update quantity",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": false,
+  "headers": [
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "http://primalkitchen.co.nz.local"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ]
+}
