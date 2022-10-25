@@ -1,0 +1,112 @@
+openapi: 3.0.3
+info:
+  title: primal kitchen api atm no admin only routes...
+  version: 1.0.0
+  
+components:
+  schemas:
+    error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+          
+    timestamp:
+      type: string
+    
+    item-id:
+      type: string
+          
+    meal:
+      type: object
+      properties:
+        id:
+         $ref: "#/components/schemas/item-id"
+        name:
+          type: string
+        price:
+          type: integer
+          format: int32
+          description: "cents"
+          minimum: 0 
+        day-delivered:
+          type: string
+          enum:
+            - monday
+            - tuesday
+            - wednesday
+            - thursday
+            - friday
+            - saturday
+            - sunday
+        sizes:
+          type: array
+          items:
+            type: string
+            enum:
+              - regular
+              - warrior
+              - family
+
+    meal-pack:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/item-id"
+        description:
+          type: string
+        meals:
+          type: array
+          items:
+            $ref: "#/components/schemas/meal"
+
+  parameters:
+    item-id:
+      name: item_id # remember! can't use - in path parameter name. must be _
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/item-id"
+      style: simple
+      allowReserved: false
+
+paths:
+  # add menu item
+  # add meal kk
+  /menu/single-meals:
+    post:
+    patch:
+    delete:
+  
+  /menu/meal-pack:
+    post:
+    patch:
+    delete:
+
+  /menu/deli:
+    post:
+    patch:
+    delete:
+
+  /menu/extras:
+    post:
+    patch:
+    delete:
+
+  /user/all:
+    get:
+
+  /user/all/orders:
+    get:
+
+  /user/{user-id}:
+    get:
+      responses:
+        '200':
+          application/json:
+            $ref: "#/components/schemas/user"
+
+    delete:
